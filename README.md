@@ -1,4 +1,4 @@
-# pierre_cardin_b2c_mobile
+# pierre_cardin_b2c_m
 皮尔卡丹b2c移动端
 
 > 初始化项目
