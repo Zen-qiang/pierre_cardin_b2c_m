@@ -3,6 +3,22 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
+import store from "./store/index.js"
+
+import './assets/css/index.scss' // global css
+
+import MintUI from 'mint-ui'
+import 'mint-ui/lib/style.css'
+
+Vue.use(MintUI)
+
+Vue.prototype.BaseUrl = 'http://www.pc18.vip';
+
+Vue.prototype.cliHeight = window.document.body.offsetHeight - 421
+
+Vue.prototype.Trim = function(str) {
+  return str.toString().replace(/\n | \r\n\↵/g, "<br/>");
+}
 
 Vue.config.productionTip = false
 
@@ -10,6 +26,10 @@ Vue.config.productionTip = false
 new Vue({
   el: '#app',
   router,
-  components: { App },
-  template: '<App/>'
+  store,
+  template: '<App/>',
+  components: {
+    App
+  }
+
 })

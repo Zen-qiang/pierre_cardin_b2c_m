@@ -5,7 +5,7 @@ const formate = {
    * @param keyArray
    * @param dataArray
    */
-  formateQueryData: function (keyArray, dataArray) {
+  formateQueryData: function(keyArray, dataArray) {
     let formateData = {}
     if (keyArray.length != dataArray.length) {
       return formateData
@@ -26,7 +26,7 @@ const formate = {
           dataTotal: data.count,
           data: rowData
         }
-      } else if (data.result) {  // 处理通过 ExecuteSQL 查询
+      } else if (data.result) { // 处理通过 ExecuteSQL 查询
         for (let row of data.result) {
           rowData.push(formate.arrayToJson(key.value, row))
         }
@@ -45,7 +45,7 @@ const formate = {
    * @param valueArray 值字典
    * @returns {{}}
    */
-  arrayToJson: function (keyArray, valueArray) {
+  arrayToJson: function(keyArray, valueArray) {
     if (keyArray.length != valueArray.length) { // 错误情况处理
       return {}
     } else {
@@ -55,7 +55,7 @@ const formate = {
       }
       return _ret
     }
-  },
+  }
 }
 
 export default formate

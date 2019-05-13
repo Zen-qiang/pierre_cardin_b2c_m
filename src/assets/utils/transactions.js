@@ -4,17 +4,17 @@ const transactions = {
    * 首页综合数据
    * @returns {{transactions: string, keyValues: *[]}}
    */
-  homeTransactions: function () {
-
+  homeTransactions: function() {
     let slideData = this.utilSlide('2', 'portal_website'); // 幻灯片
-
     let series7 = this.utilSeries(7); // 家居用品
     let series8 = this.utilSeries(8); // 服装饰品
     let series9 = this.utilSeries(9); // 家纺装饰
     let series10 = this.utilSeries(10); // Home E？tudes
-    let magazineData = this.utilMessageList(0, 6); // 动态列表
+    let magazineData = this.utilMessageA1List(0, 1); //家居顾问A1列表
+    let magazineInfo = this.utilMessageA2List(0, 6); // 家居顾问A2列表
 
     magazineData.key.key = 'messageData';
+    magazineInfo.key.key = 'messageInfo'
 
     let _transactions = [magazineData.transaction, { // 杂志数据
       id: 2,
@@ -34,7 +34,7 @@ const transactions = {
           asc: false
         }]
       }
-    }, series7.transaction, series8.transaction, series9.transaction, series10.transaction, slideData.transaction];
+    }, series7.transaction, series8.transaction, series9.transaction, series10.transaction, slideData.transaction, magazineInfo.transaction];
 
     return {
       transactions: JSON.stringify(_transactions),
@@ -43,7 +43,7 @@ const transactions = {
         pageNow: 0,
         pageSize: 3,
         value: ['magazine_code', 'issues', 'title', 'img_url', 'time']
-      }, series7.key, series8.key, series9.key, series10.key, slideData.key]
+      }, series7.key, series8.key, series9.key, series10.key, slideData.key, magazineInfo.key]
     }
   },
 
@@ -72,7 +72,7 @@ const transactions = {
   /**
    * 品牌动态 幻灯片
    */
-  qBrandMsgSlide: function () {
+  qBrandMsgSlide: function() {
     let slideData = this.utilSlide('2', 'portal_news'); // 幻灯片
     let _transactions = [slideData.transaction]
     return {
@@ -84,8 +84,8 @@ const transactions = {
   /**
    * 品牌动态 列表
    */
-  qBrandMsgList: function (pageNow, pageSize) {
-    let msgData = this.utilMessageList(pageNow, pageSize)
+  qBrandMsgList: function(pageNow, pageSize) {
+    let msgData = this.utilMessageA2List(pageNow, pageSize)
     let _transactions = [msgData.transaction]
     return {
       transactions: JSON.stringify(_transactions),
@@ -127,7 +127,7 @@ const transactions = {
   /**
    * 杂志 列表
    */
-  qMagazineList: function (pageNow, pageSize) {
+  qMagazineList: function(pageNow, pageSize) {
     let _transactions = [{
       id: 2,
       command: 'Query',
@@ -163,7 +163,7 @@ const transactions = {
   /**
    * 杂志 详情
    */
-  qMagazineDetail: function (code) {
+  qMagazineDetail: function(code) {
     let _transactions = [{
       id: 2,
       command: 'Query',
@@ -195,7 +195,7 @@ const transactions = {
   /**
    * 广告
    */
-  qAdvert: function (name) {
+  qAdvert: function(name) {
     let _transactions = [{
       id: 9,
       command: 'Query',
@@ -225,8 +225,7 @@ const transactions = {
   },
 
   // 最新单品
-  qNewProductList: function () {
-
+  qNewProductList: function() {
     let utilNewProduct = this.utilNewProduct();
     let _transactions = [utilNewProduct.transaction]
     return {
@@ -236,7 +235,7 @@ const transactions = {
   },
 
   // 精选品类
-  qIntroduceProductList: function () {
+  qIntroduceProductList: function() {
     let utilIntroduceProduct = this.utilIntroduceProduct();
     let _transactions = [utilIntroduceProduct.transaction]
     return {
@@ -247,11 +246,11 @@ const transactions = {
 
   /**
    * 搜索商品
-   * @param {*} search 
-   * @param {*} pageNow 
-   * @param {*} pageSize 
+   * @param {*} search
+   * @param {*} pageNow
+   * @param {*} pageSize
    */
-  qProductSearch: function (search, pageNow, pageSize) {
+  qProductSearch: function(search, pageNow, pageSize) {
     let utilSearch = this.utilSearch(search, pageNow, pageSize);
     let _transactions = [utilSearch.transaction]
     return {
@@ -260,17 +259,16 @@ const transactions = {
     }
   },
 
-
   // -----------------------
 
   /**
    * 获取商品列表
-   * @param {字段表示} dimFlag 
-   * @param {字段ID} dimID 
-   * @param {当前页} pageNow 
-   * @param {每页数量} pageSize 
+   * @param {字段表示} dimFlag
+   * @param {字段ID} dimID
+   * @param {当前页} pageNow
+   * @param {每页数量} pageSize
    */
-  qProductList: function (dimFlag, dimID, pageNow, pageSize) {
+  qProductList: function(dimFlag, dimID, pageNow, pageSize) {
     let utilProductList = this.utilProductList(dimFlag, dimID, pageNow, pageSize);
     let _transactions = [utilProductList.transaction]
     return {
@@ -281,9 +279,9 @@ const transactions = {
 
   /**
    * 商品信息
-   * @param {商品ID} pdtID 
+   * @param {商品ID} pdtID
    */
-  qProductInfo: function (pdtID) {
+  qProductInfo: function(pdtID) {
     let utilProductB = this.utilProductB(pdtID);
     let utilProductBSeries = this.utilProductBSeries(pdtID);
     let utilProductB24 = this.utilProductB24(pdtID);
@@ -298,9 +296,9 @@ const transactions = {
 
   /**
    * 商品信息
-   * @param {商品ID} pdtID 
+   * @param {商品ID} pdtID
    */
-  qProductA1: function (pdtID) {
+  qProductA1: function(pdtID) {
     let utilProductA1 = this.utilProductA1(pdtID); // A1区域信息
 
     let _transactions = [utilProductA1.transaction];
@@ -312,11 +310,11 @@ const transactions = {
 
   /**
    * 获取A2区域数据
-   * @param {*} pdtID 
-   * @param {*} pageNow 
-   * @param {*} pageSize 
+   * @param {*} pdtID
+   * @param {*} pageNow
+   * @param {*} pageSize
    */
-  qProductA2List: function (pdtID, pageNow, pageSize) {
+  qProductA2List: function(pdtID, pageNow, pageSize) {
     let utilProductA2 = this.utilProductA2(pdtID, pageNow, pageSize);
     let _transactions = [utilProductA2.transaction];
     return {
@@ -327,11 +325,11 @@ const transactions = {
 
   /**
    * 获取相关产品
-   * @param {商品ID} pdtID 
-   * @param {当前页面} pageNow 
-   * @param {每页数量} pageSize 
+   * @param {商品ID} pdtID
+   * @param {当前页面} pageNow
+   * @param {每页数量} pageSize
    */
-  qProductRelatedList: function (pdtID, pageNow, pageSize) {
+  qProductRelatedList: function(pdtID, pageNow, pageSize) {
     // utilRelatedProductList
     let utilRelatedProductList = this.utilRelatedProductList(pdtID, pageNow, pageSize);
     let _transactions = [utilRelatedProductList.transaction];
@@ -345,7 +343,7 @@ const transactions = {
   // 工具类
   //----------------------------------------------------------------------------
 
-  utilSearch: function (search, pageNow, pageSize) {
+  utilSearch: function(search, pageNow, pageSize) {
     return {
       transaction: {
         id: '7001',
@@ -359,12 +357,12 @@ const transactions = {
       key: {
         key: 'productList',
         value: ['pdt_id', 'pdt_img_url', 'pdt_name', 'pdt_price', 'pdt_sale']
-      },
+      }
     }
   },
 
   /* 幻灯片 */
-  utilSlide: function (id, name) {
+  utilSlide: function(id, name) {
     return {
       transaction: { // 幻灯片
         id: 14,
@@ -383,7 +381,7 @@ const transactions = {
   },
 
   /* 商品分类 */
-  utilSeries: function (id) {
+  utilSeries: function(id) {
     return {
       transaction: {
         id: id,
@@ -397,12 +395,12 @@ const transactions = {
       key: {
         key: 'series' + id,
         value: ['series_code', 'parent_code', 'name_code', 'name', 'img_url', 'picture', 'dimflag_id', 'dimflag', 'big_img']
-      },
+      }
     }
   },
 
-  /* 动态列表 */
-  utilMessageList: function (pageNow, pageSize) {
+  /* 家居顾问A1区域 */
+  utilMessageA1List: function(pageNow, pageSize) {
     return {
       transaction: {
         id: 3001,
@@ -414,8 +412,8 @@ const transactions = {
           start: (pageNow * pageSize),
           range: pageSize,
           params: {
-            column: 'ISACTIVE',
-            condition: '=Y'
+            column: 'AREA',
+            condition: '=1'
           },
           orderby: [{
             column: 'MODIFIEDDATE',
@@ -428,12 +426,43 @@ const transactions = {
         pageNow: pageNow,
         pageSize: pageSize,
         value: ['msg_code', 'title', 'detail', 'img_url', 'time']
+      }
+    }
+  },
+
+  /* 家居顾问A2区域列表 */
+  utilMessageA2List: function(pageNow, pageSize) {
+    return {
+      transaction: {
+        id: 3001,
+        command: 'Query',
+        params: {
+          table: 'PORTAL_NEWS',
+          columns: ['ID', 'TITLE', 'ABSTRACT', 'IMG', 'MODIFIEDDATE'],
+          count: true,
+          start: (pageNow * pageSize),
+          range: pageSize,
+          params: {
+            column: 'AREA',
+            condition: '=2'
+          },
+          orderby: [{
+            column: 'MODIFIEDDATE',
+            asc: false
+          }]
+        }
       },
+      key: {
+        key: 'messageList',
+        pageNow: pageNow,
+        pageSize: pageSize,
+        value: ['msg_code', 'title', 'detail', 'img_url', 'time']
+      }
     }
   },
 
   /* 杂志列表 */
-  utilMagazineList: function () {
+  utilMagazineList: function() {
     return {
       transaction: { // 杂志数据
         id: 2,
@@ -458,7 +487,7 @@ const transactions = {
           pageNow: 0,
           pageSize: 3,
           value: ['magazine_code', 'issues', 'title', 'img_url', 'time']
-        },
+        }
       }
     }
   },
@@ -466,8 +495,7 @@ const transactions = {
   /**
    * 获取最新单品SQL
    */
-  utilNewProduct: function () {
-
+  utilNewProduct: function() {
     return {
       transaction: {
         id: '6001',
@@ -481,15 +509,14 @@ const transactions = {
       key: {
         key: 'newProductList',
         value: ['pdt_id', 'pdt_name', 'pdt_price', 'pdt_sale', 'pdt_img_url']
-      },
+      }
     }
   },
 
   /**
    * 获取 精选品类
    */
-  utilIntroduceProduct: function () {
-
+  utilIntroduceProduct: function() {
     return {
       transaction: {
         id: '7001',
@@ -503,7 +530,7 @@ const transactions = {
       key: {
         key: 'introduceList',
         value: ['series_code', 'parent_code', 'name_code', 'name', 'img_url', 'picture', 'dimflag_id', 'dimflag']
-      },
+      }
     }
   },
 
@@ -512,7 +539,7 @@ const transactions = {
   /**
    * 根据商品分类 获取 商品列表 p.ID, p.PHOTO2, p.VALUE, p.PRECOST, p.PRICELIST
    */
-  utilProductList: function (dimFlag, dimID, pageNow, pageSize) {
+  utilProductList: function(dimFlag, dimID, pageNow, pageSize) {
     return {
       transaction: {
         id: '5001',
@@ -526,16 +553,15 @@ const transactions = {
       key: {
         key: 'productList',
         value: ['pdt_id', 'pdt_img_url', 'pdt_name', 'pdt_price', 'pdt_sale']
-      },
+      }
     }
   },
 
-
   /**
    * 获取A1区域数据
-   * @param {商品ID} pdtID 
+   * @param {商品ID} pdtID
    */
-  utilProductA1: function (pdtID) {
+  utilProductA1: function(pdtID) {
     return {
       transaction: {
         id: '5001',
@@ -549,14 +575,14 @@ const transactions = {
       key: {
         key: 'productA1',
         value: ['pdt_a1']
-      },
+      }
     }
   },
 
   /**
    * 获取A2区域数据
    */
-  utilProductA2: function (pdtID, pageNow, pageSize) {
+  utilProductA2: function(pdtID, pageNow, pageSize) {
     return {
       transaction: {
         id: '5002',
@@ -570,14 +596,14 @@ const transactions = {
       key: {
         key: 'productA2List',
         value: ['pdt_id', 'pdt_img_url', 'pdt_name', 'pdt_price', 'pdt_value']
-      },
+      }
     }
   },
 
   /**
    * 获取B区域数据 B1图片,规格，详情，名称，供货价，零售价
    */
-  utilProductB: function (pdtID) {
+  utilProductB: function(pdtID) {
     return {
       transaction: {
         id: '5003',
@@ -591,15 +617,15 @@ const transactions = {
       key: {
         key: 'productBInfo',
         value: ['pdt_img_url', 'pdt_standard', 'pdt_details', 'pdt_name', 'pdt_price', 'pdt_sale', 'tmail_link', 'pdt_salestalk']
-      },
+      }
     }
   },
 
   /**
    * 获取B区域数据 系列、套装
-   * @param {商品ID} pdtID 
+   * @param {商品ID} pdtID
    */
-  utilProductBSeries: function (pdtID) {
+  utilProductBSeries: function(pdtID) {
     return {
       transaction: {
         id: '5004',
@@ -613,15 +639,15 @@ const transactions = {
       key: {
         key: 'productBSeriesList',
         value: ['pdt_id', 'pdt_series']
-      },
+      }
     }
   },
 
   /**
    * 获取B2-B4区域数据
-   * @param {商品ID} pdtID 
+   * @param {商品ID} pdtID
    */
-  utilProductB24: function (pdtID) {
+  utilProductB24: function(pdtID) {
     return {
       transaction: {
         id: '5005',
@@ -635,15 +661,15 @@ const transactions = {
       key: {
         key: 'productB24List',
         value: ['pdt_img_url']
-      },
+      }
     }
   },
 
   /**
    * 获取B5-B7区域数据
-   * @param {商品ID} pdtID 
+   * @param {商品ID} pdtID
    */
-  utilProductB57: function (pdtID) {
+  utilProductB57: function(pdtID) {
     return {
       transaction: {
         id: '5006',
@@ -657,14 +683,14 @@ const transactions = {
       key: {
         key: 'productB57List',
         value: ['pdt_img_url']
-      },
+      }
     }
   },
 
   /**
    * 获取相关产品 p.ID, p.PHOTO2, p.VALUE, p.PRECOST, p.PRICELIST
    */
-  utilRelatedProductList: function (pdtID, pageNow, pageSize) {
+  utilRelatedProductList: function(pdtID, pageNow, pageSize) {
     return {
       transaction: {
         id: '5101',
@@ -678,7 +704,7 @@ const transactions = {
       key: {
         key: 'relatedProductList',
         value: ['pdt_id', 'pdt_img_url', 'pdt_name', 'pdt_price', 'pdt_sale']
-      },
+      }
     }
   }
 
