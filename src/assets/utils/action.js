@@ -134,6 +134,13 @@ const action = {
    */
   magazineDetail: function(code) {
     return http.qPost(transactions.qMagazineDetail(code))
+  },
+
+  /**
+   * 搜索接口
+   */
+  searchList: function(search, pageNow, pageSize) {
+    return http.qPost(transactions.qProductSearch(search, pageNow, pageSize))
   }
 
 };

@@ -5,7 +5,9 @@
             <div class="text-left sy-content">pierre cardin home 的每一位员工深受 Pierre Cardin
                 关于生活哲理学的浸润，大胆创新、思维活跃、热爱生活。也为每一位有能力的人才的卓越表现和蓬勃发展提供了独一无二的环境氛围。加入 pierre cardin
                 Home，与我们一同分享你在生活与工作上的不同体验，一同为每一个人的美好家居生活，进行锐意的探索与实践。</div>
-            <mt-button size="large" class="margin-bottom-10" type="default">查看职位</mt-button>
+            <div class="sy-more" @click="handleMore">
+                <div class="sy-button">查看职位<i></i></div>
+            </div>
         </div>
         <img src="../../assets/img/jiazu.jpg" class="margin-top-10 no-padding margin-bottom-10" width="100%" alt>
         <div class="text-left sy-contents">我们感恩员工们的付出，同时将品牌资源分享给所有的员工们。在品牌商学院中，将会有来自设计、艺术、时尚等各个不同领域的佼佼者以讲座、线上授课等形式为员工创造更多的学习机会，不断丰富自身创造力。</div>
@@ -30,10 +32,22 @@
             <div class="text-left sy-titles">Q & pierre cardin Home 看重候选人的哪些方面？</div>
             <div class="text-left sy-content">良好的品行是作为一切开始的先决条件。其次是良好的思维方式与个人创造力</div>
             <div class="text-left sy-content sy-cont">在线填写申请时，需回答关于您自己的若干问题，并提交简历。如果您希望提交更多信息，可在申请时上传相关资料。如果您申请的是创意、市场营销、数字化或设计团队的职位，请务必提供您的作品集。</div>
-            <h5>为合作伙伴创造更大的价值！</h5>
-            <mt-button size="large" class="margin-bottom-30" type="default">查看职位</mt-button>
+            <h4>为合作伙伴创造更大的价值！</h4>
+            <div class="sy-more padding-bottom-30" @click="handleMore">
+                <div class="sy-button">查看职位<i></i></div>
+            </div>
         </div>
-
+        <ul>
+            <li>
+                <img src="../../assets/img/workers.jpg" alt="">
+            </li>
+            <li>
+                <img src="../../assets/img/girlworkers.jpg" alt="">
+            </li>
+        </ul>
+        <div class="text-center text-dark sy-footer">
+            'I have a name,<br>I have to take advantage of it'
+        </div>
         <sy-footer></sy-footer>
     </div>
 </template>
@@ -44,7 +58,10 @@ export default {
     data() {
         return {};
     },
-    components: { syFooter }
+    components: { syFooter },
+    methods: {
+        handleMore() {}
+    }
 };
 </script>
 <style lang="scss" scoped>
@@ -65,12 +82,6 @@ export default {
             font-size: 14px;
             color: #697279;
             margin-bottom: 8px;
-        }
-        .mint-button--default {
-            background-color: #faf8ef;
-        }
-        .mint-button {
-            font-size: 13px;
         }
         .sy-content {
             padding-top: 0px;
@@ -105,6 +116,44 @@ export default {
         padding-bottom: 30px !important;
         border-bottom: 1px solid #dbd8cf;
     }
+    h4 {
+        margin: 1.8rem 0;
+    }
+    .sy-more {
+        width: 100%;
+        margin: 0.8rem 0;
+        .sy-button {
+            margin: auto;
+            width: 95%;
+            line-height: 23px;
+            font-size: 0.85rem;
+            color: #8e8e8e;
+            text-align: center;
+            padding: 0.7rem 1.2rem 0.7rem 1.2rem;
+            border: 0.02rem solid #eaeaea;
+        }
+    }
+}
+ul {
+    background-color: #faf8ef;
+    display: flex;
+    flex-flow: row wrap;
+    align-items: center;
+    padding: 0;
+    margin: 0;
+    li {
+        list-style: none;
+        flex: 0 0 50%;
+        img {
+            width: 100%;
+            padding: 0 0.15rem;
+        }
+    }
+}
+.sy-footer {
+    line-height: 1.6rem;
+    padding: 1.8rem 0;
+    font-weight: 600;
 }
 </style>
 

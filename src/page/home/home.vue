@@ -28,12 +28,10 @@ export default {
     created() {
         action.homeBase().then(res => {
             if (res) {
-                console.log(res);
                 this.swipeData = res.slideData.data;
                 this.jiajuInfo = res.messageInfo.data.filter(
                     item => item.img_url && item.img_url != ""
                 );
-                console.log();
                 if (this.jiajuInfo.length % 2 > 0) {
                     this.jiajuInfo = this.jiajuInfo.filter(
                         (item, index) => index != this.jiajuInfo.length - 1
@@ -42,7 +40,6 @@ export default {
                 this.jiajuData = res.messageData.data.filter(
                     item => item.img_url && item.img_url != ""
                 );
-                console.log(this.jiajuData, this.jiajuInfo);
                 this.pinpaiData = res.magazineData.data;
             }
         });

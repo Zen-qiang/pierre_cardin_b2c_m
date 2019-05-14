@@ -149,10 +149,10 @@ export default {
                     width: 90%;
                     color: white;
                     font-weight: 500;
-                    font-size: 1rem;
+                    font-size: 0.9rem;
                     display: inline-block;
                     vertical-align: middle;
-                    text-shadow: 0.25rem 0.25rem 0.25rem #cdc9c9;
+                    text-shadow: 0 0 30px #3d3d3d;
                 }
             }
         }

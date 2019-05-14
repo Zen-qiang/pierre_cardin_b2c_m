@@ -34,7 +34,7 @@ const mutations = {
 
 /* 从本地存储读取数据 */
 for (var item in state) {
-  LS.get(sysKeys + item) ? state[item] = JSON.parse(LS.get(sysKeys + item)) : false;
+  LS.get(sysKeys + item) ? LS.get(sysKeys + item) : state[item] = JSON.parse(LS.get(sysKeys + item)) ? JSON.parse(LS.get(sysKeys + item)) : false;
 }
 
 //数据过滤

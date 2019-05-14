@@ -91,7 +91,7 @@ export default {
                 .sy-ziti {
                     color: white;
                     font-weight: 500;
-                    font-size: 0.85rem;
+                    font-size: 0.9rem;
                     display: inline-block;
                     vertical-align: middle;
                 }

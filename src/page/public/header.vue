@@ -91,16 +91,16 @@ export default {
     }
 }
 .sy-inline {
-    padding-top: 10px;
-    padding-right: 10px;
+    padding-top: 0.6rem;
+    padding-right: 0.4rem;
     display: inline-block;
 }
 .sy-left {
     vertical-align: middle;
     width: 20%;
+    text-align: rigth;
     .sy-ziti {
         font-size: 28px;
-        padding-right: 0.01rem;
     }
 }
 .sy-center {

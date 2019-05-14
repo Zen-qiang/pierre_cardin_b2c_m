@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div class="sy-list">
+        <div class="sy-list" :style="{'min-height':cliHeight+'px'}">
             <div class="sy-title">
                 <img :src="BaseUrl+infoData.big_img" alt="">
                 <p>
@@ -264,11 +264,12 @@ export default {
             }
             .text-content {
                 padding: 8px 0;
+                margin-bottom: 0.6rem;
                 h5 {
                     padding: 0;
                     margin: 0;
                     font-size: 0.1rem;
-                    line-height: 23px;
+                    line-height: 1.3rem;
                 }
             }
         }

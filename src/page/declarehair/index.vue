@@ -108,7 +108,7 @@ export default {
         align-items: center;
         // margin: 0 -5px;
         margin: 0;
-        padding: 0 0 3.5rem 0;
+        padding: 0 0.15rem 3.5rem 0.15rem;
         background-color: #faf8ef;
         li {
             list-style: none;

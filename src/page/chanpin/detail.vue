@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div class="sy-products-detail">
+        <div class="sy-products-detail" :style="{'min-height':cliHeight+'px'}">
             <div v-if="img_url.length>0&&img_url[0].pdt_a1">
                 <img v-for="(item,index) in img_url" :key="index" v-lazy="BaseUrl+item.pdt_a1" alt="">
             </div>
@@ -12,33 +12,36 @@
                     </ul>
                 </div>
             </div>
-            <h3 class="sy-h3">单品信息</h3>
-            <div class="sy-single">
-                <mt-swipe :showIndicators="false" :defaultIndex="0">
-                    <mt-swipe-item v-for="(item,index) in headerData" :key="index">
-                        <img v-lazy="item.pdt_img_url" alt="">
-                        <span class="sy-label">{{index+1}}/{{headerData.length}}</span>
-                    </mt-swipe-item>
-                </mt-swipe>
-                <div class="text-center sy-title padding-top-20">
-                    <div>{{containerData.pdt_name}}</div>
-                    <div>零售价：￥{{containerData.pdt_price}}</div>
-                    <div class="sy-guige sy-margin">规格：<span class="sy-guiges">{{containerData.pdt_standard}}</span></div>
-                    <div class="sy-guige">{{containerData.pdt_salestalk}}</div>
+            <div v-if="containerData.pdt_name&&!jzloading">
+                <h3 class="sy-h3">单品信息</h3>
+                <div class="sy-single">
+                    <mt-swipe :showIndicators="false" :defaultIndex="0">
+                        <mt-swipe-item v-for="(item,index) in headerData" :key="index">
+                            <img v-lazy="item.pdt_img_url" alt="">
+                            <span class="sy-label">{{index+1}}/{{headerData.length}}</span>
+                        </mt-swipe-item>
+                    </mt-swipe>
+                    <div class="text-center sy-title padding-top-20">
+                        <div>{{containerData.pdt_name}}</div>
+                        <div>零售价：￥{{containerData.pdt_price}}</div>
+                        <div class="sy-guige sy-margin">规格：<span class="sy-guiges">{{containerData.pdt_standard}}</span></div>
+                        <div class="sy-guige">{{containerData.pdt_salestalk}}</div>
+                    </div>
                 </div>
-            </div>
-            <h3>产品描述</h3>
-            <div class="pdtDesc" v-if="containerData.tmail_link.length">
-                <div class="flexContainer" v-for="(item, index) of containerData.tmail_link" :key="index">
-                    <div class="imgContent"><img v-lazy="BaseUrl+item.img"></div>
-                    <div class="textContent">
-                        <div class="text">
-                            <h4>{{item.title}}</h4>
-                            <p>{{item.desc}}</p>
+                <h3>产品描述</h3>
+                <div class="pdtDesc" v-if="containerData.tmail_link.length">
+                    <div class="flexContainer" v-for="(item, index) of containerData.tmail_link" :key="index">
+                        <div class="imgContent"><img v-lazy="BaseUrl+item.img"></div>
+                        <div class="textContent">
+                            <div class="text">
+                                <h4>{{item.title}}</h4>
+                                <p>{{item.desc}}</p>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
+            <jz-loading v-else></jz-loading>
         </div>
         <sy-footer></sy-footer>
     </div>
@@ -46,6 +49,7 @@
 <script>
 import action from "@/assets/utils/action.js";
 import syFooter from "@/page/public/footer";
+import JzLoading from "@/components/loading";
 export default {
     name: "chanpin_detail",
     data() {
@@ -53,6 +57,7 @@ export default {
             img_url: [],
             headerData: [],
             A2Data: [],
+            jzloading: false,
             containerData: {
                 pdt_details: "",
                 pdt_img_url: "",
@@ -65,7 +70,7 @@ export default {
             }
         };
     },
-    components: { syFooter },
+    components: { syFooter, JzLoading },
     created() {
         this.getHead();
     },
@@ -95,13 +100,20 @@ export default {
         },
         //获取主详情数据
         getRead() {
-            action.productDetail(this.$route.params.id).then(res => {
-                this.headerData = res.productB57List.data;
-                this.containerData = res.productBInfo.data[0];
-                this.containerData.tmail_link = JSON.parse(
-                    this.containerData.tmail_link
-                );
-            });
+            this.jzloading = true;
+            action
+                .productDetail(this.$route.params.id)
+                .then(res => {
+                    this.headerData = res.productB57List.data;
+                    this.containerData = res.productBInfo.data[0];
+                    this.containerData.tmail_link = JSON.parse(
+                        this.containerData.tmail_link
+                    );
+                    this.jzloading = false;
+                })
+                .catch(() => {
+                    this.jzloading = false;
+                });
         },
         handleImg(id) {
             this.$router.push({
@@ -145,9 +157,8 @@ export default {
             font-size: 12px;
             color: #687378;
             .sy-guiges {
-                padding: 1px 5px 1px 5px;
-                border-radius: 2px;
-                box-shadow: 0 0.01rem 0 red;
+                padding: 0.1rem 0.3rem 0.1rem 0.3rem;
+                border: 0.01rem solid #687378;
             }
         }
         .sy-margin {
@@ -221,15 +232,15 @@ export default {
                 .text {
                     display: inline-block;
                     vertical-align: middle;
-                    line-height: 18px;
+                    line-height: 1.3rem;
                     padding: 0 10%;
                     h4 {
-                        font-size: 0.5rem;
+                        font-size: 0.7rem;
                         margin-bottom: 0.1rem;
                     }
                     p {
-                        color: #b8bbbf;
-                        font-size: 0.12rem;
+                        color: #687378;
+                        font-size: 0.8rem;
                         margin: 0;
                     }
                 }

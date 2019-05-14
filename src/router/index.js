@@ -20,6 +20,13 @@ const router = new Router({
           title: "首页"
         }
       }, {
+        path: '/search',
+        name: 'search',
+        component: () => import('@/page/search/search'),
+        meta: {
+          title: "搜索"
+        }
+      }, {
         path: '/chanpin',
         name: 'chanpin',
         component: () => import('@/page/chanpin/transtfe'),

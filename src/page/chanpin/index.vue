@@ -1,8 +1,8 @@
 <template>
     <div>
-        <div class="sy-chanpin">
+        <div class="sy-chanpin" :style="{'min-height':cliHeight+'px'}">
             <h3 class="padding-50">{{title}}</h3>
-            <ul class="sy-ulli">
+            <ul class="sy-ulli" v-if="chanpinData.length>0&&!jzloading">
                 <li v-for="(item,index) in chanpinData" :key="index" @click="handleUrl(item.series_code)">
                     <img v-lazy="BaseUrl+item.img_url" alt>
                     <p>
@@ -10,6 +10,7 @@
                     </p>
                 </li>
             </ul>
+            <jz-loading v-else></jz-loading>
             <div style="clear:both"></div>
             <div class="padding-top-40 padding-bottom-40">
                 <div class="sy-type" v-for="(item,index) in typeData" :key="index">
@@ -23,12 +24,14 @@
 <script>
 import syFooter from "@/page/public/footer";
 import action from "@/assets/utils/action.js";
+import JzLoading from "@/components/loading";
 export default {
     name: "chanpin",
     data() {
         return {
             title: "",
             chanpinData: [],
+            jzloading: false,
             typeData: [
                 {
                     id: 9,
@@ -60,20 +63,27 @@ export default {
             }
         }
     },
-    created() {
+    mounted() {
+        this.jzloading = true;
         this.getData();
         let item = this.typeData.find(item => item.id == this.$route.params.id);
         if (item) {
             this.title = item.title;
         }
     },
-    components: { syFooter },
+    components: { syFooter, JzLoading },
     methods: {
         //获取数据源
         getData() {
-            action.productClassify(this.$route.params.id).then(res => {
-                this.chanpinData = res.seriesList.data;
-            });
+            action
+                .productClassify(this.$route.params.id)
+                .then(res => {
+                    this.chanpinData = res.seriesList.data;
+                    this.jzloading = false;
+                })
+                .catch(() => {
+                    this.jzloading = false;
+                });
         },
         handleClick(id) {
             if (this.$route.params.id == id) return;
@@ -110,13 +120,15 @@ export default {
         align-items: center;
         padding: 0;
         margin: 0;
+        padding-left: 0.08rem;
+        padding-right: 0.08rem;
         li {
             list-style: none;
             position: relative;
             flex: 0 0 50%;
             img {
                 width: 100%;
-                padding: 0 2px 0 2px;
+                padding: 0 0.1rem 0 0.1rem;
             }
             p {
                 position: absolute;
@@ -135,7 +147,7 @@ export default {
                 .sy-ziti {
                     color: white;
                     font-weight: 500;
-                    font-size: 1rem;
+                    font-size: 0.9rem;
                     display: inline-block;
                     vertical-align: middle;
                     text-shadow: 0 0 0.1rem red;
