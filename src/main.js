@@ -6,6 +6,7 @@ import router from './router'
 import store from "./store/index.js"
 
 import './assets/css/index.scss' // global css
+import * as filters from './filters/index' // global filters
 
 import MintUI from 'mint-ui'
 import 'mint-ui/lib/style.css'
@@ -19,6 +20,11 @@ Vue.prototype.cliHeight = window.document.body.offsetHeight - 421
 Vue.prototype.Trim = function(str) {
   return str.toString().replace(/\n | \r\n\↵/g, "<br/>");
 }
+
+// register global utility filters.
+Object.keys(filters).forEach(key => {
+  Vue.filter(key, filters[key])
+})
 
 Vue.config.productionTip = false
 

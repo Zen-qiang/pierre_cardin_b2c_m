@@ -4,7 +4,7 @@
             <h3>家居顾问</h3>
             <ul v-if="listData.length>0&&!jzloading" v-infinite-scroll="loadMore" infinite-scroll-disabled="loading"
                 infinite-scroll-distance="385.6">
-                <li v-for="(item,index) in listData" :key="index" @click="hanldeUrl(item.magazine_code)" @click.native="handleUrl(item.msg_code)">
+                <li v-for="(item,index) in listData" :key="index" @click="handleUrl(item.msg_code)">
                     <img v-if="item.img_url&&item.img_url" v-lazy="BaseUrl+item.img_url" alt="">
                     <img v-else src="../../assets/noimg.jpg" alt="">
                     <p class="sy-content">
@@ -78,6 +78,7 @@ export default {
             action
                 .brandMsgList(this.page, this.pageSize)
                 .then(res => {
+                    console.log(res);
                     typedata = false;
                     if (this.page == 0) {
                         this.listData = res.messageList.data;
@@ -98,7 +99,7 @@ export default {
         },
         hanldeUrl(id) {
             this.$router.push({
-                name: "furnishings_detail",
+                name: "furnishing_detail",
                 params: {
                     id: id
                 }
