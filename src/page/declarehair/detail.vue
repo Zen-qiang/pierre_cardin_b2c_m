@@ -33,9 +33,10 @@ export default {
         //读取数据源
         getRead() {
             action.magazineDetail(this.$route.params.id).then(res => {
-                console.log(res);
                 this.info = res.magazineDetail.data[0];
-                this.loadFile(this.BaseUrl + this.info.pdf_url);
+                if (this.info.pdf_url) {
+                    this.loadFile(this.BaseUrl + this.info.pdf_url);
+                }
             });
         },
         renderPage(num) {
@@ -52,7 +53,6 @@ export default {
                     ctx.backingStorePixelRatio ||
                     1;
                 let ratio = dpr / bsr;
-                console.log(dpr, bsr, ratio);
                 var viewport = page.getViewport(
                     screen.availWidth / page.getViewport(1).width
                 );

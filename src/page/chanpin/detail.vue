@@ -252,7 +252,7 @@ export default {
 <style lang="scss">
 .mint-swipe {
     .mint-swipe-items-wrap {
-        height: 257px !important;
+        height: 375px !important;
     }
 }
 </style>

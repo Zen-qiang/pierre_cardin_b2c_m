@@ -127,6 +127,7 @@ router.beforeEach((to, from, next) => {
   } else {
     store.commit('setshowBack', true)
   }
+  store.commit("setIsLocation", false);
   next()
 })
 

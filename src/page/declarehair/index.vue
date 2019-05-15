@@ -37,7 +37,7 @@ export default {
             listData: [],
             loading: false,
             showBottom: false,
-            JzLoading: false,
+            jzloading: false,
             total: 0
         };
     },

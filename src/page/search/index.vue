@@ -1,6 +1,6 @@
 <template>
     <div class="sy-search">
-        <mt-popup style="height:100%;width:100%;background-color:white;" v-model="popupVisible" position="bottom">
+        <mt-popup style="height:100%;width:101%;background-color:white;" v-model="popupVisible" position="bottom">
             <header class="sy-header">
                 <div class="sy-back" style="margin:auto">
                     <div class="text-left sy-inline sy-left" @click="handleHome">
@@ -26,8 +26,9 @@
                 <div class="menu-search tree_con_focus" id="i_con_search">
                     <!-- <img src="../../../static/search.png" /> -->
                     <i class="icon icon-search2"></i>
-                    <input placeholder="搜索" type="text" v-model="value" class="form-control" @blur="inputBlur(null)"
-                        @focus="inputFocus" @keyup.enter="inputBlur(true)">
+                    <input placeholder="搜索" type="text" v-model="value" class="form-control" @focus="inputFocus"
+                        @keyup.enter="inputBlur(true)">
+                    <span v-if="hasFocus" class="searchDelete" @click.self="searchInput">搜索</span>
                     <!-- <img src="../../../static/xxx.svg" v-if="hasFocus" class="searchDelete" @click.self="deleteInput"> -->
                 </div>
             </div>
@@ -38,6 +39,7 @@
     </div>
 </template>
 <script>
+import $ from "jquery";
 export default {
     name: "search",
     props: {
@@ -86,25 +88,31 @@ export default {
             $("#i_con_search").removeClass("tree_con_focus");
             $("#i_con_search").addClass("search-focus-top");
             $("#i_con_search").removeClass("search-focus-bottom");
-            $("#i_con_search input").append(
-                "<style>input::-webkit-input-placeholder{text-align:right;}</style>"
-            );
+            $("#i_con_search input").removeAttr("placeholder");
             $("#i_con_search").css({
                 "border-bottom": "1px solid #687378"
             });
         },
         inputBlur(val) {
             // console.log("失去焦点");
-            this.hasFocus = false;
-            $("#i_con_search").addClass("tree_con_focus");
-            $("#i_con_search").removeClass("search-focus-top");
-            $("#i_con_search input").append(
-                "<style>input::-webkit-input-placeholder{text-align:left}</style>"
-            );
-            $("#i_con_search").css({ "border-bottom": 0 });
             if (val) {
                 this.searchText();
             }
+            this.closeSearch();
+        },
+        searchInput() {
+            if (this.value) {
+                this.searchText();
+            }
+            this.closeSearch();
+        },
+        closeSearch() {
+            $("#i_con_search").addClass("tree_con_focus");
+            $("#i_con_search").removeClass("search-focus-top");
+            $("#i_con_search input").attr("placeholder", "搜索");
+            $("#i_con_search").css({ "border-bottom": 0 });
+            this.hasFocus = false;
+            this.value = "";
         },
         searchText() {
             this.$router.push({
@@ -114,9 +122,9 @@ export default {
                 }
             });
             this.$emit("CB-popupVisible");
-            this.value = "";
         },
         handleClose() {
+            this.closeSearch();
             this.$emit("CB-popupVisible");
         },
         //返回首页
@@ -132,6 +140,13 @@ export default {
         handleUrl(id) {
             switch (id) {
                 case 1:
+                    if (this.$route.name != "home") {
+                        this.$router.push({
+                            name: "home"
+                        });
+                    }
+                    this.$store.commit("setIsLocation", true);
+                    this.$emit("CB-popupVisible");
                     break;
                 case 2:
                     this.$router.push({
@@ -159,7 +174,11 @@ export default {
 </script>
 <style lang="scss" scoped>
 .sy-search {
-    border-bottom: 0.01rem solid #e0eeee;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    height: 100%;
+    // border-bottom: 0.01rem solid #e0eeee;
     .sy-header {
         top: 0;
         right: 0;
@@ -255,6 +274,7 @@ export default {
     // width: 60%;
     position: absolute;
     margin-left: 20px;
+    margin-right: 1.5rem;
     // .input-group-prepend {
     //     width: 35px !important;
     // }
@@ -266,6 +286,7 @@ export default {
         bottom: -0.15rem;
     }
     & .searchDelete {
+        font-size: 20px !important;
         width: 24px;
         right: 0;
         top: 0;
@@ -286,6 +307,7 @@ export default {
         border: none !important;
         font-size: 18px !important;
         color: #000 !important;
+        width: 200px;
         height: 40px !important;
         padding: 0 10px !important;
         padding-left: 10px;

@@ -41,13 +41,11 @@ const http = {
       if (res.status == 200 && res.data.length > 0 && res.data[0].result.length > 0) {
         if (res.data[0].result.length == 1) {
         //   let retData = formate.arrayToJson(trans.keys, res.data[0].result[0])
-          // console.log(retData);
         } else {
           let retArray = [];
           for (let _ret of res.data[0].result) {
             retArray.push(formate.arrayToJson(trans.keys, _ret))
           }
-          // // console.log(retArray);
         }
         return new Promise(function(resolve, reject) {});
       }

@@ -54,12 +54,13 @@ export default {
 </script>
 <style lang="scss" scoped>
 .sy-jiaju {
+    width: 100%;
     .sy-furnishing {
         display: flex;
         flex-flow: row wrap;
         align-items: center;
         margin: 0;
-        padding: 0;
+        padding: 0.05rem;
         li {
             list-style: none;
             box-sizing: border-box;

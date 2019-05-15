@@ -12,6 +12,7 @@
     </div>
 </template>
 <script>
+// import { goAnchor, GetQueryString } from "@/assets/utils/scroller.js";
 export default {
     name: "product",
     data() {
@@ -39,6 +40,13 @@ export default {
                 }
             ]
         };
+    },
+    mounted() {
+        // let maodian = "anchor"; //进入页面，如果带有锚点参数，则跳转至锚点地方，参数值就是id名
+        // console.log(maodian);
+        // if (maodian) {
+        //     goAnchor("#" + maodian);
+        // }
     },
     methods: {
         handleClick(type, id) {

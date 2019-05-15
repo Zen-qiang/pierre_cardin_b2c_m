@@ -1,8 +1,8 @@
 <template>
     <div id="layout">
-        <syHeader></syHeader>
+        <syHeader @CB-Header="CB_Header"></syHeader>
         <transition>
-            <router-view />
+            <router-view id="routerView" />
         </transition>
     </div>
 </template>
@@ -11,7 +11,19 @@
 import syHeader from "@/page/public/header";
 export default {
     name: "layout",
-    components: { syHeader }
+    components: { syHeader },
+    methods: {
+        CB_Header(val) {
+            if (val) {
+                document.body.style.overflow = "hidden";
+            } else {
+                document.body.style.overflow = "auto";
+            }
+        },
+        preventDefaultFn(event) {
+            event.preventDefault();
+        }
+    }
 };
 </script>
 <style lang="scss">

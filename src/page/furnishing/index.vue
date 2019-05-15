@@ -78,7 +78,6 @@ export default {
             action
                 .brandMsgList(this.page, this.pageSize)
                 .then(res => {
-                    console.log(res);
                     typedata = false;
                     if (this.page == 0) {
                         this.listData = res.messageList.data;

@@ -31,7 +31,6 @@ export default {
         },
         //详情
         handleUrl(id) {
-            console.log(id);
             this.$router.push({
                 name: "declarehair_detail",
                 params: {

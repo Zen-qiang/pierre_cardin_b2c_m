@@ -12,7 +12,6 @@ const action = {
    */
   homeBase: function() {
     return http.qPost(transactions.homeTransactions()).then((res) => {
-      // // console.log(res)
       return res
     })
   },

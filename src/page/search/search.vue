@@ -3,7 +3,8 @@
         <div :style="{'min-height':cliHeight+'px'}" class="sy-search-index">
             <div class="text-center text-muted sy-search">搜索结果</div>
             <div class="text-center sy-title">“{{$route.query.keys}}”</div>
-            <ul v-if="listData.length>0&&!jzloading" :class="!showButton?'padding-bottom-40':''">
+            <ul v-if="listData.length>0&&!jzloading" v-infinite-scroll="loadMore" infinite-scroll-disabled="loading"
+                infinite-scroll-distance="385.6" class="padding-bottom-40">
                 <li v-for="(item,index) in listData" :key="index" @click="handleUrl(item.pdt_id)">
                     <img v-lazy="item.pdt_img_url" alt="">
                     <div class="text-content">
@@ -13,9 +14,7 @@
                 </li>
             </ul>
             <jz-loading v-else></jz-loading>
-            <div class="margin-top-30 padding-bottom-50 sy-more" v-if="showButton">
-                <div class="sy-button" @click="handleMore">查看更多 <i></i></div>
-            </div>
+            <load-bottom v-if="showBottom && listData.length>0"></load-bottom>
         </div>
         <sy-footer></sy-footer>
     </div>
@@ -24,6 +23,7 @@
 import action from "@/assets/utils/action.js";
 import syFooter from "@/page/public/footer";
 import JzLoading from "@/components/loading";
+import LoadBottom from "@/page/public/loadbottom";
 export default {
     name: "search_index",
     data() {
@@ -33,20 +33,28 @@ export default {
             page: 1,
             pageSize: 10,
             total: 0,
-            showButton: true
+            showBottom: false
         };
     },
-    components: { syFooter, JzLoading },
+    components: { syFooter, JzLoading, LoadBottom },
     mounted() {
         this.jzloading = true;
         this.getData();
     },
     methods: {
+        //更多
+        loadMore() {
+            this.loading = true;
+            setTimeout(() => {
+                if (this.pageSize > this.total) return;
+                this.page++;
+                this.getData();
+            }, 2500);
+        },
         getData() {
             action
                 .searchList(this.$route.query.keys, this.page, this.pageSize)
                 .then(res => {
-                    console.log(res);
                     if (this.page == 1) {
                         this.listData = res.productList.data;
                     } else {
@@ -56,7 +64,7 @@ export default {
                     }
                     this.total = res.productList.dataTotal;
                     if (this.total >= 0 && this.total < this.pageSize) {
-                        this.showButton = false;
+                        this.showBottom = true;
                     }
                     this.jzloading = false;
                 })

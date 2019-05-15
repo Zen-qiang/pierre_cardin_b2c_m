@@ -44,9 +44,11 @@ export default {
         },
         handleSearch() {
             this.popupVisible = true;
+            this.$emit("CB-Header", this.popupVisible);
         },
         CB_popupVisible(val) {
             this.popupVisible = false;
+            this.$emit("CB-Header", this.popupVisible);
         }
     }
 };

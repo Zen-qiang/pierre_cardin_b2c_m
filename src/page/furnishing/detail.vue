@@ -36,7 +36,6 @@ export default {
             action
                 .brandMsgDetail(this.$route.params.id)
                 .then(res => {
-                    console.log(res);
                     this.listData = res.messageDetail.data;
                     this.jzloading = false;
                 })
