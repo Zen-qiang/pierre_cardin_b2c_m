@@ -1,13 +1,14 @@
 <template>
-    <div class="sy-swiper">
-        <mt-swipe class="sy-swipe" :auto="6000" :speed="2000" continuous showIndicators>
-            <mt-swipe-item v-for="(item,index) in swipeData" :key="index" style="margin-left:-72%;margin-right:28%;">
+    <div class="sy-swiper" v-if="swipeData.length>0">
+        <mt-swipe class="sy-swipe" :auto="6000" :speed="2000" continuous showIndicators :style="{'height':height+'px'}">
+            <mt-swipe-item v-for="(item,index) in swipeData" :key="index">
                 <img v-lazy="BaseUrl + item.image" alt>
             </mt-swipe-item>
         </mt-swipe>
     </div>
 </template>
 <script>
+import $ from "jquery";
 export default {
     name: "swiper",
     props: {
@@ -15,8 +16,13 @@ export default {
             type: Array
         }
     },
+    beforeMount: function() {
+        this.height = ($(window).width() * 664) / 500;
+    },
     data() {
-        return {};
+        return {
+            height: 0
+        };
     },
 
     methods: {}
@@ -25,16 +31,17 @@ export default {
 
 <style lang="scss" scoped>
 .sy-swiper {
-    height: 520px;
     .sy-swipe {
         img {
             border: 0;
             margin: 0;
-            left: 50%;
+            left: 0;
             padding: 0;
+            width: 100%;
             overflow-x: hidden;
             // width: 100%;
             height: 100%;
+            object-fit: cover;
         }
     }
 }

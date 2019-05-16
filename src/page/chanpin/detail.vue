@@ -15,7 +15,7 @@
             <div v-if="containerData.pdt_name&&!jzloading">
                 <h3 class="sy-h3">单品信息</h3>
                 <div class="sy-single">
-                    <mt-swipe :showIndicators="false" :defaultIndex="0">
+                    <mt-swipe :showIndicators="false" :defaultIndex="0" :style="{'height':height+'px'}">
                         <mt-swipe-item v-for="(item,index) in headerData" :key="index">
                             <img v-lazy="item.pdt_img_url" alt="">
                             <span class="sy-label">{{index+1}}/{{headerData.length}}</span>
@@ -41,12 +41,13 @@
                     </div>
                 </div>
             </div>
-            <jz-loading v-else></jz-loading>
+            <jz-loading v-else class="margin-bottom-50"></jz-loading>
         </div>
         <sy-footer></sy-footer>
     </div>
 </template>
 <script>
+import $ from "jquery";
 import action from "@/assets/utils/action.js";
 import syFooter from "@/page/public/footer";
 import JzLoading from "@/components/loading";
@@ -58,6 +59,7 @@ export default {
             headerData: [],
             A2Data: [],
             jzloading: false,
+            height: 0,
             containerData: {
                 pdt_details: "",
                 pdt_img_url: "",
@@ -71,7 +73,10 @@ export default {
         };
     },
     components: { syFooter, JzLoading },
-    created() {
+    beforeMount: function() {
+        this.height = ($(window).width() * 664) / 666;
+    },
+    mounted() {
         this.getHead();
     },
     watch: {
@@ -246,13 +251,6 @@ export default {
                 }
             }
         }
-    }
-}
-</style>
-<style lang="scss">
-.mint-swipe {
-    .mint-swipe-items-wrap {
-        height: 375px !important;
     }
 }
 </style>

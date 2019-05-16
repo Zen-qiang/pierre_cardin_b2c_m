@@ -124,7 +124,7 @@ export default {
         margin: 0.8rem 0;
         .sy-button {
             margin: auto;
-            width: 95%;
+            width: 98%;
             line-height: 23px;
             font-size: 0.85rem;
             color: #8e8e8e;
