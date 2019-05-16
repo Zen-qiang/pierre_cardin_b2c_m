@@ -110,8 +110,9 @@ export default {
 <style lang="scss" scoped>
 .sy-furnishings {
     h3 {
-        padding-top: 2.8rem;
-        padding-bottom: 1.6rem;
+        color: black;
+        font-size: 1.3rem;
+        padding: 2.8rem 0;
     }
     ul {
         display: flex;
@@ -148,7 +149,7 @@ export default {
                     width: 90%;
                     color: white;
                     font-weight: 500;
-                    font-size: 0.9rem;
+                    font-size: 1rem;
                     display: inline-block;
                     vertical-align: middle;
                     text-shadow: 0 0 30px #3d3d3d;

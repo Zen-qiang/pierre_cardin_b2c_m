@@ -19,7 +19,7 @@
                     <mt-tab-container-item :id="items.series_code" v-for="(items,indexs) in typeData" :key="indexs"
                         class="margin-bottom-30">
                         <div class="padding-top-20">
-                            <span v-for="(item,index) in fenleiData" :key="index" class="padding-5">
+                            <span v-for="(item,index) in fenleiData" :key="index" class="padding-5" style="width:100%;overflow-y:scroll">
                                 <span class="sy-checked" :class="item.dimflag_id==selects&&item.dimflag==dimflag?'is-xuanzhong':''"
                                     @click="handleXuanzhong(item.dimflag_id,item.dimflag)">{{item.name}}</span>
                             </span>
@@ -31,7 +31,7 @@
                                     <img v-lazy="itm.pdt_img_url" alt="" @click="handleImg(itm.pdt_id)">
                                     <div class="text-content">
                                         <h5>{{itm.pdt_name}}</h5>
-                                        <h5>零售价：{{itm.pdt_price}}</h5>
+                                        <h5>零售价：￥{{itm.pdt_price}}</h5>
                                     </div>
                                 </li>
                             </ul>
@@ -250,9 +250,9 @@ export default {
     }
     .sy-checked {
         font-size: 13px;
-        padding: 3px 8px 3px 8px;
-        border: 0.01rem solid #687378;
-        border-radius: 8px;
+        padding: 3px 6px 3px 6px;
+        border: 0.04rem solid #ebebeb;
+        border-radius: 2rem;
         box-shadow: 0 0 0 #ebebeb;
     }
     .sy-nodata {
@@ -285,7 +285,7 @@ export default {
                 h5 {
                     padding: 0;
                     margin: 0;
-                    font-size: 0.1rem;
+                    font-size: 0.4rem;
                     line-height: 1.3rem;
                 }
             }

@@ -55,19 +55,20 @@ export default {
         line-height: 40px;
         padding: 0 10px;
         .sy-htitle {
-            font-size: 13px;
+            font-size: 0.95rem;
             color: black;
-            font-weight: 600;
+            font-weight: 700;
             line-height: 23px;
             padding-bottom: 13px;
             border-bottom: 1px solid #e0e0e0;
         }
         .sy-context {
             text-align: left;
-            font-size: 18px;
-            font-weight: 600;
+            font-size: 1.2rem;
+            font-weight: 700;
             padding-top: 25px;
-            margin-bottom: 2px;
+            color: black;
+            margin-bottom: 1.2rem;
         }
 
         .sy-title {

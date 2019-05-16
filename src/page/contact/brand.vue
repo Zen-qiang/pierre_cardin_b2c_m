@@ -32,7 +32,7 @@
             <div class="text-left sy-titles">Q & pierre cardin Home 看重候选人的哪些方面？</div>
             <div class="text-left sy-content">良好的品行是作为一切开始的先决条件。其次是良好的思维方式与个人创造力</div>
             <div class="text-left sy-content sy-cont">在线填写申请时，需回答关于您自己的若干问题，并提交简历。如果您希望提交更多信息，可在申请时上传相关资料。如果您申请的是创意、市场营销、数字化或设计团队的职位，请务必提供您的作品集。</div>
-            <h4>为合作伙伴创造更大的价值！</h4>
+            <h4 class="sy-cooperation">为合作伙伴创造更大的价值！</h4>
             <div class="sy-more padding-bottom-30" @click="handleMore">
                 <div class="sy-button">查看职位<i></i></div>
             </div>
@@ -60,7 +60,10 @@ export default {
     },
     components: { syFooter },
     methods: {
-        handleMore() {}
+        handleMore() {
+            let url = "https://jobs.51job.com/all/co5179172.html";
+            window.open(url);
+        }
     }
 };
 </script>
@@ -73,10 +76,11 @@ export default {
         padding: 0 10px;
         .sy-context {
             text-align: left;
-            font-size: 18px;
-            font-weight: 600;
+            font-size: 1.2rem;
+            font-weight: 700;
             padding-top: 25px;
-            margin-bottom: 2px;
+            margin-bottom: 0.1rem;
+            color: black;
         }
         .sy-title {
             font-size: 14px;
@@ -95,18 +99,19 @@ export default {
         padding: 0 10px;
         color: black;
         font-size: 13px;
-        font-weight: 600;
+        font-weight: 700;
         line-height: 23px;
         padding-bottom: 16px;
         border-bottom: 1px solid #dbd8cf;
     }
     .sy-question {
         margin-top: 0;
-        font-size: 14px;
+        font-size: 1.1rem;
+        color: black;
         border-bottom: 1px solid #dbd8cf;
     }
     .sy-titles {
-        font-weight: 600;
+        font-weight: 700;
         color: black;
         font-size: 11px;
         line-height: 23px;
@@ -150,10 +155,13 @@ export default {
         }
     }
 }
+.sy-cooperation {
+    color: black;
+}
 .sy-footers {
     line-height: 1.6rem;
     padding: 1.8rem 0;
-    font-weight: 600;
+    font-weight: 700;
 }
 </style>
 

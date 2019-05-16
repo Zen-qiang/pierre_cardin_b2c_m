@@ -98,9 +98,12 @@ export default {
 <style lang="scss" scoped>
 .sy-declarehair {
     h3 {
+        padding: 2.8rem 0;
+        color: black;
+        font-size: 1.3rem;
         text-decoration: underline red;
-        padding-top: 2.8rem;
-        padding-bottom: 1.6rem;
+        background-color: #fff;
+        margin: 0;
     }
     ul {
         display: flex;
@@ -120,15 +123,16 @@ export default {
             }
             .sy-content {
                 line-height: 1.2rem;
+                padding: 0.4rem 0;
                 .sy-title {
                     padding-top: 0.2rem;
-                    font-size: 0.2rem;
+                    font-size: 0.7rem;
                     color: black;
                     font-weight: bold;
                 }
                 .sy-text {
                     color: #8f8f8f;
-                    font-size: 0.01rem;
+                    font-size: 0.6rem;
                 }
             }
         }

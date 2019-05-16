@@ -50,12 +50,16 @@ export default {
     padding: 0 10px;
     .sy-context {
         text-align: left;
-        font-size: 18px;
-        font-weight: 600;
+        font-size: 1.2rem;
+        font-weight: 700;
         padding-top: 25px;
-        margin-bottom: 10px;
+        color: black;
+        margin-bottom: 1.2rem;
     }
     .sy-contact {
+        h4 {
+            color: black;
+        }
         .sy-title {
             margin-top: 0px;
             margin-bottom: 8px;

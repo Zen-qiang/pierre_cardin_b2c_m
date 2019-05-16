@@ -168,7 +168,7 @@ export default {
                     });
                     break;
                 case 5:
-                    window.open(this.BaseUrl + "/lab/business.html");
+                    window.open(this.BaseUrl + "/im");
                     break;
             }
             this.$emit("CB-popupVisible");
