@@ -37,7 +37,7 @@
                 <div class="sy-button">查看职位<i></i></div>
             </div>
         </div>
-        <ul>
+        <ul class="sy-img">
             <li>
                 <img src="../../assets/img/workers.jpg" alt="">
             </li>
@@ -45,7 +45,7 @@
                 <img src="../../assets/img/girlworkers.jpg" alt="">
             </li>
         </ul>
-        <div class="text-center text-dark sy-footer">
+        <div class="text-center text-dark sy-footers">
             'I have a name,<br>I have to take advantage of it'
         </div>
         <sy-footer></sy-footer>
@@ -134,7 +134,7 @@ export default {
         }
     }
 }
-ul {
+.sy-img {
     background-color: #faf8ef;
     display: flex;
     flex-flow: row wrap;
@@ -150,7 +150,7 @@ ul {
         }
     }
 }
-.sy-footer {
+.sy-footers {
     line-height: 1.6rem;
     padding: 1.8rem 0;
     font-weight: 600;

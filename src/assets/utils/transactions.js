@@ -47,6 +47,48 @@ const transactions = {
     }
   },
 
+  //----------------------------------------------------------------------------
+  // 工具类
+  //----------------------------------------------------------------------------
+
+  utilSearch: function() {
+    return {
+      transaction: {
+        id: '7001',
+        command: 'ExecuteSQL',
+        params: {
+          name: 'ali_producttree1_sql',
+          parsejson: 'N'
+        }
+      },
+      key: {
+        key: 'chapinList',
+        value: ['pdt_id', 'pdt_img_url', 'pdt_name', 'pdt_price', 'pdt_sale']
+      }
+    }
+  },
+
+  /**   -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+     一级产品分类
+   -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --**/
+
+  utilProductType: () => {
+    let _transactions = [{
+      command: 'ExecuteSQL',
+      params: {
+        name: 'ali_producttree1_sql',
+        parsejson: 'N'
+      }
+    }]
+    return {
+      transactions: JSON.stringify(_transactions),
+      keyValues: [{
+        key: 'productType',
+        value: ['id', 'parent_code', 'name_code', 'name', 'img_url', 'picture']
+      }]
+    }
+  },
+
   /**
    * 二级分类 三级分类 列表 , m.ID as DIMFLAGID, m.DIMFLAG
    */
@@ -336,28 +378,6 @@ const transactions = {
     return {
       transactions: JSON.stringify(_transactions),
       keyValues: [utilRelatedProductList.key]
-    }
-  },
-
-  //----------------------------------------------------------------------------
-  // 工具类
-  //----------------------------------------------------------------------------
-
-  utilSearch: function(search, pageNow, pageSize) {
-    return {
-      transaction: {
-        id: '7001',
-        command: 'ExecuteSQL',
-        params: {
-          name: 'ali_product_search_sql',
-          values: [`%${search}%`, pageNow, pageSize, pageNow, pageSize],
-          parsejson: 'N'
-        }
-      },
-      key: {
-        key: 'productList',
-        value: ['pdt_id', 'pdt_img_url', 'pdt_name', 'pdt_price', 'pdt_sale']
-      }
     }
   },
 

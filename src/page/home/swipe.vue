@@ -17,7 +17,7 @@ export default {
         }
     },
     beforeMount: function() {
-        this.height = ($(window).width() * 664) / 500;
+        this.height = ($(window).width() * 664) / 435;
     },
     data() {
         return {
@@ -49,11 +49,12 @@ export default {
 <style lang="scss">
 .sy-swiper {
     .mint-swipe-indicators {
-        bottom: 4.3rem;
+        bottom: 2.5rem;
         .mint-swipe-indicator {
-            width: 0.6rem;
-            height: 0.6rem;
-            margin: 0 0.25rem;
+            width: 0.5rem;
+            height: 0.5rem;
+            margin: 0 0.3rem;
+            opacity: 0.8;
         }
     }
 }

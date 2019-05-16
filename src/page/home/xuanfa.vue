@@ -1,6 +1,6 @@
 <template>
     <div class="sy-xuanfa">
-        <h4 class="padding-top-20">品牌宣发</h4>
+        <h3 class="padding-top-20">品牌宣发</h3>
         <ul>
             <li v-for="(item,index) in pinpaiData" :key="index" @click="handleUrl(item.magazine_code)">
                 <img v-lazy="BaseUrl+item.img_url" width="100%" alt>
@@ -42,9 +42,12 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
+h3 {
+    margin: 1.4rem 0;
+    color: black;
+}
 .sy-xuanfa {
     background-color: #faf8ef;
-
     ul {
         display: flex;
         flex-flow: row wrap;

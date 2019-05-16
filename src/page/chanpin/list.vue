@@ -7,14 +7,14 @@
                     <span class="sy-ziti">{{infoData.name}}</span>
                 </p>
             </div>
-            <div style="border-bottom:0.03rem solid #EBEBEB;padding-bottom:0.15rem">
-                <div class="padding-left-10 padding-right-10">
+            <div style="border-bottom:0.03rem solid #EBEBEB;padding-top:0;background-color:#fff;width:100%;overflow-y:scroll">
+                <div>
                     <mt-navbar v-model="selected">
                         <mt-tab-item :id="item.series_code" v-for="(item,index) in typeData" :key="index">{{item.name}}</mt-tab-item>
                     </mt-navbar>
                 </div>
             </div>
-            <div>
+            <div v-if="typeData.length>0" style="background-color:#fff">
                 <mt-tab-container v-model="selected">
                     <mt-tab-container-item :id="items.series_code" v-for="(items,indexs) in typeData" :key="indexs"
                         class="margin-bottom-30">
@@ -47,6 +47,11 @@
                 </mt-tab-container>
                 <load-bottom v-if="showBottom && productsData.length>0"></load-bottom>
             </div>
+            <div v-else class="text-center text-muted font-70 sy-nodata">
+                <i class="icon icon-lian-hengxian sy-cry"></i>
+                <div>没有查询到相关产品信息</div>
+            </div>
+
         </div>
         <sy-footer></sy-footer>
     </div>
@@ -132,9 +137,11 @@ export default {
         //获取一级分类
         getData() {
             action.productClassify(this.$route.params.id).then(res => {
-                this.typeData = res.seriesList.data;
-                this.selected = this.typeData[0].series_code;
-                this.dimflag = this.typeData[0].dimflag;
+                if (res.seriesList.data.length) {
+                    this.typeData = res.seriesList.data;
+                    this.selected = this.typeData[0].series_code;
+                    this.dimflag = this.typeData[0].dimflag;
+                }
                 this.getBeitype();
             });
         },
@@ -208,7 +215,10 @@ export default {
 <style lang="scss" scoped>
 .sy-list {
     .sy-title {
+        padding: 0;
+        margin: 0;
         position: relative;
+        background-color: #fff;
         p {
             position: absolute;
             top: 0;
@@ -244,6 +254,13 @@ export default {
         border: 0.01rem solid #687378;
         border-radius: 8px;
         box-shadow: 0 0 0 #ebebeb;
+    }
+    .sy-nodata {
+        background-color: #fff;
+        padding: 4rem 0 5rem 0;
+        .sy-cry {
+            font-size: 4.2rem;
+        }
     }
     ul {
         display: flex;
@@ -288,6 +305,8 @@ export default {
     .is-selected {
         color: black;
         border-bottom: 3px solid red;
+        margin: auto;
+        max-width: 23%;
     }
     .sy-cry {
         font-size: 50px;

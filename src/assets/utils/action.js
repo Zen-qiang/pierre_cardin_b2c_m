@@ -26,6 +26,11 @@ const action = {
     return http.qPost(transactions.qIntroduceProductList())
   },
 
+  /**一级产品分类 */
+  chanpinType: function() {
+    return http.qPost(transactions.utilProductType())
+  },
+
   // 官网首页广告图
   advertImg: function() {
     return http.qPost(transactions.qAdvert('portal:advert'))

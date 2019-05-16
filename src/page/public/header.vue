@@ -2,15 +2,15 @@
     <div>
         <header class="sy-header">
             <div class="sy-back" style="margin:auto">
-                <div class="text-left sy-inline sy-left" @click="handleHome">
+                <div class="text-left sy-inline sy-left sy-right" @click="handleHome">
                     <img v-if="!showBack" src="../../assets/img/logos.png" width="27rem" height="27rem" alt>
                     <mt-button v-if="showBack" class="sy-button" icon="back" @click="handleBack"></mt-button>
                 </div>
                 <div class="text-center sy-inline sy-center" @click="handleHome">
                     <img src="../../assets/logo.png" width="150rem" height="20rem" alt>
                 </div>
-                <div class="text-right sy-inline sy-left">
-                    <i class="icon icon-gengduo1 sy-ziti" @click="handleSearch"></i>
+                <div class="text-right sy-inline sy-left sy-menu">
+                    <i class="icon icon-menu sy-ziti" @click="handleSearch"></i>
                 </div>
                 <search :popupVisible="popupVisible" @CB-popupVisible="CB_popupVisible"></search>
             </div>
@@ -62,7 +62,7 @@ export default {
     z-index: 1;
     background-color: #fff;
     color: black;
-    height: 46px;
+    height: 60px;
     -webkit-box-align: center;
     align-items: center;
     box-sizing: border-box;
@@ -78,6 +78,7 @@ export default {
     width: 100%;
     text-align: left;
     -webkit-box-flex: 5;
+    padding-top: 0.1rem;
     flex: 5;
     .mint-button--default {
         background-color: #fff;
@@ -94,21 +95,28 @@ export default {
 }
 .sy-inline {
     padding-top: 0.6rem;
-    padding-right: 0.4rem;
+    padding-right: 0.5rem;
     display: inline-block;
+}
+.sy-right {
+    margin-top: 0.5rem;
+}
+.sy-menu {
+    padding-top: 0.5rem !important;
 }
 .sy-left {
     vertical-align: middle;
     width: 20%;
     text-align: rigth;
+    margin-top: 0.15rem;
     .sy-ziti {
-        font-size: 28px;
+        font-size: 36px;
     }
 }
 .sy-center {
     width: 60%;
     vertical-align: middle;
-    padding-top: 10px;
+    padding-top: 8px;
 }
 .sy-button {
     border: none;

@@ -78,4 +78,12 @@ export default {
     right: 0;
 }
 </style>
+<style lang="scss">
+.sy-furn_detail {
+    img {
+        width: 100% !important;
+        height: 75% !important;
+    }
+}
+</style>
 

@@ -1,6 +1,6 @@
 <template>
     <div class="sy-jiaju">
-        <h4>家居顾问</h4>
+        <h3>家居顾问</h3>
         <ul>
             <li v-for="(item,index) in jiajuData" :key="index" @click="handleUrl(item.msg_code)">
                 <img v-if="item.img_url" v-lazy="BaseUrl+item.img_url" alt>
@@ -53,6 +53,10 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
+h3 {
+    margin: 1.4rem 0;
+    color: black;
+}
 .sy-jiaju {
     width: 100%;
     .sy-furnishing {
@@ -101,7 +105,6 @@ export default {
                     width: 90%;
                     color: #fff;
                     text-shadow: 0 0 30px #3d3d3d;
-                    font-size: 0.9rem;
                     display: inline-block;
                     vertical-align: middle;
                 }

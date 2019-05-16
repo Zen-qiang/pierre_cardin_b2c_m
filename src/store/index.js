@@ -22,6 +22,13 @@ const showBack = false;
  */
 const isLocation = false
 
+/**
+ * productsType [产品以及分类]
+ * @type {Boolean}
+ * @author sy 2019-05-16
+ */
+const productsType = []
+
 /*
  * activeList 活动列表
  * pageSize 设置每页显示记录条数
@@ -29,7 +36,8 @@ const isLocation = false
  * */
 const state = {
   showBack: showBack,
-  isLocation: isLocation
+  isLocation: isLocation,
+  productsType: productsType
 }
 
 //从组件中提交请求方法，写在此类下，注意保存时，一定要保存为json
@@ -41,6 +49,10 @@ const mutations = {
   setIsLocation(state, payload) { //设置是否锚点定位
     state.isLocation = payload;
     LS.set(sysKeys + 'isLocation', JSON.stringify(state.isLocation))
+  },
+  setProductsType(state, payload) { //设置产品一级分类
+    state.productsType = payload;
+    LS.set(sysKeys + 'productsType', JSON.stringify(state.productsType))
   }
 }
 

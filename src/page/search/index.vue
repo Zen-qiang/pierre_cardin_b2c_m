@@ -3,18 +3,18 @@
         <mt-popup style="height:100%;width:101%;background-color:white;" v-model="popupVisible" position="bottom">
             <header class="sy-header">
                 <div class="sy-back" style="margin:auto">
-                    <div class="text-left sy-inline sy-left" @click="handleHome">
+                    <div class="text-left sy-inline sy-left sy-right" @click="handleHome">
                         <img src="../../assets/img/logos.png" width="27rem" height="27rem" alt>
                     </div>
                     <div class="text-center sy-inline sy-center" @click="handleHome">
                         <img src="../../assets/logo.png" width="150rem" height="20rem" alt>
                     </div>
-                    <div class="text-right sy-inline sy-left">
+                    <div class="text-right sy-inline sy-left sy-menu">
                         <i class="icon icon-error3 sy-ziti" @click="handleClose"></i>
                     </div>
                 </div>
             </header>
-            <div :style="{'height':cliHeight+'px'}">
+            <div :style="{'height':showHeight+'px'}">
                 <div class="sy-cell" v-if="!hasFocus">
                     <mt-cell class="sy-mt-cell" v-for="(item,index) in typeLei" @click.native="handleUrl(item.id)"
                         is-link :key="index">
@@ -29,7 +29,6 @@
                     <input placeholder="搜索" type="text" v-model="value" class="form-control" @focus="inputFocus"
                         @keyup.enter="inputBlur(true)">
                     <span v-if="hasFocus" class="searchDelete" @click.self="searchInput">搜索</span>
-                    <!-- <img src="../../../static/xxx.svg" v-if="hasFocus" class="searchDelete" @click.self="deleteInput"> -->
                 </div>
             </div>
 
@@ -48,6 +47,7 @@ export default {
     data() {
         return {
             hasFocus: false,
+            showHeight: 0,
             typeLei: [
                 {
                     id: 1,
@@ -80,9 +80,13 @@ export default {
     },
     mounted() {
         $("#i_con_search").addClass("search-focus-bottom");
+        this.showHeight = JSON.parse(JSON.stringify(this.cliHeight));
     },
     methods: {
         inputFocus() {
+            $("input").on("focus", function() {
+                window.scroll(0, 0);
+            });
             this.hasFocus = true;
             // console.log("获取焦点");
             $("#i_con_search").removeClass("tree_con_focus");
@@ -187,7 +191,7 @@ export default {
         z-index: 1;
         background-color: #fff;
         color: black;
-        height: 46px;
+        height: 60px;
         -webkit-box-align: center;
         align-items: center;
         box-sizing: border-box;
@@ -217,29 +221,37 @@ export default {
             height: 21px;
         }
     }
+    .sy-right {
+        margin-top: 0.45rem;
+        padding-left: 0.2rem;
+    }
     .sy-inline {
-        padding-top: 10px;
-        padding-right: 10px;
+        padding-top: 0.6rem;
+        padding-right: 0.6rem;
         display: inline-block;
+    }
+    .sy-menu {
+        padding-top: 0.5rem !important;
     }
     .sy-left {
         vertical-align: middle;
         width: 20%;
         .sy-ziti {
-            font-size: 1.3rem;
+            font-size: 1.4rem;
             padding-right: 0.2rem;
         }
     }
     .sy-center {
         width: 60%;
         vertical-align: middle;
-        padding-top: 10px;
+        padding-top: 11px;
+        padding-right: 0.5rem;
     }
 }
 </style>
 <style lang="scss">
 .sy-cell {
-    padding-top: 46px;
+    padding-top: 60px;
     .sy-mt-cell {
         .mint-cell-title {
             font-size: 1rem;
@@ -318,8 +330,9 @@ export default {
         box-shadow: 0 0 0 0 !important;
     }
     & .form-control::placeholder {
-        font-size: 20px !important;
+        font-size: 1.3rem !important;
         color: #000 !important;
+        line-height: 1.3rem !important;
     }
 }
 .tree_con_focus {

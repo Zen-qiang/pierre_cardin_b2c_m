@@ -13,7 +13,7 @@ import 'mint-ui/lib/style.css'
 
 Vue.use(MintUI)
 
-Vue.prototype.BaseUrl = 'http://www.pc18.vip';
+Vue.prototype.BaseUrl = process.env.WEB_ROOT;
 
 Vue.prototype.cliHeight = window.document.body.offsetHeight - 421
 
@@ -26,18 +26,12 @@ Object.keys(filters).forEach(key => {
   Vue.filter(key, filters[key])
 })
 
-router.beforeEach((to, from, next) => {
-  // chrome
-  document.body.scrollTop = 0
-  // firefox
-  document.documentElement.scrollTop = 0
-  // safari
-  window.pageYOffset = 0
-  next()
-})
+window.addEventListener("beforeunload", window.scrollTo(0, 0))
 
 router.afterEach((to, from, next) => {
-  window.scrollTo(0, 0)
+  document.documentElement.scrollTop = document.body.scrollTop = 0;
+  window.addEventListener("beforeunload", window.scrollTo(0, 0))
+  //   window.scrollTo(0, 0);
 })
 
 Vue.config.productionTip = false

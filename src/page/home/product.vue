@@ -1,57 +1,43 @@
 <template>
     <div class="sy-page">
-        <h4>产品系列</h4>
-        <ul>
-            <li class="sy-li" v-for="(item,index) in chanpinData" :key="index" @click="handleClick('chanpin_index',item.id)">
-                <img :src="item.img_url" alt>
+        <h3>产品系列</h3>
+        <ul v-if="chanpinData.length>0&&!jzloading">
+            <li class="sy-li" v-for="(item,index) in chanpinData" :key="index" @click="handleClick(item.id)">
+                <img :src="item.img_url" :style="{'height':height +'px'}" style="margin-left:-50%;margin-right:-50%;"
+                    alt>
                 <p>
-                    <span class="sy-ziti">{{item.title}}</span>
+                    <span class="sy-ziti">{{item.name}}</span>
                 </p>
             </li>
         </ul>
+        <jz-loading v-else></jz-loading>
     </div>
 </template>
 <script>
-// import { goAnchor, GetQueryString } from "@/assets/utils/scroller.js";
+import $ from "jquery";
+import JzLoading from "@/components/loading";
 export default {
     name: "product",
     data() {
         return {
-            chanpinData: [
-                {
-                    id: 9,
-                    title: "家纺装饰",
-                    img_url: require("../../assets/img/jiafang.jpg")
-                },
-                {
-                    id: 8,
-                    title: "家居服饰",
-                    img_url: require("../../assets/img/jiaju.jpg")
-                },
-                {
-                    id: 7,
-                    title: "家居用品",
-                    img_url: require("../../assets/img/yongpin.jpg")
-                },
-                {
-                    id: 10,
-                    title: "Home Etudes CAFE",
-                    img_url: require("../../assets/img/homeec.jpg")
-                }
-            ]
+            jzloading: false,
+            height: 0
         };
     },
-    mounted() {
-        // let maodian = "anchor"; //进入页面，如果带有锚点参数，则跳转至锚点地方，参数值就是id名
-        // console.log(maodian);
-        // if (maodian) {
-        //     goAnchor("#" + maodian);
-        // }
+    props: {
+        chanpinData: {
+            type: Array
+        }
     },
+    beforeMount: function() {
+        this.height = ($(window).width() * 664) / 1135;
+    },
+    components: { JzLoading },
+    mounted() {},
     methods: {
-        handleClick(type, id) {
+        handleClick(id) {
             this.$router.push({
-                name: type,
+                name: "chanpin_index",
                 params: {
                     id: id
                 }
@@ -63,6 +49,10 @@ export default {
 
 <style lang="scss" scoped>
 .sy-page {
+    h3 {
+        margin: 1.4rem 0;
+        color: black;
+    }
     ul {
         display: flex;
         flex-flow: row wrap;
@@ -73,13 +63,14 @@ export default {
         .sy-li {
             list-style: none;
             position: relative;
-            flex: 0 0 50%;
-            padding: 0.1rem;
+            flex: 0 0 48.8%;
+            padding: 0.1rem 0;
             box-sizing: border-box;
-            margin: 0;
+            overflow: hidden;
+            margin: 0 0.13rem;
             img {
-                width: 100%;
-                // padding: 0 2px 2px 2px;
+                height: 100%;
+                object-fit: cover;
                 vertical-align: middle;
             }
             p {
@@ -99,7 +90,6 @@ export default {
                 .sy-ziti {
                     color: white;
                     font-weight: 500;
-                    font-size: 0.9rem;
                     display: inline-block;
                     vertical-align: middle;
                 }

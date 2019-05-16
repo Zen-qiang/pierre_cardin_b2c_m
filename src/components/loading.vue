@@ -1,5 +1,5 @@
 <template>
-    <div class="text-center text-muted padding-top-30">
+    <div class="text-center text-muted padding-top-30 padding-bottom-30">
         <i class="icon icon-Loading1 sy-cry sy-loading"></i>
     </div>
 </template>

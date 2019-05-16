@@ -2,7 +2,9 @@ import axios from 'axios'
 import utils from './utils.js'
 import formate from './formate.js'
 
-axios.defaults.baseURL = 'http://www.pc18.vip'
+axios.defaults.baseURL = process.env.API_ROOT
+
+axios.defaults.withCredentials = true
 
 const http = {
   url: '/servlets/binserv/Rest',
@@ -40,7 +42,7 @@ const http = {
     axios.post(this.url, {}, _config).then((res) => {
       if (res.status == 200 && res.data.length > 0 && res.data[0].result.length > 0) {
         if (res.data[0].result.length == 1) {
-        //   let retData = formate.arrayToJson(trans.keys, res.data[0].result[0])
+          //   let retData = formate.arrayToJson(trans.keys, res.data[0].result[0])
         } else {
           let retArray = [];
           for (let _ret of res.data[0].result) {

@@ -1,7 +1,7 @@
 <template>
     <div class="page">
         <swiper v-if="swipeData.length>0" :swipeData="swipeData">轮播图</swiper>
-        <products id="products">产品系列</products>
+        <products :chanpinData="chanpinData" id="products">产品系列</products>
         <pin-pai v-if="jiajuData.length>0" :jiajuInfo="jiajuInfo" :jiajuData="jiajuData">家居顾问</pin-pai>
         <xuan-fa v-if="pinpaiData.length>0" :pinpaiData="pinpaiData">品牌宣发</xuan-fa>
         <sy-footer></sy-footer>
@@ -27,7 +27,10 @@ export default {
             swipeData: [],
             jiajuData: [],
             jiajuInfo: [],
-            pinpaiData: []
+            pinpaiData: [],
+            productsData: [],
+            chanpinData: [],
+            jzloading: false
         };
     },
     watch: {
@@ -56,10 +59,68 @@ export default {
                 if (this.isLocation) {
                     this.setLocation(this.setLocation);
                 }
+                this.productsData.push(res.series7.data);
+                this.productsData.push(res.series8.data);
+                this.productsData.push(res.series9.data);
+                this.productsData.push(res.series10.data);
+                this.getChanpin();
             }
         });
     },
     methods: {
+        getChanpin() {
+            this.jzloading = true;
+            action
+                .chanpinType()
+                .then(res => {
+                    let data = res.productType.data.filter(
+                        item =>
+                            item.id == 7 ||
+                            item.id == 8 ||
+                            item.id == 9 ||
+                            item.id == 10
+                    );
+                    for (var i in data) {
+                        for (var j in this.productsData) {
+                            if (
+                                parseInt(data[i].id) ==
+                                parseInt(this.productsData[j][0].parent_code)
+                            ) {
+                                data[i].img_url = this.productsData[j][0]
+                                    .img_url
+                                    ? this.BaseUrl +
+                                      this.productsData[j][0].img_url
+                                    : this.imgfilter(data[i].id);
+                            }
+                        }
+                    }
+                    this.chanpinData = JSON.parse(JSON.stringify(data));
+                    this.$store.commit("setProductsType", data);
+                    this.jzloading = false;
+                })
+                .catch(() => {
+                    this.jzloading = false;
+                });
+        },
+        //过滤图片
+        imgfilter(val) {
+            let img_url = "";
+            switch (val) {
+                case 7:
+                    img_url = "../../assets/img/jiafang";
+                    break;
+                case 8:
+                    img_url = "../../assets/img/jiaju";
+                    break;
+                case 9:
+                    img_url = "../../assets/img/yongpin";
+                    break;
+                case 10:
+                    img_url = "../../assets/img/homeec";
+                    break;
+            }
+            return img_url;
+        },
         //锚点定位
         setLocation(val) {
             setTimeout(() => {
