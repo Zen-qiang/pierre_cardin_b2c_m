@@ -211,7 +211,7 @@ export default {
         .mint-button--default {
             background-color: #fff;
             box-shadow: none;
-            font-weight: 600;
+            font-weight: 700;
         }
         .mint-button--normal {
             padding: 0;
@@ -256,7 +256,7 @@ export default {
         .mint-cell-title {
             font-size: 1rem;
             padding-left: 0.8rem;
-            font-weight: 600;
+            font-weight: 700;
         }
     }
     .mint-cell-wrapper {
