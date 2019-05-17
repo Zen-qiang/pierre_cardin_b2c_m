@@ -18,13 +18,13 @@
                 <mt-tab-container v-model="selected">
                     <mt-tab-container-item :id="items.series_code" v-for="(items,indexs) in typeData" :key="indexs"
                         class="margin-bottom-30">
-                        <div class="padding-top-20">
-                            <span v-for="(item,index) in fenleiData" :key="index" class="padding-5" style="width:100%;overflow-y:scroll">
+                        <div class="padding-top-20 sy-little-tab">
+                            <div v-for="(item,index) in fenleiData" :key="index" class="padding-left-5 padding-right-5 sy-tab">
                                 <span class="sy-checked" :class="item.dimflag_id==selects&&item.dimflag==dimflag?'is-xuanzhong':''"
-                                    @click="handleXuanzhong(item.dimflag_id,item.dimflag)">{{item.name}}</span>
-                            </span>
+                                    @click="handleXuanzhong(index,item.dimflag_id,item.dimflag)">{{item.name}}</span>
+                            </div>
                         </div>
-                        <div class="padding-top-30" v-if="productsData.length>0&&!jzloading">
+                        <div class="padding-top-20" v-if="productsData.length>0&&!jzloading">
                             <ul v-infinite-scroll="loadMore" infinite-scroll-disabled="loading"
                                 infinite-scroll-distance="385.6">
                                 <li v-for="(itm,idx) in productsData" :key="idx">
@@ -60,6 +60,7 @@
 import action from "@/assets/utils/action.js";
 import syFooter from "@/page/public/footer";
 import LoadBottom from "@/page/public/loadbottom";
+import $ from "jquery";
 let typedata = true;
 export default {
     name: "chanpin_list",
@@ -70,6 +71,7 @@ export default {
             fenData: [],
             typeData: [],
             selected: "",
+            flagitemleft: [],
             infoData: {
                 name: "",
                 img_url: ""
@@ -85,7 +87,7 @@ export default {
         };
     },
     components: { syFooter, LoadBottom },
-    created() {
+    mounted() {
         this.jzloading = true;
         this.getFenlei();
     },
@@ -188,7 +190,11 @@ export default {
                     this.loading = false;
                 });
         },
-        handleXuanzhong(id, dimflag) {
+        handleXuanzhong(index, id, dimflag) {
+            $(".sy-little-tab").animate(
+                { scrollLeft: this.flagitemleft[index] },
+                300
+            );
             this.pageNow = 1;
             this.selects = id;
             let item = this.fenleiData.find(item => item.dimflag_id == id);
@@ -197,6 +203,7 @@ export default {
             }
             this.showBottom = false;
             this.jzloading = true;
+            this.setScroleleft();
             this.getList();
         },
         //跳转详情页
@@ -208,6 +215,21 @@ export default {
                     id: id
                 }
             });
+        },
+        setScroleleft() {
+            let viewWidth = $(".sy-little-tab").width() / 2;
+            let length = this.fenleiData.length;
+            let dom = $(".sy-little-tab>.sy-tab");
+            let itemleft = 0;
+            for (let i = 0; i < length; i++) {
+                itemleft =
+                    dom.eq(i).position().left +
+                    dom.eq(i).width() / 2 +
+                    12 -
+                    viewWidth;
+                itemleft = parseInt(itemleft);
+                this.flagitemleft.push(itemleft);
+            }
         }
     }
 };
@@ -248,12 +270,25 @@ export default {
     .mint-navbar .mint-tab-item {
         padding: 12px 0;
     }
-    .sy-checked {
-        font-size: 13px;
-        padding: 3px 6px 3px 6px;
-        border: 0.04rem solid #ebebeb;
-        border-radius: 2rem;
-        box-shadow: 0 0 0 #ebebeb;
+    .sy-little-tab {
+        // width: 100%;
+        overflow-x: scroll;
+        padding-bottom: 0.8rem;
+        .sy-tab {
+            display: inline;
+            padding-bottom: 0.6rem;
+            .sy-checked {
+                font-size: 13px;
+                padding: 3px 6px 3px 6px;
+                border: 0.04rem solid #ebebeb;
+                border-radius: 2rem;
+                box-shadow: 0 0 0 #ebebeb;
+                white-space: nowrap;
+            }
+        }
+        & .sy-tab:last-child {
+            clear: both;
+        }
     }
     .sy-nodata {
         background-color: #fff;
@@ -285,8 +320,8 @@ export default {
                 h5 {
                     padding: 0;
                     margin: 0;
-                    font-size: 0.4rem;
-                    line-height: 1.3rem;
+                    font-size: 0.7rem;
+                    line-height: 1.2rem;
                 }
             }
         }
@@ -306,7 +341,7 @@ export default {
         color: black;
         border-bottom: 3px solid red;
         margin: auto;
-        max-width: 23%;
+        max-width: 24%;
     }
     .sy-cry {
         font-size: 50px;

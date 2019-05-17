@@ -2,7 +2,7 @@
     <div id="layout">
         <syHeader @CB-Header="CB_Header"></syHeader>
         <transition>
-            <router-view id="routerView" />
+            <router-view id="routerViewer" :key="$route.name" />
         </transition>
     </div>
 </template>

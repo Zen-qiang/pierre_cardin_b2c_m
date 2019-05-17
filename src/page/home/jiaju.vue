@@ -56,8 +56,10 @@ export default {
 h3 {
     margin: 1.4rem 0;
     color: black;
+    background-color: #fff;
 }
 .sy-jiaju {
+    background-color: #fff;
     width: 100%;
     .sy-furnishing {
         display: flex;

@@ -109,10 +109,11 @@ export default {
 </script>
 <style lang="scss" scoped>
 .sy-furnishings {
+    background-color: #fff;
     h3 {
         color: black;
         font-size: 1.3rem;
-        padding: 2.8rem 0;
+        padding: 2.8rem 0 1.4rem 0;
     }
     ul {
         display: flex;
@@ -160,10 +161,11 @@ export default {
     .sy-explain {
         color: #388e8e;
         line-height: 23px;
-        width: 66%;
+        width: 90%;
         font-size: 0.7rem;
         margin: auto;
         padding-bottom: 2rem;
+        letter-spacing: 0.05rem;
     }
     .sy-nodata {
         padding: 4rem 0 5rem 0;

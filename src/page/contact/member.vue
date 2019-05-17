@@ -66,9 +66,9 @@ export default {
             text-align: left;
             font-size: 1.2rem;
             font-weight: 700;
-            padding-top: 25px;
+            padding-top: 1.8rem;
             color: black;
-            margin-bottom: 1.2rem;
+            margin: 0;
         }
 
         .sy-title {

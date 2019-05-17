@@ -58,6 +58,10 @@ export default {
     data() {
         return {};
     },
+    mounted() {
+        console.log(document.getElementsByClassName("sy-page"));
+        // alert(document.getElementsByClassName("sy-page")[0].clientTop);
+    },
     components: { syFooter },
     methods: {
         handleMore() {

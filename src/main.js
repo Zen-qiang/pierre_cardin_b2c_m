@@ -26,14 +26,6 @@ Object.keys(filters).forEach(key => {
   Vue.filter(key, filters[key])
 })
 
-window.addEventListener("beforeunload", window.scrollTo(0, 0))
-
-router.afterEach((to, from, next) => {
-  document.documentElement.scrollTop = document.body.scrollTop = 0;
-  window.addEventListener("beforeunload", window.scrollTo(0, 0))
-  //   window.scrollTo(0, 0);
-})
-
 Vue.config.productionTip = false
 
 /* eslint-disable no-new */

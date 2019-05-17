@@ -33,7 +33,6 @@ export default {
         this.height = ($(window).width() * 664) / 1135;
     },
     components: { JzLoading },
-    mounted() {},
     methods: {
         handleClick(id) {
             this.$router.push({
@@ -49,6 +48,7 @@ export default {
 
 <style lang="scss" scoped>
 .sy-page {
+    background-color: #fff;
     h3 {
         margin: 1.4rem 0;
         color: black;
@@ -63,7 +63,7 @@ export default {
         .sy-li {
             list-style: none;
             position: relative;
-            flex: 0 0 48.8%;
+            flex: 0 0 48.6%;
             padding: 0.1rem 0;
             box-sizing: border-box;
             overflow: hidden;

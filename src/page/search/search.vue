@@ -9,7 +9,7 @@
                     <img v-lazy="item.pdt_img_url" alt="">
                     <div class="text-content">
                         <h5>{{item.pdt_name}}</h5>
-                        <h5>零售价：{{item.pdt_price}}</h5>
+                        <h5>零售价：￥{{item.pdt_price}}</h5>
                     </div>
                 </li>
             </ul>
@@ -90,6 +90,7 @@ export default {
 </script>
 <style lang="scss" scoped>
 .sy-search-index {
+    background-color: #fff;
     .sy-search {
         color: #68838b;
         font-size: 0.2rem;
@@ -120,8 +121,8 @@ export default {
                 h5 {
                     padding: 0;
                     margin: 0;
-                    font-size: 0.1rem;
-                    line-height: 23px;
+                    font-size: 0.7rem;
+                    line-height: 1.2rem;
                 }
             }
         }

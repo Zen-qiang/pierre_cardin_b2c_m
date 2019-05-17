@@ -51,18 +51,19 @@ const transactions = {
   // 工具类
   //----------------------------------------------------------------------------
 
-  utilSearch: function() {
+  utilSearch: function(search, pageNow, pageSize) {
     return {
       transaction: {
         id: '7001',
         command: 'ExecuteSQL',
         params: {
-          name: 'ali_producttree1_sql',
+          name: 'ali_product_search_sql',
+          values: [`%${search}%`, pageNow, pageSize, pageNow, pageSize],
           parsejson: 'N'
         }
       },
       key: {
-        key: 'chapinList',
+        key: 'productList',
         value: ['pdt_id', 'pdt_img_url', 'pdt_name', 'pdt_price', 'pdt_sale']
       }
     }
@@ -74,6 +75,7 @@ const transactions = {
 
   utilProductType: () => {
     let _transactions = [{
+      id: 7002,
       command: 'ExecuteSQL',
       params: {
         name: 'ali_producttree1_sql',

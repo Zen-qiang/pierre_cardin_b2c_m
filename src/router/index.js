@@ -5,6 +5,17 @@ import store from "@/store/index.js"
 Vue.use(Router)
 
 const router = new Router({
+  mode: "history",
+  scrollBehavior(to, from, savedPosition) {
+    if (savedPosition) {
+      return savedPosition
+    } else {
+      return {
+        x: 0,
+        y: 0
+      }
+    }
+  },
   routes: [{
     path: "",
     name: "layout",
@@ -110,18 +121,8 @@ const router = new Router({
         }
       }
     ]
-  }],
-  scrollBehavior(to, from, savedPosition) {
-    if (savedPosition) {
-      return savedPosition
-    } else {
-      console.log(111)
-      return {
-        x: 0,
-        y: 0
-      }
-    }
-  }
+  }]
+
 })
 
 let whiteList = ['home', 'contact', 'brand', 'member', "declarehair_index", "furnishing_index"]
@@ -134,6 +135,12 @@ router.beforeEach((to, from, next) => {
   }
   store.commit("setIsLocation", false);
   next()
+})
+
+router.afterEach((to, from, next) => {
+  document.body.scrollTop = 0
+  document.documentElement.scrollTop = 0;
+  window.scrollTo(0, 0)
 })
 
 export default router

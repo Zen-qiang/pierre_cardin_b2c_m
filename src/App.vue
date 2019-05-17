@@ -28,7 +28,8 @@ body {
     color: #2c3e50;
     margin-top: 60px;
     font-size: 16px;
-    letter-spacing: 0.03rem;
+    letter-spacing: 0.05rem;
+    background-color: #fff;
     /* overflow: hidden; */
 }
 </style>

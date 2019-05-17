@@ -134,5 +134,6 @@ export default {
 <style>
 .page {
     margin-bottom: -46px;
+    background-color: #fff;
 }
 </style>
