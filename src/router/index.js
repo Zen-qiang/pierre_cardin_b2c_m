@@ -5,40 +5,29 @@ import store from "@/store/index.js"
 Vue.use(Router)
 
 const router = new Router({
-  mode: "history",
-  scrollBehavior(to, from, savedPosition) {
-    if (savedPosition) {
-      return savedPosition
-    } else {
-      return {
-        x: 0,
-        y: 0
-      }
-    }
-  },
   routes: [{
-    path: "",
+    path: "/",
     name: "layout",
     redirect: {
       name: "home"
     },
     component: () => import('@/page/public/layout'),
     children: [{
-        path: '/',
+        path: '',
         name: 'home',
         component: () => import('@/page/home/home'),
         meta: {
           title: "首页"
         }
       }, {
-        path: '/search',
+        path: 'search',
         name: 'search',
         component: () => import('@/page/search/search'),
         meta: {
           title: "搜索"
         }
       }, {
-        path: '/chanpin',
+        path: 'chanpin',
         name: 'chanpin',
         component: () => import('@/page/chanpin/transtfe'),
         redirect: {
@@ -58,7 +47,7 @@ const router = new Router({
           component: () => import('@/page/chanpin/detail')
         }]
       }, {
-        path: '/furnishing',
+        path: 'furnishing',
         name: 'furnishing',
         component: () => import('@/page/furnishing/transfer'),
         redirect: {
@@ -77,7 +66,7 @@ const router = new Router({
           component: () => import('@/page/furnishing/detail')
         }]
       }, {
-        path: '/declarehair',
+        path: 'declarehair',
         name: 'declarehair',
         component: () => import('@/page/declarehair/transfer'),
         redirect: {
@@ -105,7 +94,7 @@ const router = new Router({
         }
       },
       {
-        path: '/brand',
+        path: 'brand',
         name: 'brand',
         component: () => import('@/page/contact/brand'),
         meta: {
@@ -113,7 +102,7 @@ const router = new Router({
         }
       },
       {
-        path: '/member',
+        path: 'member',
         name: 'member',
         component: () => import('@/page/contact/member'),
         meta: {
@@ -121,8 +110,13 @@ const router = new Router({
         }
       }
     ]
-  }]
-
+  }],
+  scrollBehavior(to, from, savedPosition) {
+    return {
+      x: 0,
+      y: 0
+    }
+  }
 })
 
 let whiteList = ['home', 'contact', 'brand', 'member', "declarehair_index", "furnishing_index"]
@@ -138,9 +132,10 @@ router.beforeEach((to, from, next) => {
 })
 
 router.afterEach((to, from, next) => {
+  window.pageYOffset = 0
+  window.scrollTo(0, 0)
   document.body.scrollTop = 0
   document.documentElement.scrollTop = 0;
-  window.scrollTo(0, 0)
 })
 
 export default router

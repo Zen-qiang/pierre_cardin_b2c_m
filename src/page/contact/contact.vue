@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div id="concat">
         <div class="sy-contacts">
             <h3 class="sy-context">联系我们</h3>
             <div class="sy-contact">

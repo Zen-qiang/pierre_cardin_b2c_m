@@ -24,16 +24,12 @@
                     </mt-cell>
                 </div>
                 <div class="menu-search tree_con_focus" id="i_con_search">
-                    <!-- <img src="../../../static/search.png" /> -->
                     <i class="icon icon-search2"></i>
                     <input placeholder="搜索" type="text" v-model="value" class="form-control" @focus="inputFocus"
                         @keyup.enter="inputBlur(true)">
                     <span v-if="hasFocus" class="searchDelete" @click.self="searchInput">搜索</span>
                 </div>
             </div>
-
-            <!-- <mt-search v-model="value" @focus="handleFocus"></mt-search> -->
-
         </mt-popup>
     </div>
 </template>
@@ -150,7 +146,6 @@ export default {
                         });
                     }
                     this.$store.commit("setIsLocation", true);
-                    this.$emit("CB-popupVisible");
                     break;
                 case 2:
                     this.$router.push({
@@ -184,11 +179,6 @@ export default {
     height: 100%;
     // border-bottom: 0.01rem solid #e0eeee;
     .sy-header {
-        top: 0;
-        right: 0;
-        left: 0;
-        position: fixed;
-        z-index: 1;
         background-color: #fff;
         color: black;
         height: 60px;
@@ -251,7 +241,7 @@ export default {
 </style>
 <style lang="scss">
 .sy-cell {
-    padding-top: 60px;
+    // padding-top: 60px;
     .sy-mt-cell {
         .mint-cell-title {
             font-size: 1rem;

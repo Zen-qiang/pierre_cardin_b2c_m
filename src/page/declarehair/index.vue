@@ -101,7 +101,6 @@ export default {
         padding: 2.8rem 0;
         color: black;
         font-size: 1.3rem;
-        text-decoration: underline red;
         background-color: #fff;
         margin: 0;
     }

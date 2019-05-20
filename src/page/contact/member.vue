@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div id="member">
         <div class="sy-page">
             <div class="sy-contacts">
                 <h3 class="sy-context">会员招募</h3>
@@ -40,7 +40,7 @@
 <script>
 import syFooter from "@/page/public/footer";
 export default {
-    name: "contact",
+    name: "member",
     data() {
         return {};
     },

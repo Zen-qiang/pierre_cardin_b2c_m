@@ -13,7 +13,7 @@ import 'mint-ui/lib/style.css'
 
 Vue.use(MintUI)
 
-Vue.prototype.BaseUrl = process.env.WEB_ROOT;
+Vue.prototype.BaseUrl = process.env.API_ROOT;
 
 Vue.prototype.cliHeight = window.document.body.offsetHeight - 421
 

@@ -64,7 +64,7 @@ export default {
         }
     }
     .copy-footer {
-        font-size: 0.1rem;
+        font-size: 0.2rem;
         border-top: 1px solid #535d63;
         color: #c5cace;
         line-height: 56px;

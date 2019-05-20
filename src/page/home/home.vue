@@ -123,9 +123,7 @@ export default {
         },
         //锚点定位
         setLocation(val) {
-            setTimeout(() => {
-                document.querySelector("#products").scrollIntoView(val);
-            }, 500);
+
         }
     }
 };
