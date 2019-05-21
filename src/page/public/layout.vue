@@ -30,6 +30,7 @@ export default {
 #layout {
     margin: 0;
     padding: 0;
+    -webkit-overflow-scrolling: touch;
 }
 </style>
 

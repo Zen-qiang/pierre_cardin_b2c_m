@@ -162,7 +162,7 @@ export default {
         }
     }
     .sy-explain {
-        color: #388e8e;
+        color: #687378;
         line-height: 23px;
         width: 90%;
         font-size: 0.7rem;

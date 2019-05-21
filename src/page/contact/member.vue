@@ -46,7 +46,7 @@ export default {
         return {};
     },
     mounted() {
-        document.querySelector("#member").scrollIntoView(true);
+        document.querySelector("#nodata").scrollIntoView(true);
     },
     components: { syFooter }
 };

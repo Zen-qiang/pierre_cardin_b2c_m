@@ -60,7 +60,7 @@ export default {
     right: 0;
     left: 0;
     bottom: 0;
-    z-index: 1;
+    z-index: 9999;
     background-color: #fff;
     color: black;
     height: 60px;

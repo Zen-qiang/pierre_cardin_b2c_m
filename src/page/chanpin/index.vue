@@ -143,7 +143,7 @@ export default {
                     font-size: 1rem;
                     display: inline-block;
                     vertical-align: middle;
-                    text-shadow: 0 0 0.1rem red;
+                    text-shadow: 0 0 0.1rem #3d3d3d;
                 }
             }
         }

@@ -31,7 +31,7 @@
                                 <li v-for="(itm,idx) in productsData" :key="idx">
                                     <img v-lazy="itm.pdt_img_url" alt="" @click="handleImg(itm.pdt_id)">
                                     <div class="text-content">
-                                        <h5>{{itm.pdt_name}}</h5>
+                                        <h5 class="text-h5">{{itm.pdt_name}}</h5>
                                         <h5>零售价：￥{{itm.pdt_price}}</h5>
                                     </div>
                                 </li>
@@ -311,12 +311,19 @@ export default {
             flex: 0 0 50%;
             list-style: none;
             box-sizing: border-box;
+            width: 50%;
             padding: 0 2px;
             img {
                 box-sizing: border-box;
                 width: 100%;
             }
             .text-content {
+                text-shadow: none;
+                .text-h5 {
+                    overflow: hidden; /*自动隐藏文字*/
+                    text-overflow: ellipsis; /*文字隐藏后添加省略号*/
+                    white-space: nowrap;
+                }
                 padding: 8px 0;
                 margin-bottom: 0.6rem;
                 h5 {
