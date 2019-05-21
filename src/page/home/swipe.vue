@@ -57,10 +57,10 @@ export default {
                 slideOn();
             }
 
-            //每5s调用changeSlide函数进行图片轮播
+            //每6s调用changeSlide函数进行图片轮播
             var slideon = setInterval(changeSlide, 6000);
 
-            slideshow.touchmove = function() {
+            slideshow.touchmouve = function() {
                 changeSlide();
                 clearInterval(slideon); //当鼠标移入时清除轮播事件
             };

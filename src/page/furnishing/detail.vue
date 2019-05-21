@@ -1,5 +1,6 @@
 <template>
     <div>
+        <div id="nodata" style="height:60px;"></div>
         <div class="sy-furn_detail" :style="{'min-height':cliHeight-48+'px'}">
             <div v-if="listData.length>0&&!jzloading">
                 <div v-for="(item,index) in listData" :key="index">
@@ -27,6 +28,7 @@ export default {
         };
     },
     mounted() {
+        document.querySelector("#nodata").scrollIntoView(true);
         this.getRead();
     },
     components: { syFooter, JzLoading },

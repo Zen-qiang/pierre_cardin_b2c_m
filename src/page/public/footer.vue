@@ -64,10 +64,11 @@ export default {
         }
     }
     .copy-footer {
-        font-size: 0.2rem;
+        font-size: 0.5rem;
         border-top: 1px solid #535d63;
         color: #c5cace;
-        line-height: 56px;
+        padding: 1.8rem 0;
+        line-height: 1rem;
     }
 }
 </style>

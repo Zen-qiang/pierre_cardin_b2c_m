@@ -1,5 +1,6 @@
 <template>
     <div>
+        <div id="nodata" style="height:60px;"></div>
         <div class="sy-declarehair" :style="{'min-height':cliHeight+'px'}">
             <h3>品牌宣发</h3>
             <ul v-if="listData.length>0&&!jzloading" v-infinite-scroll="loadMore" infinite-scroll-disabled="loading"
@@ -43,6 +44,7 @@ export default {
     },
     components: { syFooter, LoadBottom, JzLoading },
     mounted() {
+        document.querySelector("#nodata").scrollIntoView(true);
         this.jzloading = true;
         this.getData();
     },

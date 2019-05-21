@@ -55,10 +55,11 @@ export default {
 </script>
 <style lang="scss" scoped>
 .sy-header {
+    position: fixed;
     top: 0;
     right: 0;
     left: 0;
-    position: fixed;
+    bottom: 0;
     z-index: 1;
     background-color: #fff;
     color: black;
@@ -66,7 +67,6 @@ export default {
     -webkit-box-align: center;
     align-items: center;
     box-sizing: border-box;
-    display: fixed;
     font-size: 14px;
     line-height: 1;
     padding: 0 10px;

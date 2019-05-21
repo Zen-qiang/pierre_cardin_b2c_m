@@ -1,9 +1,9 @@
 <template>
     <div id="layout">
         <syHeader @CB-Header="CB_Header"></syHeader>
-        <keep-alive>
+        <transition :style="{'min-height':cliHeight+'px'}">
             <router-view :key="$route.name" />
-        </keep-alive>
+        </transition>
     </div>
 </template>
 
@@ -12,9 +12,6 @@ import syHeader from "@/page/public/header";
 export default {
     name: "layout",
     components: { syHeader },
-    activated() {
-        document.getElementById("layout").scrollTop = 0;
-    },
     methods: {
         CB_Header(val) {
             if (val) {
@@ -33,7 +30,6 @@ export default {
 #layout {
     margin: 0;
     padding: 0;
-    // overflow: scroll;
 }
 </style>
 

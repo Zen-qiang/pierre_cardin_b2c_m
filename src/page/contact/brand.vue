@@ -1,6 +1,7 @@
 <template>
     <div class="sy-page" id="brand">
         <div>
+            <div id="nodata" style="height:60px;"></div>
             <div class="sy-contacts">
                 <h3 class="sy-context">品牌招聘</h3>
                 <div class="text-left sy-content">pierre cardin home 的每一位员工深受 Pierre Cardin
@@ -60,6 +61,9 @@ export default {
     data() {
         return {};
     },
+    mounted() {
+        document.querySelector("#nodata").scrollIntoView(true);
+    },
     components: { syFooter },
     methods: {
         handleMore() {
@@ -81,6 +85,7 @@ export default {
             font-size: 1.2rem;
             font-weight: 700;
             padding-top: 25px;
+            margin: 0;
             margin-bottom: 0.1rem;
             color: black;
         }

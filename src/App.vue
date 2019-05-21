@@ -28,10 +28,10 @@ body {
     -moz-osx-font-smoothing: grayscale;
     text-align: center;
     color: #2c3e50;
-    margin-top: 60px;
+    /* margin-top: 3.7rem; */
+    padding: 0;
     font-size: 16px;
     letter-spacing: 0.05rem;
     background-color: #fff;
-    /* overflow: hidden; */
 }
 </style>

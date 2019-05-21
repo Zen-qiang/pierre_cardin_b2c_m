@@ -1,6 +1,7 @@
 <template>
     <div id="member">
         <div class="sy-page">
+            <div id="nodata" style="height:60px;"></div>
             <div class="sy-contacts">
                 <h3 class="sy-context">会员招募</h3>
             </div>
@@ -44,6 +45,9 @@ export default {
     data() {
         return {};
     },
+    mounted() {
+        document.querySelector("#member").scrollIntoView(true);
+    },
     components: { syFooter }
 };
 </script>
@@ -66,7 +70,7 @@ export default {
             text-align: left;
             font-size: 1.2rem;
             font-weight: 700;
-            padding-top: 1.8rem;
+            padding-top: 25px;
             color: black;
             margin: 0;
         }

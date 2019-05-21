@@ -1,5 +1,6 @@
 <template>
     <div>
+        <div id="nodata" style="height:60px;"></div>
         <div class="sy-furnishings" :style="{'min-height':cliHeight+'px'}">
             <h3>家居顾问</h3>
             <ul v-if="listData.length>0&&!jzloading" v-infinite-scroll="loadMore" infinite-scroll-disabled="loading"
@@ -46,6 +47,7 @@ export default {
     },
     components: { syFooter, LoadBottom, JzLoading },
     mounted() {
+        document.querySelector("#nodata").scrollIntoView(true);
         this.jzloading = true;
         this.getData();
     },
@@ -113,7 +115,8 @@ export default {
     h3 {
         color: black;
         font-size: 1.3rem;
-        padding: 2.8rem 0 1.4rem 0;
+        padding: 2.8rem 0;
+        margin: 0;
     }
     ul {
         display: flex;

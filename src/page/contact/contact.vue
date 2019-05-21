@@ -1,5 +1,6 @@
 <template>
     <div id="concat">
+        <div id="nodata" style="height:60px;"></div>
         <div class="sy-contacts">
             <h3 class="sy-context">联系我们</h3>
             <div class="sy-contact">
@@ -39,6 +40,9 @@ export default {
     data() {
         return {};
     },
+    mounted() {
+        document.querySelector("#nodata").scrollIntoView(true);
+    },
     components: { syFooter }
 };
 </script>
@@ -55,6 +59,7 @@ export default {
         padding-top: 25px;
         color: black;
         margin-bottom: 1.2rem;
+        margin-top: 0;
     }
     .sy-contact {
         h4 {

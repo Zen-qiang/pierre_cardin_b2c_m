@@ -1,5 +1,6 @@
 <template>
     <div>
+        <div id="nodata" style="height:60px;"></div>
         <div :style="{'min-height':cliHeight+'px'}" class="sy-search-index">
             <div class="text-center text-muted sy-search">搜索结果</div>
             <div class="text-center sy-title">“{{$route.query.keys}}”</div>
@@ -38,6 +39,7 @@ export default {
     },
     components: { syFooter, JzLoading, LoadBottom },
     mounted() {
+        document.querySelector("#nodata").scrollIntoView(true);
         this.jzloading = true;
         this.getData();
     },

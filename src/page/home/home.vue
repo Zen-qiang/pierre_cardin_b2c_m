@@ -1,5 +1,6 @@
 <template>
     <div class="page">
+        <div id="nodata" style="height:60px;"></div>
         <swiper v-if="swipeData.length>0" :swipeData="swipeData">轮播图</swiper>
         <products :chanpinData="chanpinData" id="products">产品系列</products>
         <pin-pai v-if="jiajuData.length>0" :jiajuInfo="jiajuInfo" :jiajuData="jiajuData">家居顾问</pin-pai>
@@ -36,11 +37,12 @@ export default {
     watch: {
         isLocation(newValue) {
             if (newValue) {
-                this.setLocation(this.setLocation);
+                this.setLocation(newValue);
             }
         }
     },
     mounted() {
+        document.querySelector("#nodata").scrollIntoView(true);
         action.homeBase().then(res => {
             if (res) {
                 this.swipeData = res.slideData.data;
@@ -57,7 +59,7 @@ export default {
                 );
                 this.pinpaiData = res.magazineData.data;
                 if (this.isLocation) {
-                    this.setLocation(this.setLocation);
+                    this.setLocation(this.isLocation);
                 }
                 this.productsData.push(res.series7.data);
                 this.productsData.push(res.series8.data);
@@ -123,7 +125,9 @@ export default {
         },
         //锚点定位
         setLocation(val) {
-
+            setTimeout(() => {
+                document.querySelector("#products").scrollIntoView(val);
+            }, 500);
         }
     }
 };
