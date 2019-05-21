@@ -1,5 +1,6 @@
 <template>
     <div>
+        <div id="nodata" style="height:60px;"></div>
         <div class="sy-products-detail" :style="{'min-height':cliHeight+'px'}">
             <div v-if="img_url.length>0&&img_url[0].pdt_a1">
                 <img v-for="(item,index) in img_url" :key="index" v-lazy="BaseUrl+item.pdt_a1" alt="">
@@ -77,6 +78,7 @@ export default {
         this.height = ($(window).width() * 664) / 666;
     },
     mounted() {
+        document.querySelector("#nodata").scrollIntoView(true);
         this.getHead();
     },
     watch: {

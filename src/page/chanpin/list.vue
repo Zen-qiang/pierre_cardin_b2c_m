@@ -1,5 +1,6 @@
 <template>
     <div>
+        <div id="nodata" style="height:60px;"></div>
         <div class="sy-list" :style="{'min-height':cliHeight+'px'}">
             <div class="sy-title">
                 <img :src="BaseUrl+infoData.big_img" alt="">
@@ -88,6 +89,7 @@ export default {
     },
     components: { syFooter, LoadBottom },
     mounted() {
+        document.querySelector("#nodata").scrollIntoView(true);
         this.jzloading = true;
         this.getFenlei();
     },

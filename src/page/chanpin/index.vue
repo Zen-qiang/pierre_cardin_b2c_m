@@ -1,5 +1,6 @@
 <template>
     <div>
+        <div id="nodata" style="height:60px;"></div>
         <div class="sy-chanpin" :style="{'min-height':cliHeight+'px'}">
             <h3 class="padding-50">{{title}}</h3>
             <ul class="sy-ulli" v-if="chanpinData.length>0&&!jzloading">
@@ -52,6 +53,7 @@ export default {
         ...mapState(["productsType"])
     },
     mounted() {
+        document.querySelector("#nodata").scrollIntoView(true);
         this.jzloading = true;
         this.getData();
         let item = this.productsType.find(
