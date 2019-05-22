@@ -19,7 +19,50 @@
 </template>
 <script>
 import { mapState } from "vuex";
+import $ from "jquery";
 import Search from "@/page/search/index";
+// var windowTop = 0;
+var startY = 0;
+window.addEventListener("touchstart", function(e) {
+    // console.log(e);
+    startY = e.touches[0].pageY;
+});
+window.addEventListener("touchend", function(e) {
+    var endY = e.changedTouches[0].pageY;
+    console.log(startY, endY);
+    if (startY - endY > 0) {
+        if ($("#layouts").offset().top < -60) {
+            if (!$(".sy-header").hasClass("fadeOutUp")) {
+                $(".sy-header").addClass("animated fadeOutUp");
+                $(".sy-header").removeClass("fadeInDown");
+            }
+        }
+    } else {
+        if (!$(".sy-header").hasClass("fadeInDown")) {
+            $(".sy-header").addClass("animated fadeInDown");
+            $(".sy-header").removeClass("fadeOutUp");
+        }
+    }
+});
+// window.addEventListener("touchmove", function(e) {
+//     // windowTop = e.targetTouches[0].pageY;
+//     if (e.targetTouches[0].pageY <= windowTop) {
+//         if (e.targetTouches[0].pageY > 60) {
+//             if ($("#layouts").offset().top < -60) {
+//                 if (!$(".sy-header").hasClass("fadeOutUp")) {
+//                     $(".sy-header").addClass("animated fadeOutUp");
+//                     $(".sy-header").removeClass("fadeInDown");
+//                 }
+//             }
+//         }
+//     } else if (e.targetTouches[0].pageY > windowTop) {
+//         if (!$(".sy-header").hasClass("fadeInDown")) {
+//             $(".sy-header").addClass("animated fadeInDown");
+//             $(".sy-header").removeClass("fadeOutUp");
+//         }
+//     }
+//     windowTop = e.targetTouches[0].pageY;
+// });
 export default {
     name: "sy-header",
     data() {
@@ -30,6 +73,14 @@ export default {
     components: { Search },
     computed: {
         ...mapState(["showBack"])
+    },
+    watch: {
+        $route(newValue) {
+            if (newValue) {
+                $(".sy-header").removeClass("fadeInDown");
+                $(".sy-header").removeClass("fadeOutUp");
+            }
+        }
     },
     methods: {
         handleBack() {
