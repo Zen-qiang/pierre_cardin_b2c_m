@@ -10,6 +10,8 @@ import * as filters from './filters/index' // global filters
 
 import MintUI from 'mint-ui'
 import 'mint-ui/lib/style.css'
+import animated from 'animate.css'
+Vue.use(animated)
 
 Vue.use(MintUI)
 
