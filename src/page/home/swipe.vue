@@ -1,8 +1,8 @@
 <template>
     <div class="sy-swiper" v-if="swipeData.length>0">
         <div id="slideshow" :style="{'height':height+'px'}">
-            <img v-for="(item,index) in swipeData" :key="index" v-lazy="BaseUrl + item.image" style="margin-left:-80%;margin-rightL-20%"
-                alt="">
+            <img v-for="(item,index) in swipeData" :key="index" v-lazy="BaseUrl + item.image" @touchend="slideshow(true,$event)"
+                @touchstart="touchStart" style="margin-left:-80%;margin-rightL-20%" alt="">
             <div class="sy-punctuation">
                 <span v-for="(item,index) in swipeData.length" :key="index" class="active"></span>
             </div>
@@ -24,14 +24,22 @@ export default {
     },
     data() {
         return {
-            height: 0
+            height: 0,
+            currentPage: 0,
+            startX: 0,
+            endX: 0
         };
     },
     mounted() {
-        this.slideshow();
+        this.slideshow(false);
     },
     methods: {
-        slideshow() {
+        touchStart(e) {
+            this.startX = e.touches[0].pageX;
+        },
+        slideshow(val, e) {
+            let _this = this;
+            if (e) this.endX = e.changedTouches[0].pageX;
             var slideshow = document.getElementById("slideshow");
             var imgs = slideshow.getElementsByTagName("img"); //得到图片们
             var pages = slideshow.getElementsByTagName("span"); //得到页码们
@@ -40,41 +48,62 @@ export default {
             function slideOff() {
                 for (let i = 0; i < pages.length; i++) {
                     pages[i].className = "";
+                    imgs[i].className = "";
                 }
-                imgs[current].className = ""; //图片淡出
             }
-            function slideOn() {
-                imgs[current].className = "active"; //图片淡入
-                pages[current].className = "active";
+            function slideOn(val) {
+                if (val) {
+                    imgs[val].className = "active"; //图片淡入
+                    pages[val].className = "active";
+                } else {
+                    imgs[current].className = "active"; //图片淡入
+                    pages[current].className = "active";
+                }
+                _this.currentPage = val && val != undefined ? val : current;
             }
-            slideOff();
-            slideOn();
+            if (!val) {
+                slideOff();
+                slideOn();
+            }
+            var slideon = setInterval(changeSlide, 6000); //每6s调用changeSlide函数进行图片轮播
             function changeSlide() {
+                if (val) {
+                    clearInterval(slideon);
+                    return;
+                }
                 //切换图片的函数
                 slideOff();
                 current++; //自增1
                 if (current >= 3) current = 0;
                 slideOn();
             }
-
-            //每6s调用changeSlide函数进行图片轮播
-            var slideon = setInterval(changeSlide, 6000);
-
-            slideshow.touchmouve = function() {
+            if (val) {
                 changeSlide();
-                clearInterval(slideon); //当鼠标移入时清除轮播事件
-            };
-            slideshow.touchend = function() {
-                slideon = setInterval(changeSlide, 6000); //当鼠标移出时重新开始轮播事件
-            };
-
-            for (var i = 0; i < pages.length; i++) {
+                // clearInterval(slideon); //当鼠标移入时清除轮播事件
+            }
+            if (val) {
+                for (var i = 0; i < pages.length; i++) {
+                    if (pages[i].className == "active") {
+                        _this.currentPage = i;
+                    }
+                }
                 //定义鼠标移入和移出页码事件
-                pages[i].touchstart = function() {
+                pages[_this.currentPage].ontouchend = function() {
                     slideOff(); //图片淡出
-                    current = this.innerHTML - 1; //得到鼠标停留的页码对应的current
-                    slideOn(); //图片淡出
+                    if (_this.startX - _this.endX > 0) {
+                        _this.currentPage++;
+                        if (_this.currentPage >= 3) {
+                            _this.currentPage = 0;
+                        }
+                    } else if (_this.startX - _this.endX < 0) {
+                        _this.currentPage--;
+                        if (_this.currentPage < 0) {
+                            _this.currentPage = 2;
+                        }
+                    }
+                    slideOn(_this.currentPage); //图片淡出
                 };
+                pages[_this.currentPage].ontouchend();
             }
         }
     }

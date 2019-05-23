@@ -29,7 +29,6 @@ window.addEventListener("touchstart", function(e) {
 });
 window.addEventListener("touchend", function(e) {
     var endY = e.changedTouches[0].pageY;
-    console.log(startY, endY);
     if (startY - endY > 0) {
         if ($("#layouts").offset().top < -60) {
             if (!$(".sy-header").hasClass("fadeOutUp")) {
