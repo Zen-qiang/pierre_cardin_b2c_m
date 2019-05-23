@@ -10,21 +10,20 @@
                     <img src="../../assets/logo.png" width="150rem" height="20rem" alt>
                 </div>
                 <div class="text-right sy-inline sy-left sy-menu">
-                    <i class="icon icon-menu sy-ziti" @click="handleSearch"></i>
+                    <i v-if="!popupVisible" class="icon icon-menu sy-ziti" @click="handleSearch"></i>
+                    <i v-else class="icon icon-error3 sy-zitis" @click="handleClose"></i>
                 </div>
-                <search :popupVisible="popupVisible" @CB-popupVisible="CB_popupVisible"></search>
             </div>
         </header>
+        <search :popupVisible="popupVisible" @CB-popupVisible="CB_popupVisible"></search>
     </div>
 </template>
 <script>
 import { mapState } from "vuex";
 import $ from "jquery";
 import Search from "@/page/search/index";
-// var windowTop = 0;
 var startY = 0;
 window.addEventListener("touchstart", function(e) {
-    // console.log(e);
     startY = e.touches[0].pageY;
 });
 window.addEventListener("touchend", function(e) {
@@ -36,32 +35,13 @@ window.addEventListener("touchend", function(e) {
                 $(".sy-header").removeClass("fadeInDown");
             }
         }
-    } else {
+    } else if (startY - endY < 0) {
         if (!$(".sy-header").hasClass("fadeInDown")) {
             $(".sy-header").addClass("animated fadeInDown");
             $(".sy-header").removeClass("fadeOutUp");
         }
     }
 });
-// window.addEventListener("touchmove", function(e) {
-//     // windowTop = e.targetTouches[0].pageY;
-//     if (e.targetTouches[0].pageY <= windowTop) {
-//         if (e.targetTouches[0].pageY > 60) {
-//             if ($("#layouts").offset().top < -60) {
-//                 if (!$(".sy-header").hasClass("fadeOutUp")) {
-//                     $(".sy-header").addClass("animated fadeOutUp");
-//                     $(".sy-header").removeClass("fadeInDown");
-//                 }
-//             }
-//         }
-//     } else if (e.targetTouches[0].pageY > windowTop) {
-//         if (!$(".sy-header").hasClass("fadeInDown")) {
-//             $(".sy-header").addClass("animated fadeInDown");
-//             $(".sy-header").removeClass("fadeOutUp");
-//         }
-//     }
-//     windowTop = e.targetTouches[0].pageY;
-// });
 export default {
     name: "sy-header",
     data() {
@@ -96,6 +76,10 @@ export default {
             this.popupVisible = true;
             this.$emit("CB-Header", this.popupVisible);
         },
+        handleClose() {
+            this.popupVisible = false;
+            this.$emit("CB-Header", this.popupVisible);
+        },
         CB_popupVisible(val) {
             this.popupVisible = false;
             this.$emit("CB-Header", this.popupVisible);
@@ -117,7 +101,7 @@ export default {
     -webkit-box-align: center;
     align-items: center;
     box-sizing: border-box;
-    font-size: 14px;
+    font-size: 1.2rem;
     line-height: 1;
     padding: 0 10px;
     text-align: center;
@@ -128,7 +112,7 @@ export default {
     width: 100%;
     text-align: left;
     -webkit-box-flex: 5;
-    padding-top: 0.1rem;
+    padding-top: 0.15rem;
     flex: 5;
     .mint-button--default {
         background-color: #fff;
@@ -152,7 +136,7 @@ export default {
     margin-top: 0.5rem;
 }
 .sy-menu {
-    padding-top: 0.5rem !important;
+    padding-top: 0.25rem !important;
 }
 .sy-left {
     vertical-align: middle;
@@ -162,11 +146,15 @@ export default {
     .sy-ziti {
         font-size: 36px;
     }
+    .sy-zitis {
+        font-size: 23px;
+        padding-right: 0.2rem;
+    }
 }
 .sy-center {
     width: 60%;
     vertical-align: middle;
-    padding-top: 8px;
+    padding-top: 11px;
 }
 .sy-button {
     border: none;

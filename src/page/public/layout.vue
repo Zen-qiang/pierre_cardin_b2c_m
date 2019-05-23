@@ -13,7 +13,6 @@ import syHeader from "@/page/public/header";
 export default {
     name: "layout",
     components: { syHeader },
-
     methods: {
         CB_Header(val) {
             if (val) {
@@ -21,9 +20,6 @@ export default {
             } else {
                 document.body.style.overflow = "auto";
             }
-        },
-        preventDefaultFn(event) {
-            event.preventDefault();
         }
     }
 };

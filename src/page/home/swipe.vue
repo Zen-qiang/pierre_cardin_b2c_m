@@ -11,6 +11,7 @@
 </template>
 <script>
 import $ from "jquery";
+import { setInterval } from "timers";
 
 export default {
     name: "swiper",
@@ -27,7 +28,9 @@ export default {
             height: 0,
             currentPage: 0,
             startX: 0,
-            endX: 0
+            endX: 0,
+            jstime: new Date().getTime(),
+            slideon: 0
         };
     },
     mounted() {
@@ -65,12 +68,11 @@ export default {
                 slideOff();
                 slideOn();
             }
-            var slideon = setInterval(changeSlide, 6000); //每6s调用changeSlide函数进行图片轮播
+            if (!val) {
+                this.slideon = setInterval(changeSlide, 5000); //每5s调用changeSlide函数进行图片轮播
+            }
             function changeSlide() {
-                if (val) {
-                    clearInterval(slideon);
-                    return;
-                }
+                current = _this.currentPage;
                 //切换图片的函数
                 slideOff();
                 current++; //自增1
@@ -78,8 +80,8 @@ export default {
                 slideOn();
             }
             if (val) {
-                changeSlide();
-                // clearInterval(slideon); //当鼠标移入时清除轮播事件
+                // changeSlide();
+                window.clearInterval(_this.slideon._id);
             }
             if (val) {
                 for (var i = 0; i < pages.length; i++) {
@@ -104,6 +106,7 @@ export default {
                     slideOn(_this.currentPage); //图片淡出
                 };
                 pages[_this.currentPage].ontouchend();
+                this.slideon = setInterval(changeSlide, 5000);
             }
         }
     }
@@ -123,7 +126,7 @@ export default {
             top: 0;
             left: 0;
             opacity: 0; /*初始不透明度为0，图片都看不见*/
-            transition: opacity 3s linear;
+            transition: opacity 1s linear;
         }
         & img.active {
             opacity: 1; /*有active类的图片不透明度为1，即显示图片*/
@@ -143,6 +146,7 @@ export default {
             margin: 0 0.6rem;
             background: black;
             font-size: 1.15rem;
+            opacity: 0.7;
         }
         & span.active {
             opacity: 0.8;

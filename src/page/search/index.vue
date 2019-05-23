@@ -1,33 +1,35 @@
 <template>
     <div class="sy-search">
         <mt-popup style="height:100%;width:101%;background-color:white;" v-model="popupVisible" position="bottom">
-            <header class="sy-header">
-                <div class="sy-back" style="margin:auto">
-                    <div class="text-left sy-inline sy-left sy-right" @click="handleHome">
-                        <img src="../../assets/img/logos.png" width="27rem" height="27rem" alt>
-                    </div>
-                    <div class="text-center sy-inline sy-center" @click="handleHome">
-                        <img src="../../assets/logo.png" width="150rem" height="20rem" alt>
-                    </div>
-                    <div class="text-right sy-inline sy-left sy-menu">
-                        <i class="icon icon-error3 sy-ziti" @click="handleClose"></i>
-                    </div>
-                </div>
-            </header>
-            <div :style="{'height':showHeight+'px'}">
-                <div class="sy-cell" v-if="!hasFocus">
-                    <mt-cell class="sy-mt-cell" v-for="(item,index) in typeLei" @click.native="handleUrl(item.id)"
-                        is-link :key="index">
-                        <div slot="title">
-                            <span>{{ item.name }}</span>
+            <div style="height:100%;width:100%;">
+                <!-- <header class="sy-headers">
+                    <div class="sy-back" style="margin:auto">
+                        <div class="text-left sy-inline sy-left sy-right" @click="handleHome">
+                            <img src="../../assets/img/logos.png" width="27rem" height="27rem" alt>
                         </div>
-                    </mt-cell>
-                </div>
-                <div class="menu-search tree_con_focus" id="i_con_search">
-                    <i class="icon icon-search2"></i>
-                    <input placeholder="搜索" type="text" v-model="value" class="form-control" @focus="inputFocus"
-                        @keyup.enter="inputBlur(true)">
-                    <span v-if="hasFocus" class="searchDelete" @click.self="searchInput">搜索</span>
+                        <div class="text-center sy-inline sy-center" @click="handleHome">
+                            <img src="../../assets/logo.png" width="150rem" height="20rem" alt>
+                        </div>
+                        <div class="text-right sy-inline sy-left sy-menu">
+                            <i class="icon icon-error3 sy-ziti" @click="handleClose"></i>
+                        </div>
+                    </div>
+                </header> -->
+                <div style="margin-top:60px;">
+                    <div class="sy-cell" v-if="!hasFocus">
+                        <mt-cell class="sy-mt-cell" v-for="(item,index) in typeLei" @click.native="handleUrl(item.id)"
+                            is-link :key="index">
+                            <div slot="title">
+                                <span>{{ item.name }}</span>
+                            </div>
+                        </mt-cell>
+                    </div>
+                    <div class="menu-search tree_con_focus" id="i_con_search">
+                        <i class="icon icon-search2"></i>
+                        <input placeholder="搜索" type="text" v-model="value" class="form-control" @focus="inputFocus"
+                            @keyup.enter="inputBlur(true)">
+                        <span v-if="hasFocus" class="searchDelete" @click.self="searchInput">搜索</span>
+                    </div>
                 </div>
             </div>
         </mt-popup>
@@ -78,6 +80,13 @@ export default {
         $("#i_con_search").addClass("search-focus-bottom");
         this.showHeight = JSON.parse(JSON.stringify(this.cliHeight));
     },
+    watch: {
+        popupVisible(newValue) {
+            if (!newValue) {
+                this.closeSearch();
+            }
+        }
+    },
     methods: {
         inputFocus() {
             $("input").on("focus", function() {
@@ -94,7 +103,8 @@ export default {
             });
         },
         inputBlur(val) {
-            // console.log("失去焦点");
+            $(".sy-header").removeClass("fadeInDown");
+            $(".sy-header").removeClass("fadeOutUp");
             if (val) {
                 this.searchText();
             }
@@ -178,7 +188,7 @@ export default {
     width: 100%;
     height: 100%;
     // border-bottom: 0.01rem solid #e0eeee;
-    .sy-header {
+    .sy-headers {
         background-color: #fff;
         color: black;
         height: 60px;
@@ -251,6 +261,7 @@ export default {
     }
     .mint-cell-wrapper {
         background-size: 0;
+        text-align: left;
     }
     .mint-cell-allow-right::after {
         border: solid 1px black;
@@ -266,11 +277,12 @@ export default {
         transform: translateY(-50%) rotate(45deg);
     }
 }
-.search-focus-top {
-    top: 80px;
-}
+
 .search-focus-bottom {
     bottom: 60px;
+}
+.search-focus-top {
+    top: 80px;
 }
 .menu-search {
     // width: 60%;
