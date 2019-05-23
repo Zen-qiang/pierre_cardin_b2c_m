@@ -23,25 +23,7 @@ import { mapState } from "vuex";
 import $ from "jquery";
 import Search from "@/page/search/index";
 var startY = 0;
-window.addEventListener("touchstart", function(e) {
-    startY = e.touches[0].pageY;
-});
-window.addEventListener("touchend", function(e) {
-    var endY = e.changedTouches[0].pageY;
-    if (startY - endY > 0) {
-        if ($("#layouts").offset().top < -60) {
-            if (!$(".sy-header").hasClass("fadeOutUp")) {
-                $(".sy-header").addClass("animated fadeOutUp");
-                $(".sy-header").removeClass("fadeInDown");
-            }
-        }
-    } else if (startY - endY < 0) {
-        if (!$(".sy-header").hasClass("fadeInDown")) {
-            $(".sy-header").addClass("animated fadeInDown");
-            $(".sy-header").removeClass("fadeOutUp");
-        }
-    }
-});
+var dialogStae = false;
 export default {
     name: "sy-header",
     data() {
@@ -74,18 +56,43 @@ export default {
         },
         handleSearch() {
             this.popupVisible = true;
+            dialogStae = true;
             this.$emit("CB-Header", this.popupVisible);
         },
         handleClose() {
             this.popupVisible = false;
+            dialogStae = false;
             this.$emit("CB-Header", this.popupVisible);
         },
         CB_popupVisible(val) {
             this.popupVisible = false;
+            dialogStae = false;
             this.$emit("CB-Header", this.popupVisible);
         }
     }
 };
+window.addEventListener("touchstart", function(e) {
+    startY = e.touches[0].pageY;
+});
+window.addEventListener("touchend", function(e) {
+    var endY = e.changedTouches[0].pageY;
+    if (startY - endY > 0) {
+        if ($("#layouts").offset().top < -60) {
+            if (dialogStae) {
+                $(".sy-header").removeClass("fadeInDown");
+                $(".sy-header").removeClass("fadeOutUp");
+            } else if (!$(".sy-header").hasClass("fadeOutUp")) {
+                $(".sy-header").addClass("animated fadeOutUp");
+                $(".sy-header").removeClass("fadeInDown");
+            }
+        }
+    } else if (startY - endY < 0) {
+        if (!$(".sy-header").hasClass("fadeInDown")) {
+            $(".sy-header").addClass("animated fadeInDown");
+            $(".sy-header").removeClass("fadeOutUp");
+        }
+    }
+});
 </script>
 <style lang="scss" scoped>
 .sy-header {
