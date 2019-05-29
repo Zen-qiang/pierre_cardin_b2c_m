@@ -5,17 +5,18 @@
             <div class="text-center text-muted sy-search">搜索结果</div>
             <div class="text-center sy-title">“{{$route.query.keys}}”</div>
             <ul v-if="listData.length>0&&!jzloading" v-infinite-scroll="loadMore" infinite-scroll-disabled="loading"
-                infinite-scroll-distance="385.6" class="padding-bottom-40">
+                infinite-scroll-distance="536">
                 <li v-for="(item,index) in listData" :key="index" @click="handleUrl(item.pdt_id)">
-                    <img v-lazy="item.pdt_img_url" alt="">
+                    <img :src="item.pdt_img_url" alt="">
                     <div class="text-content">
                         <h5>{{item.pdt_name}}</h5>
                         <h5>零售价：￥{{item.pdt_price}}</h5>
                     </div>
                 </li>
             </ul>
-            <jz-loading v-else></jz-loading>
-            <load-bottom v-if="showBottom && listData.length>0"></load-bottom>
+            <div v-else class="text-center font-70" style="color:rgb(205,206,207)">
+                <div>未查询到产品信息</div>
+            </div>
         </div>
         <sy-footer></sy-footer>
     </div>
@@ -23,8 +24,6 @@
 <script>
 import action from "@/assets/utils/action.js";
 import syFooter from "@/page/public/footer";
-import JzLoading from "@/components/loading";
-import LoadBottom from "@/page/public/loadbottom";
 export default {
     name: "search_index",
     data() {
@@ -37,7 +36,16 @@ export default {
             showBottom: false
         };
     },
-    components: { syFooter, JzLoading, LoadBottom },
+    watch: {
+        "$route.query.keys"(newValue) {
+            if (newValue) {
+                document.querySelector("#nodata").scrollIntoView(true);
+                this.page = 1;
+                this.getData();
+            }
+        }
+    },
+    components: { syFooter },
     mounted() {
         document.querySelector("#nodata").scrollIntoView(true);
         this.jzloading = true;
@@ -94,37 +102,46 @@ export default {
 .sy-search-index {
     background-color: #fff;
     .sy-search {
-        color: #68838b;
-        font-size: 0.2rem;
+        color: rgb(105, 113, 118);
+        font-size: 0.8rem;
         padding: 2.6rem 0 1.5rem 0;
     }
     .sy-title {
-        font-size: 1.2rem;
+        font-size: 1.3rem;
         color: black;
-        border-bottom: 0.01rem solid #e8e8e8;
         padding-bottom: 3rem;
     }
     ul {
         display: flex;
         flex-flow: row wrap;
         align-items: center;
-        padding: 0;
+        padding: 0.15rem 2px;
         margin: 0;
         padding-top: 0.2rem;
         li {
             list-style: none;
             flex: 0 0 50%;
+            width: 50%;
+            box-sizing: border-box;
             img {
                 width: 100%;
-                padding: 0 0.1rem 0 0.1rem;
+                padding: 0 2px;
             }
             .text-content {
-                padding: 0.4rem 0 1.4rem 0;
+                font-size: 0.9rem;
+                text-shadow: none;
+                line-height: 1.3rem;
+                padding: 0.8rem 0;
+                margin-bottom: 0.2rem;
+                .sy-title {
+                    overflow: hidden; /*自动隐藏文字*/
+                    text-overflow: ellipsis; /*文字隐藏后添加省略号*/
+                    white-space: nowrap;
+                    font-weight: bold;
+                }
                 h5 {
                     padding: 0;
                     margin: 0;
-                    font-size: 0.7rem;
-                    line-height: 1.2rem;
                 }
             }
         }

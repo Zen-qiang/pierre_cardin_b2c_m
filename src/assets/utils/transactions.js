@@ -23,8 +23,8 @@ const transactions = {
         table: 'MAGAZINE',
         columns: ['ID', 'ISSUES', 'TITLE', 'IMAGE', 'MODIFIEDDATE'],
         count: true,
-        start: (0 * 3),
-        range: 3,
+        start: (0 * 4),
+        range: 4,
         params: {
           column: 'ISACTIVE',
           condition: '=Y'

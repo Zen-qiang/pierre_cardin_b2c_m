@@ -1,6 +1,5 @@
 <template>
     <div class="page">
-        <div id="nodata" style="height:60px;"></div>
         <swiper v-if="swipeData.length>0" :swipeData="swipeData">轮播图</swiper>
         <products :chanpinData="chanpinData" id="products">产品系列</products>
         <pin-pai v-if="jiajuData.length>0" :jiajuInfo="jiajuInfo" :jiajuData="jiajuData">家居顾问</pin-pai>
@@ -42,7 +41,6 @@ export default {
         }
     },
     mounted() {
-        document.querySelector("#nodata").scrollIntoView(true);
         action.homeBase().then(res => {
             if (res) {
                 this.swipeData = res.slideData.data;

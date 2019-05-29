@@ -2,19 +2,6 @@
     <div class="sy-search">
         <mt-popup style="height:100%;width:101%;background-color:white;" v-model="popupVisible" position="bottom">
             <div style="height:100%;width:100%;">
-                <!-- <header class="sy-headers">
-                    <div class="sy-back" style="margin:auto">
-                        <div class="text-left sy-inline sy-left sy-right" @click="handleHome">
-                            <img src="../../assets/img/logos.png" width="27rem" height="27rem" alt>
-                        </div>
-                        <div class="text-center sy-inline sy-center" @click="handleHome">
-                            <img src="../../assets/logo.png" width="150rem" height="20rem" alt>
-                        </div>
-                        <div class="text-right sy-inline sy-left sy-menu">
-                            <i class="icon icon-error3 sy-ziti" @click="handleClose"></i>
-                        </div>
-                    </div>
-                </header> -->
                 <div style="margin-top:60px;">
                     <div class="sy-cell" v-if="!hasFocus">
                         <mt-cell class="sy-mt-cell" v-for="(item,index) in typeLei" @click.native="handleUrl(item.id)"
@@ -37,6 +24,7 @@
 </template>
 <script>
 import $ from "jquery";
+
 export default {
     name: "search",
     props: {
@@ -89,11 +77,9 @@ export default {
     },
     methods: {
         inputFocus() {
-            $("input").on("focus", function() {
-                window.scroll(0, 0);
-            });
+            document.querySelector("#i_con_search").scrollIntoView(true);
+            window.scrollTo(0, 0);
             this.hasFocus = true;
-            // console.log("获取焦点");
             $("#i_con_search").removeClass("tree_con_focus");
             $("#i_con_search").addClass("search-focus-top");
             $("#i_con_search").removeClass("search-focus-bottom");
@@ -187,71 +173,10 @@ export default {
     margin: 0;
     width: 100%;
     height: 100%;
-    // border-bottom: 0.01rem solid #e0eeee;
-    .sy-headers {
-        background-color: #fff;
-        color: black;
-        height: 60px;
-        -webkit-box-align: center;
-        align-items: center;
-        box-sizing: border-box;
-        display: fixed;
-        font-size: 14px;
-        line-height: 1;
-        padding: 0 10px;
-        text-align: center;
-        white-space: nowrap;
-        border-bottom: 0.01rem solid #e0eeee;
-    }
-    .sy-back {
-        width: 100%;
-        text-align: left;
-        -webkit-box-flex: 5;
-        flex: 5;
-        .mint-button--default {
-            background-color: #fff;
-            box-shadow: none;
-            font-weight: 700;
-        }
-        .mint-button--normal {
-            padding: 0;
-            margin: 0;
-        }
-        .mint-button {
-            height: 21px;
-        }
-    }
-    .sy-right {
-        margin-top: 0.45rem;
-        padding-left: 0.2rem;
-    }
-    .sy-inline {
-        padding-top: 0.6rem;
-        padding-right: 0.6rem;
-        display: inline-block;
-    }
-    .sy-menu {
-        padding-top: 0.5rem !important;
-    }
-    .sy-left {
-        vertical-align: middle;
-        width: 20%;
-        .sy-ziti {
-            font-size: 1.4rem;
-            padding-right: 0.2rem;
-        }
-    }
-    .sy-center {
-        width: 60%;
-        vertical-align: middle;
-        padding-top: 11px;
-        padding-right: 0.5rem;
-    }
 }
 </style>
 <style lang="scss">
 .sy-cell {
-    // padding-top: 60px;
     .sy-mt-cell {
         .mint-cell-title {
             font-size: 1rem;
@@ -275,6 +200,9 @@ export default {
         position: absolute;
         -webkit-transform: translateY(-50%) rotate(45deg);
         transform: translateY(-50%) rotate(45deg);
+    }
+    .mint-cell:last-child {
+        background-image: none;
     }
 }
 

@@ -1,7 +1,7 @@
 <template>
     <div class="sy-swiper" v-if="swipeData.length>0">
         <div id="slideshow" :style="{'height':height+'px'}">
-            <img v-for="(item,index) in swipeData" :key="index" v-lazy="BaseUrl + item.image" @touchend="slideshow(true,$event)"
+            <img v-for="(item,index) in swipeData" :key="index" :src="BaseUrl + item.image" @touchend="slideshow(true,$event)"
                 @touchstart="touchStart" style="margin-left:-80%;margin-rightL-20%" alt="">
             <div class="sy-punctuation">
                 <span v-for="(item,index) in swipeData.length" :key="index" class="active"></span>
@@ -11,7 +11,6 @@
 </template>
 <script>
 import $ from "jquery";
-import { setInterval } from "timers";
 
 export default {
     name: "swiper",
@@ -28,7 +27,11 @@ export default {
             height: 0,
             currentPage: 0,
             startX: 0,
+            startY: 0,
+            endY: 0,
             endX: 0,
+            X: 0,
+            Y: 0,
             jstime: new Date().getTime(),
             slideon: 0
         };
@@ -39,10 +42,16 @@ export default {
     methods: {
         touchStart(e) {
             this.startX = e.touches[0].pageX;
+            this.startY = e.touches[0].pageY;
         },
         slideshow(val, e) {
             let _this = this;
-            if (e) this.endX = e.changedTouches[0].pageX;
+            if (e) {
+                this.endX = e.changedTouches[0].pageX;
+                this.endY = e.changedTouches[0].pageY;
+            }
+            this.X = this.endX - this.startX;
+            this.Y = this.endY - this.startY;
             var slideshow = document.getElementById("slideshow");
             var imgs = slideshow.getElementsByTagName("img"); //得到图片们
             var pages = slideshow.getElementsByTagName("span"); //得到页码们
@@ -80,8 +89,7 @@ export default {
                 slideOn();
             }
             if (val) {
-                // changeSlide();
-                window.clearInterval(_this.slideon._id);
+                window.clearInterval(this.slideon);
             }
             if (val) {
                 for (var i = 0; i < pages.length; i++) {
@@ -92,12 +100,15 @@ export default {
                 //定义鼠标移入和移出页码事件
                 pages[_this.currentPage].ontouchend = function() {
                     slideOff(); //图片淡出
-                    if (_this.startX - _this.endX > 0) {
+                    if (Math.abs(_this.X) > Math.abs(_this.Y) && _this.X < 0) {
                         _this.currentPage++;
                         if (_this.currentPage >= 3) {
                             _this.currentPage = 0;
                         }
-                    } else if (_this.startX - _this.endX < 0) {
+                    } else if (
+                        Math.abs(_this.X) > Math.abs(_this.Y) &&
+                        _this.X > 0
+                    ) {
                         _this.currentPage--;
                         if (_this.currentPage < 0) {
                             _this.currentPage = 2;

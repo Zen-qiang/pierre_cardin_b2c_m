@@ -1,34 +1,32 @@
 <template>
     <div>
-        <div id="nodata" style="height:60px;"></div>
-        <div class="sy-declarehair" :style="{'min-height':cliHeight+'px'}">
-            <h3>品牌宣发</h3>
-            <ul v-if="listData.length>0&&!jzloading" v-infinite-scroll="loadMore" infinite-scroll-disabled="loading"
-                infinite-scroll-distance="385.6">
-                <li v-for="(item,index) in listData" :key="index" @click="hanldeUrl(item.magazine_code)">
-                    <img v-lazy="BaseUrl+item.img_url" alt="">
-                    <div class="sy-content">
-                        <div class="sy-title">{{item.title}}</div>
-                        <div class="sy-text">{{item.issues}}</div>
-                    </div>
-                </li>
-            </ul>
-            <jz-loading v-else-if="jzloading"></jz-loading>
-            <div v-else class="text-center text-muted font-70 sy-nodata">
-                <i class="icon icon-lian-hengxian sy-cry"></i>
-                <div>没有查询到品牌宣发信息</div>
+        <div class="sy-declarehair">
+            <h3 class="texttitle">品牌宣发</h3>
+            <div :style="{'min-height':cliHeight+'px'}">
+                <ul v-if="listData.length>0&&!jzloading" v-infinite-scroll="loadMore" infinite-scroll-disabled="loading"
+                    infinite-scroll-distance="375.6">
+                    <li v-for="(item,index) in listData" :class="index%2==0?'sy-margin':'sy-margins'" :key="index"
+                        @click="hanldeUrl(item.magazine_code)">
+                        <img :src="BaseUrl+item.img_url" :style="{'height':height +'px'}" style="margin-left:-50%;margin-right:-50%;"
+                            alt="">
+                        <div class="sy-content">
+                            <div class="sy-title">{{item.title}}</div>
+                            <div class="sy-text">{{item.issues}}</div>
+                        </div>
+                    </li>
+                </ul>
+                <div v-else class="text-center font-70 sy-nodata" style="color:rgb(205,206,207)">
+                    <div>未查询到品牌宣发信息</div>
+                </div>
             </div>
-            <load-bottom v-if="showBottom && listData.length>0" class="sy-loadbottom"></load-bottom>
         </div>
         <sy-footer></sy-footer>
     </div>
 </template>
 <script>
+import $ from "jquery";
 import action from "@/assets/utils/action.js";
 import syFooter from "@/page/public/footer";
-import LoadBottom from "@/page/public/loadbottom";
-import JzLoading from "@/components/loading";
-let typedata = true;
 export default {
     name: "declarehair_index",
     data() {
@@ -39,12 +37,15 @@ export default {
             loading: false,
             showBottom: false,
             jzloading: false,
-            total: 0
+            total: 0,
+            height: 0
         };
     },
-    components: { syFooter, LoadBottom, JzLoading },
+    beforeMount: function() {
+        this.height = ($(window).width() * 664) / 1082;
+    },
+    components: { syFooter },
     mounted() {
-        document.querySelector("#nodata").scrollIntoView(true);
         this.jzloading = true;
         this.getData();
     },
@@ -52,23 +53,20 @@ export default {
         //更多
         loadMore() {
             this.loading = true;
-            if (!typedata) {
-                setTimeout(() => {
-                    if (this.listData.length >= this.total) {
-                        this.showBottom = true;
-                        return;
-                    }
-                    this.page++;
-                    this.getData();
-                }, 2500);
-            }
+            setTimeout(() => {
+                if (this.listData.length >= this.total) {
+                    this.showBottom = true;
+                    return;
+                }
+                this.page++;
+                this.getData();
+            }, 2500);
         },
         //获取数据
         getData() {
             action
                 .magazineList(this.page, this.pageSize)
                 .then(res => {
-                    typedata = false;
                     if (this.page == 0) {
                         this.listData = res.magazineList.data;
                     } else {
@@ -99,12 +97,10 @@ export default {
 </script>
 <style lang="scss" scoped>
 .sy-declarehair {
+    background-color: #fff;
     h3 {
-        padding: 2.8rem 0;
-        color: black;
         font-size: 1.3rem;
         background-color: #fff;
-        margin: 0;
     }
     ul {
         display: flex;
@@ -112,42 +108,38 @@ export default {
         align-items: center;
         // margin: 0 -5px;
         margin: 0;
-        padding: 0 0.15rem 3.5rem 0.15rem;
-        background-color: #faf8ef;
+        padding: 0 0 1.3rem 0;
+        // background-color: #faf8ef;
         li {
             list-style: none;
             flex: 0 0 50%;
+            margin: 0;
+            padding: 0;
             box-sizing: border-box;
-            padding: 0.2rem 0.1rem;
+            overflow: hidden;
             img {
-                width: 100%;
+                object-fit: cover;
+                vertical-align: middle;
             }
             .sy-content {
-                line-height: 1.2rem;
+                line-height: 1.3rem;
+                font-size: 0.8rem;
                 padding: 0.4rem 0;
                 .sy-title {
-                    padding-top: 0.2rem;
-                    font-size: 0.7rem;
+                    overflow: hidden; /*自动隐藏文字*/
+                    text-overflow: ellipsis; /*文字隐藏后添加省略号*/
+                    white-space: nowrap;
                     color: black;
                     font-weight: bold;
                 }
                 .sy-text {
                     color: #8f8f8f;
-                    font-size: 0.6rem;
                 }
             }
         }
     }
     .sy-nodata {
-        background-color: #faf8ef;
         padding: 4rem 0 5rem 0;
-        .sy-cry {
-            font-size: 4.2rem;
-        }
-    }
-
-    .sy-loadbottom {
-        background-color: #faf8ef;
     }
 }
 </style>

@@ -1,24 +1,23 @@
 <template>
     <div class="sy-page" id="brand">
         <div>
-            <div id="nodata" style="height:60px;"></div>
             <div class="sy-contacts">
-                <h3 class="sy-context">品牌招聘</h3>
-                <div class="text-left sy-content">pierre cardin home 的每一位员工深受 Pierre Cardin
+                <h3 class="sy-context texttitle">品牌招聘</h3>
+                <div class="text-left sy-content"><span>pierre cardin home</span> 的每一位员工深受 Pierre Cardin
                     关于生活哲理学的浸润，大胆创新、思维活跃、热爱生活。也为每一位有能力的人才的卓越表现和蓬勃发展提供了独一无二的环境氛围。加入 pierre cardin
                     Home，与我们一同分享你在生活与工作上的不同体验，一同为每一个人的美好家居生活，进行锐意的探索与实践。</div>
                 <div class="sy-more" @click="handleMore">
                     <div class="sy-button">查看职位<i></i></div>
                 </div>
             </div>
-            <img src="../../assets/img/jiazu.jpg" class="margin-top-10 no-padding margin-bottom-10" width="100%" alt>
+            <img src="../../assets/img/jiazu.jpg" class="margin-top-20 margin-bottom-20 no-padding" width="100%" alt>
             <div class="text-left sy-contents">我们感恩员工们的付出，同时将品牌资源分享给所有的员工们。在品牌商学院中，将会有来自设计、艺术、时尚等各个不同领域的佼佼者以讲座、线上授课等形式为员工创造更多的学习机会，不断丰富自身创造力。</div>
             <div class="sy-contacts">
                 <h4 class="text-left sy-title">工作空间</h4>
                 <div class="text-left sy-content">办公空间品牌总部大楼位于中国上海，这座建筑前身曾为一座专业的医疗研究所并超过 70
                     年的历史。我们已尊重过去、现在与将来的态度希望大楼将大楼打造成与周边社群可以和谐相处的存在。我们保留了大楼本身身处年代特有的水磨石地面；保留曾经的预制板天花并用颜色加以覆盖；创造性地将钢结构新楼与历史老楼以玻璃框架分离开来并将“老与新”的概念在公司的职能分布上进行结合。而这也是皮尔·卡丹家具的品牌重塑的重要象征之一。</div>
             </div>
-            <img src="../../assets/img/company.jpg" class="margin-top-10 no-padding margin-bottom-10" width="100%" alt>
+            <img src="../../assets/img/company.jpg" class="margin-top-20 no-padding" width="100%" alt>
             <div class="sy-contacts">
                 <h4 class="text-left sy-title">企业文化</h4>
                 <div class="text-left sy-content">作为一个以重塑 70
@@ -35,16 +34,16 @@
                 <div class="text-left sy-content">良好的品行是作为一切开始的先决条件。其次是良好的思维方式与个人创造力</div>
                 <div class="text-left sy-content sy-cont">在线填写申请时，需回答关于您自己的若干问题，并提交简历。如果您希望提交更多信息，可在申请时上传相关资料。如果您申请的是创意、市场营销、数字化或设计团队的职位，请务必提供您的作品集。</div>
                 <h4 class="sy-cooperation">为合作伙伴创造更大的价值！</h4>
-                <div class="sy-more padding-bottom-30" @click="handleMore">
-                    <div class="sy-button">查看职位<i></i></div>
+                <div class="sy-more padding-bottom-20" @click="handleMore">
+                    <div class="sy-button sy-morebutton">查看职位<i></i></div>
                 </div>
             </div>
             <ul class="sy-img">
                 <li>
-                    <img src="../../assets/img/workers.jpg" alt="">
+                    <img class="sy-workers" src="../../assets/img/workers.jpg" alt="">
                 </li>
                 <li>
-                    <img src="../../assets/img/girlworkers.jpg" alt="">
+                    <img class="sy-grilworkers" src="../../assets/img/girlworkers.jpg" alt="">
                 </li>
             </ul>
             <div class="text-center text-dark sy-footers">
@@ -61,9 +60,6 @@ export default {
     data() {
         return {};
     },
-    mounted() {
-        document.querySelector("#nodata").scrollIntoView(true);
-    },
     components: { syFooter },
     methods: {
         handleMore() {
@@ -79,40 +75,42 @@ export default {
     .sy-contacts {
         width: 100%;
         line-height: 40px;
-        padding: 0 10px;
+        padding: 0 0.7rem;
         .sy-context {
             text-align: left;
             font-size: 1.2rem;
             font-weight: 700;
-            padding-top: 25px;
+            padding-top: 1rem;
+            padding-bottom: 0.25rem;
             margin: 0;
-            margin-bottom: 0.1rem;
-            color: black;
         }
         .sy-title {
-            font-size: 14px;
+            margin-top: 0.5rem;
+            padding: 0.5rem 0;
+            font-size: 1.1rem;
             color: #697279;
-            margin-bottom: 8px;
+            margin-bottom: 0.2rem;
         }
         .sy-content {
             padding-top: 0px;
             color: #697279;
-            line-height: 20px;
-            font-size: 11px;
-            padding-bottom: 16px;
+            line-height: 1.45rem;
+            font-size: 0.9rem;
+            // padding-bottom: 16px;
         }
     }
     .sy-contents {
         padding: 0 10px;
         color: black;
-        font-size: 13px;
+        font-size: 0.9rem;
         font-weight: 700;
-        line-height: 23px;
+        line-height: 1.45rem;
         padding-bottom: 16px;
         border-bottom: 1px solid #dbd8cf;
     }
     .sy-question {
         margin-top: 0;
+        padding: 1rem 0;
         font-size: 1.1rem;
         color: black;
         border-bottom: 1px solid #dbd8cf;
@@ -120,29 +118,33 @@ export default {
     .sy-titles {
         font-weight: 700;
         color: black;
-        font-size: 11px;
-        line-height: 23px;
-        padding-bottom: 16px;
+        font-size: 0.9rem;
+        line-height: 1.45rem;
+        padding: 1rem 0;
     }
     .sy-cont {
         padding-bottom: 30px !important;
         border-bottom: 1px solid #dbd8cf;
     }
     h4 {
-        margin: 1.8rem 0;
+        margin: 1.2rem 0;
     }
     .sy-more {
         width: 100%;
-        margin: 0.8rem 0;
+        margin: 0.5rem 0;
+        padding-top: 0.5rem;
         .sy-button {
             margin: auto;
             width: 98%;
             line-height: 23px;
-            font-size: 0.85rem;
-            color: #8e8e8e;
+            font-size: 0.9rem;
+            color: rgb(205, 206, 207);
             text-align: center;
             padding: 0.7rem 1.2rem 0.7rem 1.2rem;
-            border: 0.02rem solid #eaeaea;
+            border: 0.02rem solid rgb(205, 206, 207);
+        }
+        .sy-morebutton {
+            margin-top: -0.4rem;
         }
     }
 }
@@ -158,16 +160,24 @@ export default {
         flex: 0 0 50%;
         img {
             width: 100%;
-            padding: 0 0.15rem;
+            padding: 0;
+        }
+        .sy-workers {
+            padding-right: 0.1rem;
+        }
+        .sy-grilworkers {
+            padding-left: 0.1rem;
         }
     }
 }
 .sy-cooperation {
+    margin: 0;
+    padding: 0;
     color: black;
 }
 .sy-footers {
     line-height: 1.6rem;
-    padding: 1.8rem 0;
+    padding: 1.5rem 0;
     font-weight: 700;
 }
 </style>

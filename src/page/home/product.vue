@@ -1,8 +1,9 @@
 <template>
-    <div class="sy-page">
-        <h3>产品系列</h3>
+    <div class="sy-page" :style="{'min-height':cliHeight+'px'}">
+        <h3 class="texttitle">产品系列</h3>
         <ul v-if="chanpinData.length>0&&!jzloading">
-            <li class="sy-li" v-for="(item,index) in chanpinData" :key="index" @click="handleClick(item.id)">
+            <li class="sy-li" v-for="(item,index) in chanpinData" :class="index%2==0?'sy-margin':'sy-margins'" :key="index"
+                @click="handleClick(item.id)">
                 <img :src="item.img_url" :style="{'height':height +'px'}" style="margin-left:-50%;margin-right:-50%;"
                     alt>
                 <p>
@@ -10,12 +11,10 @@
                 </p>
             </li>
         </ul>
-        <jz-loading v-else></jz-loading>
     </div>
 </template>
 <script>
 import $ from "jquery";
-import JzLoading from "@/components/loading";
 export default {
     name: "product",
     data() {
@@ -30,9 +29,8 @@ export default {
         }
     },
     beforeMount: function() {
-        this.height = ($(window).width() * 664) / 1135;
+        this.height = ($(window).width() * 664) / 1082;
     },
-    components: { JzLoading },
     methods: {
         handleClick(id) {
             this.$router.push({
@@ -51,7 +49,6 @@ export default {
     background-color: #fff;
     h3 {
         margin: 1.4rem 0;
-        color: black;
     }
     ul {
         display: flex;
@@ -59,17 +56,16 @@ export default {
         align-items: center;
         width: 100%;
         margin: 0;
-        padding: 0 0.1rem;
+        padding: 0;
         .sy-li {
             list-style: none;
             position: relative;
-            flex: 0 0 48.6%;
+            flex: 0 0 50%;
+            margin: 0;
             padding: 0.1rem 0;
             box-sizing: border-box;
             overflow: hidden;
-            margin: 0 0.13rem;
             img {
-                height: 100%;
                 object-fit: cover;
                 vertical-align: middle;
             }
@@ -89,6 +85,7 @@ export default {
                 }
                 .sy-ziti {
                     color: white;
+                    font-size: 1.1rem;
                     font-weight: 500;
                     display: inline-block;
                     vertical-align: middle;
@@ -96,6 +93,12 @@ export default {
             }
         }
     }
+}
+.sy-margin {
+    margin-left: -0.2rem !important;
+}
+.sy-margins {
+    margin-left: 0.2rem !important;
 }
 </style>
 

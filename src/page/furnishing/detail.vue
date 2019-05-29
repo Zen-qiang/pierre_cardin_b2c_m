@@ -1,6 +1,5 @@
 <template>
     <div>
-        <div id="nodata" style="height:60px;"></div>
         <div class="sy-furn_detail" :style="{'min-height':cliHeight-48+'px'}">
             <div v-if="listData.length>0&&!jzloading">
                 <div v-for="(item,index) in listData" :key="index">
@@ -9,16 +8,14 @@
                     <div class="text-left sy-content" v-html="Trim(item.content)"></div>
                 </div>
             </div>
-            <jz-loading v-else></jz-loading>
         </div>
-        <div class="sy-footer">文章出处：皮尔卡丹家居</div>
+        <div class="sy-footers">文章出处：皮尔卡丹家居</div>
         <sy-footer></sy-footer>
     </div>
 </template>
 <script>
 import action from "@/assets/utils/action.js";
 import syFooter from "@/page/public/footer";
-import JzLoading from "@/components/loading";
 export default {
     name: "furnishing_detail",
     data() {
@@ -28,10 +25,9 @@ export default {
         };
     },
     mounted() {
-        document.querySelector("#nodata").scrollIntoView(true);
         this.getRead();
     },
-    components: { syFooter, JzLoading },
+    components: { syFooter },
     methods: {
         getRead() {
             this.jzloading = true;
@@ -53,8 +49,8 @@ export default {
     padding: 0.8rem;
     .sy-time {
         padding: 0.3rem 0 0.2rem 0;
-        font-size: 0.6rem;
-        color: #d4d4d4;
+        font-size: 0.8rem;
+        color: rgb(105, 113, 118);
     }
     h4 {
         margin: 0;
@@ -67,9 +63,9 @@ export default {
         line-height: 1.4rem;
     }
 }
-.sy-footer {
-    color: #e8e8e8;
-    font-size: 0.6rem;
+.sy-footers {
+    color: rgb(105, 113, 118);
+    font-size: 0.8rem;
     text-align: center;
     margin-top: 0.5rem;
     padding: 1.1rem 0;

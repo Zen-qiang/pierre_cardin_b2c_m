@@ -1,19 +1,18 @@
 <template>
     <div>
-        <div id="nodata" style="height:60px;"></div>
         <div class="sy-chanpin" :style="{'min-height':cliHeight+'px'}">
-            <h3 class="padding-50">{{title}}</h3>
+            <h3 class="texttitle">{{title}}</h3>
             <ul class="sy-ulli" v-if="chanpinData.length>0&&!jzloading">
-                <li v-for="(item,index) in chanpinData" :key="index" @click="handleUrl(item.series_code)">
-                    <img v-lazy="BaseUrl+item.img_url" alt>
+                <li v-for="(item,index) in chanpinData" :key="index" :class="index%2==0?'sy-margin':'sy-margins'"
+                    @click="handleUrl(item.series_code)">
+                    <img :src="BaseUrl+item.img_url" :style="{'height':height +'px'}" style="margin-left:-50%;margin-right:-50%;"
+                        alt>
                     <p>
                         <span class="sy-ziti">{{item.name}}</span>
                     </p>
                 </li>
             </ul>
-            <jz-loading v-else></jz-loading>
-            <div style="clear:both"></div>
-            <div class="padding-top-40 padding-bottom-40">
+            <div class="padding-top-20 padding-bottom-20">
                 <div class="sy-type" v-for="(item,index) in productsType" :key="index">
                     <a @click="handleClick(item.id)"><span :class="$route.params.id==item.id?'sy-yangshi':''">{{item.name}}</span></a>
                 </div>
@@ -26,15 +25,19 @@
 import { mapState } from "vuex";
 import syFooter from "@/page/public/footer";
 import action from "@/assets/utils/action.js";
-import JzLoading from "@/components/loading";
+import $ from "jquery";
 export default {
     name: "chanpin",
     data() {
         return {
             title: "",
             chanpinData: [],
-            jzloading: false
+            jzloading: false,
+            height: 0
         };
+    },
+    beforeMount: function() {
+        this.height = ($(window).width() * 664) / 1082;
     },
     watch: {
         "$route.params.id"(newValue) {
@@ -53,7 +56,6 @@ export default {
         ...mapState(["productsType"])
     },
     mounted() {
-        document.querySelector("#nodata").scrollIntoView(true);
         this.jzloading = true;
         this.getData();
         let item = this.productsType.find(
@@ -63,7 +65,7 @@ export default {
             this.title = item.name;
         }
     },
-    components: { syFooter, JzLoading },
+    components: { syFooter },
     methods: {
         //获取数据源
         getData() {
@@ -101,27 +103,24 @@ export default {
 </script>
 <style lang="scss" scoped>
 .sy-chanpin {
-    background-color: #faf8ef;
-    h3 {
-        margin: 0;
-        padding: 0;
-        color: black;
-    }
+    background-color: #fff;
     .sy-ulli {
         display: flex;
         flex-flow: row wrap;
         align-items: center;
         padding: 0;
         margin: 0;
-        padding-left: 0.08rem;
-        padding-right: 0.08rem;
         li {
             list-style: none;
             position: relative;
             flex: 0 0 50%;
+            margin: 0;
+            padding: 0.1rem 0;
+            box-sizing: border-box;
+            overflow: hidden;
             img {
-                width: 100%;
-                padding: 0 0.1rem 0 0.1rem;
+                object-fit: cover;
+                vertical-align: middle;
             }
             p {
                 position: absolute;
@@ -140,17 +139,16 @@ export default {
                 .sy-ziti {
                     color: white;
                     font-weight: 500;
-                    font-size: 1rem;
+                    font-size: 1.1rem;
                     display: inline-block;
                     vertical-align: middle;
-                    text-shadow: 0 0 0.1rem #3d3d3d;
                 }
             }
         }
     }
     .sy-type {
-        line-height: 36px;
-        font-size: 13px;
+        line-height: 2.8rem;
+        font-size: 1.1rem;
     }
     a {
         margin: 0;
@@ -159,11 +157,17 @@ export default {
             color: black;
             padding: 0;
             margin: 0;
-            border-bottom: 2px solid #cc3300;
+            border-bottom: 3px solid rgb(204, 51, 0);
             text-decoration: none;
-            line-height: 50px;
+            // line-height: 0px;
         }
     }
+}
+.sy-margin {
+    margin-left: -0.2rem !important;
+}
+.sy-margins {
+    margin-left: 0.2rem !important;
 }
 </style>
 

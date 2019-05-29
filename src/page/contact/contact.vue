@@ -1,8 +1,7 @@
 <template>
     <div id="concat">
-        <div id="nodata" style="height:60px;"></div>
         <div class="sy-contacts">
-            <h3 class="sy-context">联系我们</h3>
+            <h3 class="sy-context texttitle">联系我们</h3>
             <div class="sy-contact">
                 <div class="sy-text">
                     <h4 class="text-left sy-title">全国服务热线</h4>
@@ -40,9 +39,6 @@ export default {
     data() {
         return {};
     },
-    mounted() {
-        document.querySelector("#nodata").scrollIntoView(true);
-    },
     components: { syFooter }
 };
 </script>
@@ -51,15 +47,13 @@ export default {
     width: 100%;
     line-height: 40px;
     background-color: #faf8ef;
-    padding: 0 10px;
+    padding: 0 0.7rem;
     .sy-context {
         text-align: left;
-        font-size: 1.2rem;
+        font-size: 1.3rem;
+        margin: 0;
+        padding-top: 1rem;
         font-weight: 700;
-        padding-top: 25px;
-        color: black;
-        margin-bottom: 1.2rem;
-        margin-top: 0;
     }
     .sy-contact {
         h4 {
@@ -73,8 +67,8 @@ export default {
             border-top: 1px solid #d7d7cb;
             padding-top: 12px;
             color: #697279;
-            line-height: 20px;
-            font-size: 11px;
+            line-height: 1.45rem;
+            font-size: 0.9rem;
             padding-bottom: 12px;
         }
     }

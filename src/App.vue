@@ -7,12 +7,20 @@
 </template>
 
 <script>
+import $ from "jquery";
 export default {
     name: "App"
 };
+// eslint-disable-next-line one-var
+var windowHeight = $(window).height(),
+    $body = $("body");
+$body.css("height", windowHeight);
 </script>
-
-<style>
+<style lang="scss">
+@font-face {
+    font-family: "Helveticas";
+    src: url("../static/fonts/Helvetica.ttf");
+}
 html,
 body {
     height: 100%;
@@ -21,18 +29,20 @@ body {
 body {
     margin: 0;
     padding: 0;
-    overscroll-behavior-y: none;
+    // position: fixed;
+    width: 100%;
+    height: 100%;
+    -webkit-overflow-scrolling: touch;
 }
+
 #app {
-    font-family: "Avenir", Helvetica, Arial, sans-serif;
+    font-family: "Helveticas", "Avenir", Arial, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-align: center;
-    color: #2c3e50;
-    /* margin-top: 3.7rem; */
+    color: black;
     padding: 0;
     font-size: 16px;
-    letter-spacing: 0.05rem;
     background-color: #fff;
 }
 </style>

@@ -1,6 +1,6 @@
 <template>
     <div class="text-center text-muted padding-top-50 padding-bottom-50">
-        <i class="icon icon-Loading1 sy-cry sy-loading"></i>
+        <i class="icon icon-Loading1 1082 sy-loading"></i>
     </div>
 </template>
 <script>

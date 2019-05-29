@@ -1,17 +1,19 @@
 <template>
     <div>
         <header class="sy-header">
-            <div class="sy-back" style="margin:auto">
-                <div class="text-left sy-inline sy-left sy-right" @click="handleHome">
-                    <img v-if="!showBack" src="../../assets/img/logos.png" width="27rem" height="27rem" alt>
-                    <mt-button v-if="showBack" class="sy-button" icon="back" @click="handleBack"></mt-button>
-                </div>
-                <div class="text-center sy-inline sy-center" @click="handleHome">
-                    <img src="../../assets/logo.png" width="150rem" height="20rem" alt>
-                </div>
-                <div class="text-right sy-inline sy-left sy-menu">
-                    <i v-if="!popupVisible" class="icon icon-menu sy-ziti" @click="handleSearch"></i>
-                    <i v-else class="icon icon-error3 sy-zitis" @click="handleClose"></i>
+            <div class="sy-headerpage" :class="scrollObj.direction">
+                <div class="sy-back" :class="popupVisible?'sy-backs':''" style="margin:auto">
+                    <div class="text-left sy-inline sy-left sy-right" @click="handleHome">
+                        <img v-if="!showBack" src="../../assets/img/logos.png" width="27rem" height="27rem" alt>
+                        <mt-button v-if="showBack" class="sy-button" icon="back" @click="handleBack"></mt-button>
+                    </div>
+                    <div class="text-center sy-inline sy-center" @click="handleHome">
+                        <img src="../../assets/logo.png" width="188rem" height="25rem" alt>
+                    </div>
+                    <div class="text-right sy-inline sy-left sy-menu">
+                        <i v-if="!popupVisible" class="icon icon-menu sy-ziti" @click="handleSearch"></i>
+                        <i v-else class="icon icon-error3 sy-zitis" @click="handleClose"></i>
+                    </div>
                 </div>
             </div>
         </header>
@@ -20,10 +22,7 @@
 </template>
 <script>
 import { mapState } from "vuex";
-import $ from "jquery";
 import Search from "@/page/search/index";
-var startY = 0;
-var dialogStae = false;
 export default {
     name: "sy-header",
     data() {
@@ -31,17 +30,15 @@ export default {
             popupVisible: false
         };
     },
+    props: {
+        scrollObj: {
+            type: Object
+        },
+        topheader: { type: Boolean }
+    },
     components: { Search },
     computed: {
         ...mapState(["showBack"])
-    },
-    watch: {
-        $route(newValue) {
-            if (newValue) {
-                $(".sy-header").removeClass("fadeInDown");
-                $(".sy-header").removeClass("fadeOutUp");
-            }
-        }
     },
     methods: {
         handleBack() {
@@ -56,43 +53,18 @@ export default {
         },
         handleSearch() {
             this.popupVisible = true;
-            dialogStae = true;
             this.$emit("CB-Header", this.popupVisible);
         },
         handleClose() {
             this.popupVisible = false;
-            dialogStae = false;
             this.$emit("CB-Header", this.popupVisible);
         },
         CB_popupVisible(val) {
             this.popupVisible = false;
-            dialogStae = false;
             this.$emit("CB-Header", this.popupVisible);
         }
     }
 };
-window.addEventListener("touchstart", function(e) {
-    startY = e.touches[0].pageY;
-});
-window.addEventListener("touchend", function(e) {
-    var endY = e.changedTouches[0].pageY;
-    if (startY - endY > 0) {
-        if ($("#layouts").offset().top < -60) {
-            if (dialogStae) {
-                $(".sy-header").removeClass("fadeInDown");
-                $(".sy-header").removeClass("fadeOutUp");
-            } else if (!$(".sy-header").hasClass("fadeOutUp")) {
-                $(".sy-header").addClass("animated fadeOutUp");
-                $(".sy-header").removeClass("fadeInDown");
-            }
-        }
-    } else if (startY - endY < 0) {
-        if (!$(".sy-header").hasClass("fadeInDown")) {
-            $(".sy-header").addClass("animated fadeInDown");
-            $(".sy-header").removeClass("fadeOutUp");
-        }
-    }
-});
 </script>
 <style lang="scss" scoped>
 .sy-header {
@@ -102,24 +74,29 @@ window.addEventListener("touchend", function(e) {
     left: 0;
     bottom: 0;
     z-index: 9999;
+    margin: 0;
+    padding: 0;
     background-color: #fff;
     color: black;
+    overflow-x: hidden;
     height: 60px;
     -webkit-box-align: center;
     align-items: center;
     box-sizing: border-box;
     font-size: 1.2rem;
     line-height: 1;
-    padding: 0 10px;
     text-align: center;
     white-space: nowrap;
-    border: 0.05rem solid #ededed;
+    background-color: transparent;
+}
+.sy-backs {
+    padding-top: 0.65rem !important;
 }
 .sy-back {
     width: 100%;
     text-align: left;
     -webkit-box-flex: 5;
-    padding-top: 0.15rem;
+    padding-top: 0.4rem;
     flex: 5;
     .mint-button--default {
         background-color: #fff;
@@ -135,36 +112,58 @@ window.addEventListener("touchend", function(e) {
     }
 }
 .sy-inline {
-    padding-top: 0.6rem;
+    padding-top: 0.5rem;
     padding-right: 0.5rem;
     display: inline-block;
 }
-.sy-right {
-    margin-top: 0.5rem;
-}
 .sy-menu {
-    padding-top: 0.25rem !important;
+    padding-top: 0.4rem !important;
 }
 .sy-left {
     vertical-align: middle;
-    width: 20%;
+    width: 15%;
     text-align: rigth;
-    margin-top: 0.15rem;
     .sy-ziti {
         font-size: 36px;
     }
     .sy-zitis {
-        font-size: 23px;
+        font-size: 1.4rem;
         padding-right: 0.2rem;
     }
 }
 .sy-center {
-    width: 60%;
+    width: 70%;
     vertical-align: middle;
-    padding-top: 11px;
+    padding-top: 0.5rem;
 }
 .sy-button {
     border: none;
+}
+.sy-headerpage {
+    position: relative;
+    top: 0;
+    height: 60px;
+    width: 100%;
+    padding: 0 10px;
+    border-bottom: 0.05rem solid #ededed;
+    background-color: #fff;
+    transition: background-color 200ms cubic-bezier(0.645, 0.045, 0.355, 1),
+        border 300ms cubic-bezier(0.645, 0.045, 0.355, 1),
+        color 100ms cubic-bezier(0.645, 0.045, 0.355, 1);
+    &.down {
+        top: -60px;
+        background-color: #fff;
+        left: 0;
+        position: fixed;
+        transition: top 600ms cubic-bezier(0.215, 0.61, 0.355, 1);
+    }
+    &.up {
+        top: 0;
+        background-color: #fff;
+        left: 0;
+        position: fixed;
+        transition: top 600ms cubic-bezier(0.215, 0.61, 0.355, 1);
+    }
 }
 </style>
 

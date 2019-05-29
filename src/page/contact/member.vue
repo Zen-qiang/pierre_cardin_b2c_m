@@ -1,14 +1,13 @@
 <template>
     <div id="member">
         <div class="sy-page">
-            <div id="nodata" style="height:60px;"></div>
             <div class="sy-contacts">
-                <h3 class="sy-context">会员招募</h3>
+                <h3 class="sy-context texttitle">会员招募</h3>
             </div>
-            <img src="../../assets/img/recruitBanner.jpg" class="margin-top-10 no-padding margin-bottom-10" width="100%"
+            <img src="../../assets/img/recruitBanner.jpg" class="margin-top-10 no-padding margin-bottom-20" width="100%"
                 alt>
             <div class="sy-contacts">
-                <div class="text-left sy-htitle">
+                <div class="text-left padding-bottom-20 sy-htitle">
                     全新美好生活，
                     <br>从成为 pierre cardin Home 会员开始。
                 </div>
@@ -23,15 +22,16 @@
                 <div class="text-left sy-content padding-bottom-20">随时获得专属于你的 pierre cardin Home 特别折扣。</div>
             </div>
             <img src="../../assets/img/people.jpg" class="sy-img" width="95%" alt>
-            <div class="sy-contacts padding-bottom-40">
+            <div class="sy-contacts padding-bottom-30">
                 <div class="text-left sy-htitle">
                     每个人都拥有感受生活美好、实现理想家居生活的权利。
                     <br>
-                    <div class="padding-top-20">"Everyone is given the right to experience the beauty of life,as well
+                    <div class="padding-top-20 sy-english">"Everyone is given the right to experience the beauty of
+                        life,as well
                         as to
                         realize their own ideal life."</div>
                     <div class="pull-right">-- pierre cardin</div>
-                    <div style="clear:both" class="padding-bottom-20"></div>
+                    <div style="clear:both" class="padding-bottom-10"></div>
                 </div>
             </div>
         </div>
@@ -45,9 +45,6 @@ export default {
     data() {
         return {};
     },
-    mounted() {
-        document.querySelector("#nodata").scrollIntoView(true);
-    },
     components: { syFooter }
 };
 </script>
@@ -57,28 +54,31 @@ export default {
     .sy-contacts {
         width: 100%;
         line-height: 40px;
-        padding: 0 10px;
+        padding: 0 0.7rem;
         .sy-htitle {
+            letter-spacing:-0.01rem;
             font-size: 0.95rem;
             color: black;
             font-weight: 700;
             line-height: 23px;
             padding-bottom: 13px;
             border-bottom: 1px solid #e0e0e0;
+            .sy-english {
+                letter-spacing: 0.01em;
+            }
         }
         .sy-context {
             text-align: left;
             font-size: 1.2rem;
             font-weight: 700;
-            padding-top: 25px;
-            color: black;
+            padding-top: 0.9rem;
             margin: 0;
         }
 
         .sy-title {
             font-size: 1rem;
             color: #697279;
-            margin-bottom: 1rem;
+            margin: 0.8rem 0;
         }
         .mint-button--default {
             background-color: #faf8ef;
@@ -89,12 +89,12 @@ export default {
         .sy-content {
             padding-top: 0px;
             color: #697279;
-            line-height: 1.2rem;
-            font-size: 11px;
+            line-height: 1.45rem;
+            font-size: 0.9rem;
         }
     }
     .sy-img {
-        margin-bottom: 2.8rem;
+        margin-bottom: 1.8rem;
     }
 }
 </style>

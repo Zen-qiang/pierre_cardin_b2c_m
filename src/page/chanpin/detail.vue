@@ -1,24 +1,23 @@
 <template>
     <div>
-        <div id="nodata" style="height:60px;"></div>
         <div class="sy-products-detail" :style="{'min-height':cliHeight+'px'}">
             <div v-if="img_url.length>0&&img_url[0].pdt_a1">
-                <img v-for="(item,index) in img_url" :key="index" v-lazy="BaseUrl+item.pdt_a1" alt="">
+                <img v-for="(item,index) in img_url" :key="index" :src="BaseUrl+item.pdt_a1" alt="">
             </div>
             <div class="sy-headerTou" v-if="A2Data.length>0">
                 <div class="sy-headerImg">
                     <ul>
-                        <li v-for="(item,index) in A2Data" :key="index"><img v-lazy="item.pdt_img_url" @click="handleImg(item.pdt_id)"
+                        <li v-for="(item,index) in A2Data" :key="index"><img :src="item.pdt_img_url" @click="handleImg(item.pdt_id)"
                                 alt=""></li>
                     </ul>
                 </div>
             </div>
             <div v-if="containerData.pdt_name&&!jzloading">
-                <h3 class="sy-h3">单品信息</h3>
+                <h3 class="sy-h3 texttitle">单品信息</h3>
                 <div class="sy-single">
                     <mt-swipe :showIndicators="false" :defaultIndex="0" :style="{'height':height+'px'}">
                         <mt-swipe-item v-for="(item,index) in headerData" :key="index">
-                            <img v-lazy="item.pdt_img_url" alt="">
+                            <img :src="item.pdt_img_url" alt="">
                             <span class="sy-label">{{index+1}}/{{headerData.length}}</span>
                         </mt-swipe-item>
                     </mt-swipe>
@@ -29,10 +28,10 @@
                         <div class="sy-guige">{{containerData.pdt_salestalk}}</div>
                     </div>
                 </div>
-                <h3>产品描述</h3>
+                <h3 class="texttitle">产品描述</h3>
                 <div class="pdtDesc" v-if="containerData.tmail_link.length">
                     <div class="flexContainer" v-for="(item, index) of containerData.tmail_link" :key="index">
-                        <div class="imgContent"><img v-lazy="BaseUrl+item.img"></div>
+                        <div class="imgContent"><img :src="BaseUrl+item.img"></div>
                         <div class="textContent">
                             <div class="text">
                                 <h4>{{item.title}}</h4>
@@ -42,7 +41,6 @@
                     </div>
                 </div>
             </div>
-            <jz-loading v-else class="margin-bottom-50"></jz-loading>
         </div>
         <sy-footer></sy-footer>
     </div>
@@ -51,7 +49,6 @@
 import $ from "jquery";
 import action from "@/assets/utils/action.js";
 import syFooter from "@/page/public/footer";
-import JzLoading from "@/components/loading";
 export default {
     name: "chanpin_detail",
     data() {
@@ -73,12 +70,11 @@ export default {
             }
         };
     },
-    components: { syFooter, JzLoading },
+    components: { syFooter },
     beforeMount: function() {
         this.height = ($(window).width() * 664) / 666;
     },
     mounted() {
-        document.querySelector("#nodata").scrollIntoView(true);
         this.getHead();
     },
     watch: {
@@ -146,6 +142,7 @@ export default {
         ul {
             padding: 0;
             margin: 0;
+            text-align: left;
             li {
                 width: 33.33%;
                 list-style: none;
@@ -161,15 +158,15 @@ export default {
         line-height: 28px;
         .sy-guige {
             line-height: 25px;
-            font-size: 12px;
-            color: #687378;
+            font-size: 0.85rem;
+            color: rgb(105, 113, 118);
             .sy-guiges {
                 padding: 0.1rem 0.3rem 0.1rem 0.3rem;
-                border: 0.01rem solid #687378;
+                border: 0.01rem solid #cdcecf;
             }
         }
         .sy-margin {
-            margin-top: 5px;
+            margin-top: 0.55rem;
         }
     }
     .sy-h3 {
@@ -180,10 +177,10 @@ export default {
             position: absolute;
             bottom: 1rem;
             right: 1rem;
-            color: #cd8c95;
-            font-size: 0.05rem;
+            color: rgb(105, 113, 118);
+            font-size: 0.7rem;
             background-color: #fff;
-            padding: 0.1rem 0.2rem;
+            padding: 0.1rem 0.3rem;
         }
     }
     ul {
@@ -201,7 +198,7 @@ export default {
         text-align: center;
     }
     .pdtDesc {
-        margin-bottom: 80px;
+        // margin-bottom: 80px;
         .flexContainer {
             display: flex;
             flex-flow: row nowrap;
@@ -227,7 +224,7 @@ export default {
             }
             .textContent {
                 text-align: left;
-                background: #faf8ef;
+                // background: #faf8ef;
                 &::after {
                     content: "";
                     display: inline-block;
@@ -242,12 +239,12 @@ export default {
                     line-height: 1.3rem;
                     padding: 0 10%;
                     h4 {
-                        font-size: 0.7rem;
-                        margin-bottom: 0.1rem;
+                        font-size: 0.9rem;
+                        margin-bottom: 0.2rem;
                     }
                     p {
-                        color: #687378;
-                        font-size: 0.8rem;
+                        color: rgb(105, 113, 118);
+                        font-size: 0.85rem;
                         margin: 0;
                     }
                 }

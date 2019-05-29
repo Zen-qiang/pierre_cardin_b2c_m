@@ -1,6 +1,5 @@
 <template>
     <div>
-        <div id="nodata" style="height:60px;"></div>
         <div :style="{'min-height':cliHeight+'px'}" class="sy-declarehair_detail">
             <h4 class="text-left padding-left-20 padding-top-20">{{info.title}}</h4>
             <div class="padding-bottom-40">
@@ -28,7 +27,6 @@ export default {
     },
     components: { syFooter },
     mounted() {
-        document.querySelector("#nodata").scrollIntoView(true);
         this.getRead();
     },
     methods: {

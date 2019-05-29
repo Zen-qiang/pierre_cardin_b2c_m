@@ -1,15 +1,14 @@
 <template>
     <div>
-        <div id="nodata" style="height:60px;"></div>
         <div class="sy-list" :style="{'min-height':cliHeight+'px'}">
             <div class="sy-title">
-                <img :src="BaseUrl+infoData.big_img" alt="">
+                <img v-if="infoData.big_img" :src="BaseUrl+infoData.big_img" alt="">
                 <p>
                     <span class="sy-ziti">{{infoData.name}}</span>
                 </p>
             </div>
             <div style="border-bottom:0.03rem solid #EBEBEB;padding-top:0;background-color:#fff;width:100%;overflow-y:scroll">
-                <div>
+                <div class="sy-mint-scroll">
                     <mt-navbar v-model="selected">
                         <mt-tab-item :id="item.series_code" v-for="(item,index) in typeData" :key="index">{{item.name}}</mt-tab-item>
                     </mt-navbar>
@@ -17,19 +16,18 @@
             </div>
             <div v-if="typeData.length>0" style="background-color:#fff">
                 <mt-tab-container v-model="selected">
-                    <mt-tab-container-item :id="items.series_code" v-for="(items,indexs) in typeData" :key="indexs"
-                        class="margin-bottom-30">
+                    <mt-tab-container-item :id="items.series_code" v-for="(items,indexs) in typeData" :key="indexs">
                         <div class="padding-top-20 sy-little-tab">
                             <div v-for="(item,index) in fenleiData" :key="index" class="padding-left-5 padding-right-5 sy-tab">
                                 <span class="sy-checked" :class="item.dimflag_id==selects&&item.dimflag==dimflag?'is-xuanzhong':''"
                                     @click="handleXuanzhong(index,item.dimflag_id,item.dimflag)">{{item.name}}</span>
                             </div>
                         </div>
-                        <div class="padding-top-20" v-if="productsData.length>0&&!jzloading">
+                        <div class="padding-top-10" v-if="productsData.length>0&&!jzloading">
                             <ul v-infinite-scroll="loadMore" infinite-scroll-disabled="loading"
                                 infinite-scroll-distance="385.6">
                                 <li v-for="(itm,idx) in productsData" :key="idx">
-                                    <img v-lazy="itm.pdt_img_url" alt="" @click="handleImg(itm.pdt_id)">
+                                    <img v-if="itm.pdt_img_url" :src="itm.pdt_img_url" alt="" @click="handleImg(itm.pdt_id)">
                                     <div class="text-content">
                                         <h5 class="text-h5">{{itm.pdt_name}}</h5>
                                         <h5>零售价：￥{{itm.pdt_price}}</h5>
@@ -37,20 +35,14 @@
                                 </li>
                             </ul>
                         </div>
-                        <div v-else-if="jzloading" class="text-center text-muted padding-top-30">
-                            <i class="icon icon-Loading1 sy-cry sy-loading"></i>
-                        </div>
-                        <div v-else class="text-center text-muted font-70 padding-top-30">
-                            <i class="icon icon-lian-hengxian sy-cry"></i>
-                            <div>没有查询到商品信息</div>
+                        <div v-else class="text-center font-70 padding-top-20 padding-bottom-30" style="color:rgb(205,206,207)">
+                            <div>未查询到产品信息</div>
                         </div>
                     </mt-tab-container-item>
                 </mt-tab-container>
-                <load-bottom v-if="showBottom && productsData.length>0"></load-bottom>
             </div>
-            <div v-else class="text-center text-muted font-70 sy-nodata">
-                <i class="icon icon-lian-hengxian sy-cry"></i>
-                <div>没有查询到相关产品信息</div>
+            <div v-else class="text-center font-70 sy-nodata" style="color:rgb(205,206,207)">
+                <div>未查询到相关产品信息</div>
             </div>
 
         </div>
@@ -60,7 +52,6 @@
 <script>
 import action from "@/assets/utils/action.js";
 import syFooter from "@/page/public/footer";
-import LoadBottom from "@/page/public/loadbottom";
 import $ from "jquery";
 let typedata = true;
 export default {
@@ -87,9 +78,8 @@ export default {
             loading: false
         };
     },
-    components: { syFooter, LoadBottom },
+    components: { syFooter },
     mounted() {
-        document.querySelector("#nodata").scrollIntoView(true);
         this.jzloading = true;
         this.getFenlei();
     },
@@ -159,7 +149,9 @@ export default {
                         series_code: this.selected,
                         name: "全部"
                     };
-                    res.seriesList.data.unshift(data);
+                    if (res.seriesList.data.length > 1) {
+                        res.seriesList.data.unshift(data);
+                    }
                     this.fenleiData = res.seriesList.data;
                 }
                 this.getList();
@@ -237,6 +229,9 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
+.mint-tab-item-label {
+    font-size: 1rem;
+}
 .sy-list {
     .sy-title {
         padding: 0;
@@ -260,7 +255,7 @@ export default {
             .sy-ziti {
                 color: white;
                 font-weight: 500;
-                font-size: 1rem;
+                font-size: 1.3rem;
                 display: inline-block;
                 vertical-align: middle;
             }
@@ -272,6 +267,20 @@ export default {
     .mint-navbar .mint-tab-item {
         padding: 12px 0;
     }
+    .mint-navbar {
+        a,
+        a:hover,
+        a:active,
+        a:visited,
+        a:link,
+        a:focus {
+            -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+            -webkit-tap-highlight-color: transparent;
+            outline: none;
+            background: none;
+            text-decoration: none;
+        }
+    }
     .sy-little-tab {
         // width: 100%;
         overflow-x: scroll;
@@ -281,7 +290,7 @@ export default {
             padding-bottom: 0.6rem;
             .sy-checked {
                 font-size: 13px;
-                padding: 3px 6px 3px 6px;
+                padding: 0.25rem 0.35rem 0.2rem 0.4rem;
                 border: 0.04rem solid #ebebeb;
                 border-radius: 2rem;
                 box-shadow: 0 0 0 #ebebeb;
@@ -295,9 +304,6 @@ export default {
     .sy-nodata {
         background-color: #fff;
         padding: 4rem 0 5rem 0;
-        .sy-cry {
-            font-size: 4.2rem;
-        }
     }
     ul {
         display: flex;
@@ -318,19 +324,19 @@ export default {
                 width: 100%;
             }
             .text-content {
+                font-size: 0.9rem;
                 text-shadow: none;
+                line-height: 1.3rem;
+                padding: 0.8rem 0;
+                margin-bottom: 0.2rem;
                 .text-h5 {
                     overflow: hidden; /*自动隐藏文字*/
                     text-overflow: ellipsis; /*文字隐藏后添加省略号*/
                     white-space: nowrap;
                 }
-                padding: 8px 0;
-                margin-bottom: 0.6rem;
                 h5 {
                     padding: 0;
                     margin: 0;
-                    font-size: 0.7rem;
-                    line-height: 1.2rem;
                 }
             }
         }
@@ -348,12 +354,8 @@ export default {
     }
     .is-selected {
         color: black;
-        border-bottom: 3px solid red;
+        border-bottom: 3px solid rgb(204, 51, 0);
         margin: auto;
-        max-width: 24%;
-    }
-    .sy-cry {
-        font-size: 50px;
     }
     .sy-loading {
         display: inline-block;
@@ -364,6 +366,17 @@ export default {
             }
             to {
                 transform: rotate(360deg);
+            }
+        }
+    }
+}
+</style>
+<style lang="scss">
+.sy-mint-scroll {
+    .mint-navbar {
+        .mint-tab-item {
+            .mint-tab-item-label {
+                font-size: 0.85rem;
             }
         }
     }

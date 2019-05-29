@@ -46,7 +46,7 @@ export default {
 <style lang="scss" scoped>
 .sy-footer {
     width: 100%;
-    background-color: #687378;
+    background-color: #f5f5f5;
     ul {
         margin: 0;
         padding: 0;
@@ -55,19 +55,18 @@ export default {
             padding: 0 5px;
             width: 100%;
             list-style: none;
-            color: #fbf8f1;
-            font-size: 0.85rem;
-            line-height: 3.7rem;
+            font-size: 1rem;
+            line-height: 4rem;
         }
         .li-border-bottom {
-            border-bottom: 1px solid #535d63;
+            border-bottom: 1px solid #cdcecf;
         }
     }
     .copy-footer {
-        font-size: 0.5rem;
-        border-top: 1px solid #535d63;
-        color: #c5cace;
-        padding: 1.8rem 0;
+        font-size: 0.7rem;
+        border-top: 1px solid #cdcecf;
+        color: rgb(105, 113, 118);
+        padding: 1.8rem 1rem;
         line-height: 1rem;
     }
 }
