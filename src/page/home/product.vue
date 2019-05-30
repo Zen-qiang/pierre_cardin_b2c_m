@@ -89,6 +89,7 @@ export default {
                     font-weight: 500;
                     display: inline-block;
                     vertical-align: middle;
+                    text-transform: Capitalize;
                 }
             }
         }

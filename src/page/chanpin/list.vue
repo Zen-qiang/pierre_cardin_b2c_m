@@ -377,6 +377,7 @@ export default {
         .mint-tab-item {
             .mint-tab-item-label {
                 font-size: 0.85rem;
+                text-transform: Capitalize;
             }
         }
     }

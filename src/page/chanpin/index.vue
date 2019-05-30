@@ -104,6 +104,9 @@ export default {
 <style lang="scss" scoped>
 .sy-chanpin {
     background-color: #fff;
+    h3 {
+        text-transform: Capitalize;
+    }
     .sy-ulli {
         display: flex;
         flex-flow: row wrap;
@@ -149,6 +152,7 @@ export default {
     .sy-type {
         line-height: 2.8rem;
         font-size: 1.1rem;
+        text-transform: Capitalize;
     }
     a {
         margin: 0;

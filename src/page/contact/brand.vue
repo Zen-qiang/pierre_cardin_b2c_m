@@ -138,7 +138,7 @@ export default {
             width: 98%;
             line-height: 23px;
             font-size: 0.9rem;
-            color: rgb(205, 206, 207);
+            color: rgb(105, 113, 118);
             text-align: center;
             padding: 0.7rem 1.2rem 0.7rem 1.2rem;
             border: 0.02rem solid rgb(205, 206, 207);
