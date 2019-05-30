@@ -15,6 +15,9 @@
                 <img v-if="item.img_url" :src="BaseUrl+item.img_url" :style="{'height':height +'px'}" style="margin-left:-50%;margin-right:-50%;"
                     alt>
                 <img v-else src="../../assets/noimg.jpg" alt="">
+                <p class="sy-content">
+                    <span class="sy-ziti" v-html="Trim(item.title.substring(0,6))"></span>
+                </p>
             </li>
         </ul>
         <div class="sy-more" @click="handleMore">
@@ -85,6 +88,30 @@ h3 {
                 object-fit: cover;
                 vertical-align: middle;
             }
+            p {
+                position: absolute;
+                top: 0;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                margin: 0;
+                &::before {
+                    content: "";
+                    display: inline-block;
+                    width: 0;
+                    height: 100%;
+                    vertical-align: middle;
+                }
+                .sy-ziti {
+                    width: 68%;
+                    color: white;
+                    font-weight: 500;
+                    font-size: 1.1rem;
+                    display: inline-block;
+                    vertical-align: middle;
+                    text-shadow: 0 0 30px #3d3d3d;
+                }
+            }
         }
     }
     ul {
@@ -134,7 +161,7 @@ h3 {
             color: rgb(105, 113, 118);
             text-align: center;
             padding: 0.7rem 1.2rem 0.7rem 1.2rem;
-            border: 0.02rem solid #eaeaea;
+            border: 0.02rem solid rgb(105, 113, 118);
         }
     }
 }

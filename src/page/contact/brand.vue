@@ -28,9 +28,9 @@
                 <div class="text-left sy-titles">我们鼓励您阅读 pierre cardin Home 招聘流程详细介绍，以便在申请中获取足够的信心。</div>
                 <div class="text-left sy-titles">Pierre Cardin 的招聘流程是怎么样的？</div>
                 <div class="text-left sy-content">根据职位不同，我们的招聘和聘用流程可能有所差异。不过，在线提交申请后，会有人力资源部门的工作人员审核申请。他们如果认为您适合该职位，便会安排电话面试，在某些情况下会采用视频面试。您可以藉此机会进一步介绍自己的技能、性格以及为何适合该职位。对于某些职位，我们要求候选任人参加某种形式的评估，然后进行背景和证明材料调查，最后提供工作机会</div>
-                <div class="text-left sy-titles">Q & 我如何申请 pierre cardin Home 的职位？</div>
+                <div class="text-left sy-titles">我如何申请 pierre cardin Home 的职位？</div>
                 <div class="text-left sy-content">请在上方页面点击查看职位，在线上提示的流程下进行职位了解与职位申请。</div>
-                <div class="text-left sy-titles">Q & pierre cardin Home 看重候选人的哪些方面？</div>
+                <div class="text-left sy-titles">pierre cardin Home 看重候选人的哪些方面？</div>
                 <div class="text-left sy-content">良好的品行是作为一切开始的先决条件。其次是良好的思维方式与个人创造力</div>
                 <div class="text-left sy-content sy-cont">在线填写申请时，需回答关于您自己的若干问题，并提交简历。如果您希望提交更多信息，可在申请时上传相关资料。如果您申请的是创意、市场营销、数字化或设计团队的职位，请务必提供您的作品集。</div>
                 <h4 class="sy-cooperation">为合作伙伴创造更大的价值！</h4>
@@ -141,7 +141,7 @@ export default {
             color: rgb(105, 113, 118);
             text-align: center;
             padding: 0.7rem 1.2rem 0.7rem 1.2rem;
-            border: 0.02rem solid rgb(205, 206, 207);
+            border: 0.02rem solid rgb(105, 113, 118);
         }
         .sy-morebutton {
             margin-top: -0.4rem;

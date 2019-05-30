@@ -81,7 +81,7 @@ h3 {
             color: rgb(105, 113, 118);
             text-align: center;
             padding: 0.7rem 1.2rem 0.7rem 1.2rem;
-            border: 0.02rem solid #eaeaea;
+            border: 0.02rem solid rgb(105, 113, 118);
         }
     }
 }
