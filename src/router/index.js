@@ -4,8 +4,10 @@ import store from "@/store/index.js"
 
 Vue.use(Router)
 
+let AppPath = process.env.APP_PATH
 const router = new Router({
-//   mode: 'history',
+  mode: 'history', // require service support
+  base: AppPath,
   routes: [{
     path: "",
     name: "layout",
