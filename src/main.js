@@ -39,6 +39,11 @@ new Vue({
   template: '<App/>',
   components: {
     App
+  },
+  mounted() {
+    if (/Windows|Macintosh/i.test(navigator.userAgent)) {
+      window.location.href = 'http://www.pc18.vip/pc18/index.html';
+    };
   }
 
 })
