@@ -4,6 +4,8 @@
 
 const path = require('path')
 
+const prod = require('./prod.env')
+
 module.exports = {
   dev: {
     // Paths
@@ -57,7 +59,7 @@ module.exports = {
     // Paths
     assetsRoot: path.resolve(__dirname, '../dist'),
     assetsSubDirectory: 'static',
-    assetsPublicPath: '/',
+    assetsPublicPath: prod.APP_PATH.replace(/^\"|\"$/g, ''),
 
     /**
      * Source Maps

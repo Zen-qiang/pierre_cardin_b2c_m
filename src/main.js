@@ -42,7 +42,7 @@ new Vue({
   },
   mounted() {
     if (/Windows|Macintosh/i.test(navigator.userAgent)) {
-      window.location.href = 'http://www.pc18.vip/pc18/index.html';
+      location.replace('http://www.pc18.vip/pc18/index.html');
     };
   }
 

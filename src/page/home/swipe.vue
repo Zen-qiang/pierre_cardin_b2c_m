@@ -1,8 +1,9 @@
 <template>
     <div class="sy-swiper" v-if="swipeData.length>0">
         <div id="slideshow" :style="{'height':height+'px'}">
-            <img v-for="(item,index) in swipeData" :key="index" :src="BaseUrl + item.image" @touchend="slideshow(true,$event)"
-                @touchstart="touchStart" style="margin-left:-80%;margin-rightL-20%" alt="">
+            <img v-for="(item,index) in swipeData" :key="index" :src="BaseUrl + item.image" @click="handleDetail(item.id)"
+                @touchend="slideshow(true,$event)" @touchstart="touchStart" style="margin-left:-80%;margin-rightL-20%"
+                alt="">
             <div class="sy-punctuation">
                 <span v-for="(item,index) in swipeData.length" :key="index" class="active"></span>
             </div>
@@ -37,13 +38,25 @@ export default {
         };
     },
     mounted() {
+        console.log(this.swipeData);
         this.slideshow(false);
     },
     methods: {
+        //查看详情
+        handleDetail(id) {
+            this.$router.push({
+                path: "/swipe_detail",
+                query: {
+                    id: id
+                }
+            });
+        },
+        //滑动开始
         touchStart(e) {
             this.startX = e.touches[0].pageX;
             this.startY = e.touches[0].pageY;
         },
+        //滑动幻灯片
         slideshow(val, e) {
             let _this = this;
             if (e) {

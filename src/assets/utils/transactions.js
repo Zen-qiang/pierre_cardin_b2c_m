@@ -114,10 +114,10 @@ const transactions = {
   },
 
   /**
-   * 品牌动态 幻灯片
+   * 家居顾问 幻灯片
    */
   qBrandMsgSlide: function() {
-    let slideData = this.utilSlide('2', 'portal_news'); // 幻灯片
+    let slideData = this.utilSlide('2', 'portal_website'); // 幻灯片
     let _transactions = [slideData.transaction]
     return {
       transactions: JSON.stringify(_transactions),
@@ -126,7 +126,7 @@ const transactions = {
   },
 
   /**
-   * 品牌动态 列表
+   * 家居顾问 列表
    */
   qBrandMsgList: function(pageNow, pageSize) {
     let msgData = this.utilMessageA2List(pageNow, pageSize)
@@ -138,7 +138,7 @@ const transactions = {
   },
 
   /**
-   * 品牌动态 详情
+   * 家居顾问 详情
    */
   qBrandMsgDetail: (code) => {
     let _transactions = [{
@@ -397,7 +397,7 @@ const transactions = {
       },
       key: {
         key: 'slideData',
-        value: ['id', 'text', 'image', 'target', 'href', 'act_id', 'cat_id', 'pdt_id', 'maxitems']
+        value: ['id', 'text', 'image', 'target', 'href', 'act_id', 'cat_id', 'pdt_id', "details", 'maxitems']
       }
     }
   },

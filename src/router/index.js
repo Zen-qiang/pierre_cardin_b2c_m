@@ -6,7 +6,7 @@ Vue.use(Router)
 
 let AppPath = process.env.APP_PATH
 const router = new Router({
-  mode: 'history', // require service support
+  //   mode: 'history', // require service support
   base: AppPath,
   routes: [{
     path: "",
@@ -94,6 +94,14 @@ const router = new Router({
         component: () => import('@/page/contact/contact'),
         meta: {
           title: "联系我们"
+        }
+      },
+      {
+        path: '/swipe_detail',
+        name: 'swipe_detail',
+        component: () => import('@/page/home/swipe_detail'),
+        meta: {
+          title: "幻灯片详情"
         }
       },
       {

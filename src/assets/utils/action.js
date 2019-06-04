@@ -111,17 +111,24 @@ const action = {
   // ------------------------------
 
   /**
-   * 品牌动态 列表（包含分页）
+   * 家居顾问 列表（包含分页）
    */
   brandMsgList: function(pageNow, pageSize) {
     return http.qPost(transactions.qBrandMsgList(pageNow, pageSize))
   },
 
   /**
-   * 品牌动态 详情
+   * 家居顾问 详情
    */
   brandMsgDetail: function(code) {
     return http.qPost(transactions.qBrandMsgDetail(code))
+  },
+
+  /**
+   * 幻灯片 详情
+   */
+  slideMsgDetail: function() {
+    return http.qPost(transactions.qBrandMsgSlide())
   },
 
   // ------------------------------
