@@ -60,7 +60,7 @@ export default {
                 canvas.height = viewport.height;
                 canvas.style.width = viewport.width + "px";
                 canvas.style.height = viewport.height + "px";
-                ctx.setTransform(ratio, 0, 0, ratio, 0, 0);
+                // ctx.setTransform(ratio, 0, 0, ratio, 0, 0);
                 var renderContext = {
                     canvasContext: ctx,
                     viewport: viewport
