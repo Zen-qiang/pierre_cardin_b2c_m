@@ -1,8 +1,8 @@
 <template>
     <div class="sy-swiper" v-if="swipeData.length>0">
         <div id="slideshow" :style="{'height':height+'px'}">
-            <img v-for="(item,index) in swipeData" :key="index" :src="BaseUrl + item.image" @click="handleDetail(item.id)"
-                @touchend="slideshow(true,$event)" @touchstart="touchStart" style="margin-left:-80%;margin-rightL-20%"
+            <img v-for="(item,index) in swipeData" :key="index" :src="BaseUrl + item.image" @click="handleDetail"
+                @touchend="slideshow(true,$event)" @touchstart="touchStart" style="margin-left:-80%;margin-right-20%"
                 alt="">
             <div class="sy-punctuation">
                 <span v-for="(item,index) in swipeData.length" :key="index" class="active"></span>
@@ -38,16 +38,15 @@ export default {
         };
     },
     mounted() {
-        console.log(this.swipeData);
         this.slideshow(false);
     },
     methods: {
         //查看详情
-        handleDetail(id) {
+        handleDetail() {
             this.$router.push({
                 path: "/swipe_detail",
                 query: {
-                    id: id
+                    id: this.swipeData[this.currentPage].id
                 }
             });
         },
