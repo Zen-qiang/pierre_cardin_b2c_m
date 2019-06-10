@@ -66,6 +66,7 @@ export default {
             box-sizing: border-box;
             overflow: hidden;
             img {
+                width: 100%;
                 object-fit: cover;
                 vertical-align: middle;
             }
@@ -84,7 +85,7 @@ export default {
                     vertical-align: middle;
                 }
                 .sy-ziti {
-                    color: white;
+                    color: #fff;
                     font-size: 1.1rem;
                     font-weight: 500;
                     display: inline-block;

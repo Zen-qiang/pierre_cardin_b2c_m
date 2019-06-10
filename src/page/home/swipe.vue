@@ -1,7 +1,7 @@
 <template>
     <div class="sy-swiper" v-if="swipeData.length>0">
         <div id="slideshow" :style="{'height':height+'px'}">
-            <img v-for="(item,index) in swipeData" :key="index" :src="BaseUrl + item.image" @click="handleDetail"
+            <img v-for="(item,index) in swipeData" :key="index" :src="BaseUrl + item.image" @click="handleDetail(item.details)"
                 @touchend="slideshow(true,$event)" @touchstart="touchStart" style="margin-left:-80%;margin-right-20%"
                 alt="">
             <div class="sy-punctuation">
@@ -42,7 +42,8 @@ export default {
     },
     methods: {
         //查看详情
-        handleDetail() {
+        handleDetail(details) {
+            if (!details || details.length == 0) return;
             this.$router.push({
                 path: "/swipe_detail",
                 query: {

@@ -44,15 +44,15 @@ export default {
             this.pdfDoc.getPage(num).then(function(page) {
                 let canvas = document.getElementById("the-canvas" + num);
                 let ctx = canvas.getContext("2d");
-                let dpr = window.devicePixelRatio || 1;
-                let bsr =
-                    ctx.webkitBackingStorePixelRatio ||
-                    ctx.mozBackingStorePixelRatio ||
-                    ctx.msBackingStorePixelRatio ||
-                    ctx.oBackingStorePixelRatio ||
-                    ctx.backingStorePixelRatio ||
-                    1;
-                let ratio = dpr / bsr;
+                // let dpr = window.devicePixelRatio || 1;
+                // let bsr =
+                //     ctx.webkitBackingStorePixelRatio ||
+                //     ctx.mozBackingStorePixelRatio ||
+                //     ctx.msBackingStorePixelRatio ||
+                //     ctx.oBackingStorePixelRatio ||
+                //     ctx.backingStorePixelRatio ||
+                //     1;
+                // let ratio = dpr / bsr;
                 var viewport = page.getViewport(
                     screen.availWidth / page.getViewport(1).width
                 );
@@ -60,7 +60,7 @@ export default {
                 canvas.height = viewport.height;
                 canvas.style.width = viewport.width + "px";
                 canvas.style.height = viewport.height + "px";
-                ctx.setTransform(ratio, 0, 0, ratio, 0, 0);
+                // ctx.setTransform(ratio, 0, 0, ratio, 0, 0);
                 var renderContext = {
                     canvasContext: ctx,
                     viewport: viewport

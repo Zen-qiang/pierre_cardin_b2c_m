@@ -122,6 +122,7 @@ export default {
             box-sizing: border-box;
             overflow: hidden;
             img {
+                width: 100%;
                 object-fit: cover;
                 vertical-align: middle;
             }
