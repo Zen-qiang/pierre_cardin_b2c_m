@@ -330,9 +330,9 @@ export default {
                 padding: 0.8rem 0;
                 margin-bottom: 0.2rem;
                 .text-h5 {
-                    overflow: hidden; /*自动隐藏文字*/
-                    text-overflow: ellipsis; /*文字隐藏后添加省略号*/
-                    white-space: nowrap;
+                    // overflow: hidden; /*自动隐藏文字*/
+                    // text-overflow: ellipsis; /*文字隐藏后添加省略号*/
+                    // white-space: nowrap;
                 }
                 h5 {
                     padding: 0;
