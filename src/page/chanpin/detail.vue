@@ -23,7 +23,7 @@
                     </mt-swipe>
                     <div class="text-center sy-title padding-top-20">
                         <div>{{containerData.pdt_name}}</div>
-                        <div>零售价：￥{{containerData.pdt_price}}</div>
+                        <div>零售价：￥{{containerData.pdt_sale}}</div>
                         <div class="sy-guige sy-margin">规格：<span class="sy-guiges">{{containerData.pdt_standard}}</span></div>
                         <div class="sy-guige">{{containerData.pdt_salestalk}}</div>
                     </div>

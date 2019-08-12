@@ -30,7 +30,7 @@
                                     <img v-if="itm.pdt_img_url" :src="itm.pdt_img_url" alt="" @click="handleImg(itm.pdt_id)">
                                     <div class="text-content">
                                         <h5 class="text-h5">{{itm.pdt_name}}</h5>
-                                        <h5>零售价：￥{{itm.pdt_price}}</h5>
+                                        <h5>零售价：￥{{itm.pdt_sale}}</h5>
                                     </div>
                                 </li>
                             </ul>
